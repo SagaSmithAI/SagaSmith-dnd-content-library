@@ -1,0 +1,484 @@
+{
+  "schema": "sagasmith.public-content-library.v1",
+  "system_id": "dnd5e",
+  "packages": [
+    {
+      "kind": "addon_pack",
+      "id": "dnd5e.addon.rulebook.d-d-5e-dungeon-master-s-guide.28b0d385f4d2.addon",
+      "version": "1.0.0",
+      "checksum": "d45e0ae02cc86c519d96fa317baa39f316e788015f273bde3d1db96fb4c127cf",
+      "title": "D&D 5E - Dungeon Master's Guide",
+      "edition": null,
+      "license": "LicenseRef-SagaSmith-Authorized-Redistribution",
+      "attribution": "Published by SagaSmithAI with redistribution authorization explicitly confirmed by the rights holder on 2026-08-08.",
+      "component_counts": {
+        "preset_pack": 1,
+        "rule_pack": 1
+      },
+      "image_count": 0,
+      "path": "packages/dnd5e.addon.rulebook.d-d-5e-dungeon-master-s-guide.28b0d385f4d2.addon-1.0.0.json"
+    },
+    {
+      "kind": "addon_pack",
+      "id": "dnd5e.addon.rulebook.d-d-5e-eberron-rising-from-the-last-war.31293633134f.addon",
+      "version": "1.0.0",
+      "checksum": "5d7474843f6851316e77123e757d1250bf4f2706073e08ed8715fd888273e185",
+      "title": "D&D 5E - Eberron - Rising from the Last War",
+      "edition": null,
+      "license": "LicenseRef-SagaSmith-Authorized-Redistribution",
+      "attribution": "Published by SagaSmithAI with redistribution authorization explicitly confirmed by the rights holder on 2026-08-08.",
+      "component_counts": {
+        "preset_pack": 1,
+        "rule_pack": 1
+      },
+      "image_count": 0,
+      "path": "packages/dnd5e.addon.rulebook.d-d-5e-eberron-rising-from-the-last-war.31293633134f.addon-1.0.0.json"
+    },
+    {
+      "kind": "addon_pack",
+      "id": "dnd5e.addon.rulebook.d-d-5e-elemental-evil-player-s-companion.490f88d2c84c.addon",
+      "version": "1.0.0",
+      "checksum": "1b8af973100e8f9d540114d897d14f510ee15258a456d6b5bbec9106c614355b",
+      "title": "D&D 5E - Elemental Evil Player's Companion",
+      "edition": null,
+      "license": "LicenseRef-SagaSmith-Authorized-Redistribution",
+      "attribution": "Published by SagaSmithAI with redistribution authorization explicitly confirmed by the rights holder on 2026-08-08.",
+      "component_counts": {
+        "rule_pack": 1
+      },
+      "image_count": 0,
+      "path": "packages/dnd5e.addon.rulebook.d-d-5e-elemental-evil-player-s-companion.490f88d2c84c.addon-1.0.0.json"
+    },
+    {
+      "kind": "addon_pack",
+      "id": "dnd5e.addon.rulebook.d-d-5e-guildmasters-guide-to-ravnica.59317c5cf3da.addon",
+      "version": "1.0.0",
+      "checksum": "e94e3154a4a9976c11ecfd70131f7381c2d8546e6081a44d646d8c93e23b5082",
+      "title": "D&D 5E - Guildmasters' Guide to Ravnica",
+      "edition": null,
+      "license": "LicenseRef-SagaSmith-Authorized-Redistribution",
+      "attribution": "Published by SagaSmithAI with redistribution authorization explicitly confirmed by the rights holder on 2026-08-08.",
+      "component_counts": {
+        "preset_pack": 1,
+        "rule_pack": 1
+      },
+      "image_count": 0,
+      "path": "packages/dnd5e.addon.rulebook.d-d-5e-guildmasters-guide-to-ravnica.59317c5cf3da.addon-1.0.0.json"
+    },
+    {
+      "kind": "addon_pack",
+      "id": "dnd5e.addon.rulebook.d-d-5e-hb-school-of-geometry.9f4f4edec61a.addon",
+      "version": "1.0.0",
+      "checksum": "756b5ebe0973f3cdd93d7b17134fdf25851973a867d622936f09307c22f12d7f",
+      "title": "D&D 5E - HB - School of Geometry",
+      "edition": null,
+      "license": "LicenseRef-SagaSmith-Authorized-Redistribution",
+      "attribution": "Published by SagaSmithAI with redistribution authorization explicitly confirmed by the rights holder on 2026-08-08.",
+      "component_counts": {
+        "rule_pack": 1
+      },
+      "image_count": 0,
+      "path": "packages/dnd5e.addon.rulebook.d-d-5e-hb-school-of-geometry.9f4f4edec61a.addon-1.0.0.json"
+    },
+    {
+      "kind": "addon_pack",
+      "id": "dnd5e.addon.rulebook.d-d-5e-monster-manual.13193b8c22ea.addon",
+      "version": "1.0.0",
+      "checksum": "07da4ebeb4445ada025e0892849d1069441b2cc42e29d0f93cae1c60af99272d",
+      "title": "D&D 5E - Monster Manual",
+      "edition": null,
+      "license": "LicenseRef-SagaSmith-Authorized-Redistribution",
+      "attribution": "Published by SagaSmithAI with redistribution authorization explicitly confirmed by the rights holder on 2026-08-08.",
+      "component_counts": {
+        "preset_pack": 1,
+        "rule_pack": 1
+      },
+      "image_count": 0,
+      "path": "packages/dnd5e.addon.rulebook.d-d-5e-monster-manual.13193b8c22ea.addon-1.0.0.json"
+    },
+    {
+      "kind": "addon_pack",
+      "id": "dnd5e.addon.rulebook.d-d-5e-mordenkainen-s-tome-of-foes.2768304ef1af.addon",
+      "version": "1.0.0",
+      "checksum": "d31b04a391629651d36d6f62d75abaeaba67bd1069ff6db5fe732a5c2a7d5472",
+      "title": "D&D 5E - Mordenkainen's Tome of Foes",
+      "edition": null,
+      "license": "LicenseRef-SagaSmith-Authorized-Redistribution",
+      "attribution": "Published by SagaSmithAI with redistribution authorization explicitly confirmed by the rights holder on 2026-08-08.",
+      "component_counts": {
+        "preset_pack": 1,
+        "rule_pack": 1
+      },
+      "image_count": 0,
+      "path": "packages/dnd5e.addon.rulebook.d-d-5e-mordenkainen-s-tome-of-foes.2768304ef1af.addon-1.0.0.json"
+    },
+    {
+      "kind": "addon_pack",
+      "id": "dnd5e.addon.rulebook.d-d-5e-player-s-handbook.7ad6d3e9c93c.addon",
+      "version": "1.0.0",
+      "checksum": "f8e3cd1265e2c9f2eef51805366f43dc1618f425e2727468c582d5cc93869bf8",
+      "title": "D&D 5E - Player's Handbook",
+      "edition": null,
+      "license": "LicenseRef-SagaSmith-Authorized-Redistribution",
+      "attribution": "Published by SagaSmithAI with redistribution authorization explicitly confirmed by the rights holder on 2026-08-08.",
+      "component_counts": {
+        "preset_pack": 1,
+        "rule_pack": 1
+      },
+      "image_count": 0,
+      "path": "packages/dnd5e.addon.rulebook.d-d-5e-player-s-handbook.7ad6d3e9c93c.addon-1.0.0.json"
+    },
+    {
+      "kind": "addon_pack",
+      "id": "dnd5e.addon.rulebook.d-d-5e-sword-coast-adventurer-s-guide.16e6a243ef0a.addon",
+      "version": "1.0.0",
+      "checksum": "0895152c5dfbe6fd9325ba49f66657c9ffee504bb29b40b9fb596b36ede6ad94",
+      "title": "D&D 5E - Sword Coast Adventurer's Guide",
+      "edition": null,
+      "license": "LicenseRef-SagaSmith-Authorized-Redistribution",
+      "attribution": "Published by SagaSmithAI with redistribution authorization explicitly confirmed by the rights holder on 2026-08-08.",
+      "component_counts": {
+        "rule_pack": 1
+      },
+      "image_count": 0,
+      "path": "packages/dnd5e.addon.rulebook.d-d-5e-sword-coast-adventurer-s-guide.16e6a243ef0a.addon-1.0.0.json"
+    },
+    {
+      "kind": "addon_pack",
+      "id": "dnd5e.addon.rulebook.d-d-5e-tasha-s-cauldron-of-everything.89a729b37a4b.addon",
+      "version": "1.0.0",
+      "checksum": "cee787260cdfb8d24053c43bd862493d969a1e7ec38ed7a0f24506b397ab3e40",
+      "title": "D&D 5E - Tasha's Cauldron of Everything",
+      "edition": null,
+      "license": "LicenseRef-SagaSmith-Authorized-Redistribution",
+      "attribution": "Published by SagaSmithAI with redistribution authorization explicitly confirmed by the rights holder on 2026-08-08.",
+      "component_counts": {
+        "preset_pack": 1,
+        "rule_pack": 1
+      },
+      "image_count": 0,
+      "path": "packages/dnd5e.addon.rulebook.d-d-5e-tasha-s-cauldron-of-everything.89a729b37a4b.addon-1.0.0.json"
+    },
+    {
+      "kind": "addon_pack",
+      "id": "dnd5e.addon.rulebook.d-d-5e-the-tortle-package.e3234de670da.addon",
+      "version": "1.0.0",
+      "checksum": "a2d81ee22209a1b6095dc209450ef4d3c2c5106ede7bd541397d57c41c8aa4e3",
+      "title": "D&D 5E - The Tortle Package",
+      "edition": null,
+      "license": "LicenseRef-SagaSmith-Authorized-Redistribution",
+      "attribution": "Published by SagaSmithAI with redistribution authorization explicitly confirmed by the rights holder on 2026-08-08.",
+      "component_counts": {
+        "preset_pack": 1,
+        "rule_pack": 1
+      },
+      "image_count": 0,
+      "path": "packages/dnd5e.addon.rulebook.d-d-5e-the-tortle-package.e3234de670da.addon-1.0.0.json"
+    },
+    {
+      "kind": "addon_pack",
+      "id": "dnd5e.addon.rulebook.d-d-5e-ua-aberrantlurk.41bdf48914d3.addon",
+      "version": "1.0.0",
+      "checksum": "9d4d5a95f05f8c209124ba0bb81fdecc38eaeb2248b540a22a0821070fe03535",
+      "title": "D&D 5E - UA-AberrantLurk",
+      "edition": null,
+      "license": "LicenseRef-SagaSmith-Authorized-Redistribution",
+      "attribution": "Published by SagaSmithAI with redistribution authorization explicitly confirmed by the rights holder on 2026-08-08.",
+      "component_counts": {
+        "rule_pack": 1
+      },
+      "image_count": 0,
+      "path": "packages/dnd5e.addon.rulebook.d-d-5e-ua-aberrantlurk.41bdf48914d3.addon-1.0.0.json"
+    },
+    {
+      "kind": "addon_pack",
+      "id": "dnd5e.addon.rulebook.d-d-5e-ua-artificer.e99920471b34.addon",
+      "version": "1.0.0",
+      "checksum": "d4b6d988c26d9ce5c3782e7444e799ea2c63ef2f37c1304a72b867dc853f865d",
+      "title": "D&D 5E - UA - Artificer",
+      "edition": null,
+      "license": "LicenseRef-SagaSmith-Authorized-Redistribution",
+      "attribution": "Published by SagaSmithAI with redistribution authorization explicitly confirmed by the rights holder on 2026-08-08.",
+      "component_counts": {
+        "rule_pack": 1
+      },
+      "image_count": 0,
+      "path": "packages/dnd5e.addon.rulebook.d-d-5e-ua-artificer.e99920471b34.addon-1.0.0.json"
+    },
+    {
+      "kind": "addon_pack",
+      "id": "dnd5e.addon.rulebook.d-d-5e-ua-artificerv2.3c339a885211.addon",
+      "version": "1.0.0",
+      "checksum": "f67a851d567412eb70ba23af061294e93acc9c90b06c542e9ee4692d35a211bf",
+      "title": "D&D 5E - UA - ArtificerV2",
+      "edition": null,
+      "license": "LicenseRef-SagaSmith-Authorized-Redistribution",
+      "attribution": "Published by SagaSmithAI with redistribution authorization explicitly confirmed by the rights holder on 2026-08-08.",
+      "component_counts": {
+        "rule_pack": 1
+      },
+      "image_count": 0,
+      "path": "packages/dnd5e.addon.rulebook.d-d-5e-ua-artificerv2.3c339a885211.addon-1.0.0.json"
+    },
+    {
+      "kind": "addon_pack",
+      "id": "dnd5e.addon.rulebook.d-d-5e-ua-blood-hunter-class-1-2.4a5898befd39.addon",
+      "version": "1.0.0",
+      "checksum": "a69998261094b334aa59b0a328079dfc8be37b1c6196527dc5d22062e5de4c86",
+      "title": "D&D 5E - UA - Blood Hunter Class 1.2",
+      "edition": null,
+      "license": "LicenseRef-SagaSmith-Authorized-Redistribution",
+      "attribution": "Published by SagaSmithAI with redistribution authorization explicitly confirmed by the rights holder on 2026-08-08.",
+      "component_counts": {
+        "rule_pack": 1
+      },
+      "image_count": 0,
+      "path": "packages/dnd5e.addon.rulebook.d-d-5e-ua-blood-hunter-class-1-2.4a5898befd39.addon-1.0.0.json"
+    },
+    {
+      "kind": "addon_pack",
+      "id": "dnd5e.addon.rulebook.d-d-5e-ua-revisedranger.02b7259256ea.addon",
+      "version": "1.0.0",
+      "checksum": "627511c3cbf5b05272c9301efc5d7c8f7779e37fbd760df4edb5fed01398ad5f",
+      "title": "D&D 5E - UA - RevisedRanger",
+      "edition": null,
+      "license": "LicenseRef-SagaSmith-Authorized-Redistribution",
+      "attribution": "Published by SagaSmithAI with redistribution authorization explicitly confirmed by the rights holder on 2026-08-08.",
+      "component_counts": {
+        "rule_pack": 1
+      },
+      "image_count": 0,
+      "path": "packages/dnd5e.addon.rulebook.d-d-5e-ua-revisedranger.02b7259256ea.addon-1.0.0.json"
+    },
+    {
+      "kind": "addon_pack",
+      "id": "dnd5e.addon.rulebook.d-d-5e-ua-twilightfirenames.26d993a19acb.addon",
+      "version": "1.0.0",
+      "checksum": "f0aaf76fa5bd4596fb78363d9787f7b52342e8e5efaea41ceb9a81ac69cf6b14",
+      "title": "D&D 5E - UA-TwilightFireNames",
+      "edition": null,
+      "license": "LicenseRef-SagaSmith-Authorized-Redistribution",
+      "attribution": "Published by SagaSmithAI with redistribution authorization explicitly confirmed by the rights holder on 2026-08-08.",
+      "component_counts": {
+        "rule_pack": 1
+      },
+      "image_count": 0,
+      "path": "packages/dnd5e.addon.rulebook.d-d-5e-ua-twilightfirenames.26d993a19acb.addon-1.0.0.json"
+    },
+    {
+      "kind": "addon_pack",
+      "id": "dnd5e.addon.rulebook.d-d-5e-volo-s-guide-to-monsters.962933255634.addon",
+      "version": "1.0.0",
+      "checksum": "8831a39482848c106ff1db7ac9b66ca4cbf141ad3cb03adfafd264ac049d8c2d",
+      "title": "D&D 5E - Volo's Guide to Monsters",
+      "edition": null,
+      "license": "LicenseRef-SagaSmith-Authorized-Redistribution",
+      "attribution": "Published by SagaSmithAI with redistribution authorization explicitly confirmed by the rights holder on 2026-08-08.",
+      "component_counts": {
+        "preset_pack": 1,
+        "rule_pack": 1
+      },
+      "image_count": 0,
+      "path": "packages/dnd5e.addon.rulebook.d-d-5e-volo-s-guide-to-monsters.962933255634.addon-1.0.0.json"
+    },
+    {
+      "kind": "addon_pack",
+      "id": "dnd5e.addon.rulebook.d-d-5e-wayfinders-guide-to-eberron.38e71ffb60c7.addon",
+      "version": "1.0.0",
+      "checksum": "f630bd9b0a87fc5280bf6754d6a3850fcf1f2a8508d0801ac49911f815428018",
+      "title": "D&D 5E - Wayfinders Guide to Eberron",
+      "edition": null,
+      "license": "LicenseRef-SagaSmith-Authorized-Redistribution",
+      "attribution": "Published by SagaSmithAI with redistribution authorization explicitly confirmed by the rights holder on 2026-08-08.",
+      "component_counts": {
+        "preset_pack": 1,
+        "rule_pack": 1
+      },
+      "image_count": 0,
+      "path": "packages/dnd5e.addon.rulebook.d-d-5e-wayfinders-guide-to-eberron.38e71ffb60c7.addon-1.0.0.json"
+    },
+    {
+      "kind": "addon_pack",
+      "id": "dnd5e.addon.rulebook.d-d-5e-xanathar-s-guide-to-everything.72d56f4f8dae.addon",
+      "version": "1.0.0",
+      "checksum": "f6b8b25df2c2edd3c2ce3a180b42dc5883b4c10cf883bc912b4e1201d511aa19",
+      "title": "D&D 5E - Xanathar's Guide to Everything",
+      "edition": null,
+      "license": "LicenseRef-SagaSmith-Authorized-Redistribution",
+      "attribution": "Published by SagaSmithAI with redistribution authorization explicitly confirmed by the rights holder on 2026-08-08.",
+      "component_counts": {
+        "preset_pack": 1,
+        "rule_pack": 2
+      },
+      "image_count": 0,
+      "path": "packages/dnd5e.addon.rulebook.d-d-5e-xanathar-s-guide-to-everything.72d56f4f8dae.addon-1.0.0.json"
+    },
+    {
+      "kind": "addon_pack",
+      "id": "dnd5e.addon.rulebook.nlrmev2.7b10861c870a.addon",
+      "version": "1.0.0",
+      "checksum": "c733ecc34bf8c1c1d1c66b0138b41cb9158269c38564bb785c2d3a2e8fb3cc12",
+      "title": "NLRMEv2",
+      "edition": null,
+      "license": "LicenseRef-SagaSmith-Authorized-Redistribution",
+      "attribution": "Published by SagaSmithAI with redistribution authorization explicitly confirmed by the rights holder on 2026-08-08.",
+      "component_counts": {
+        "rule_pack": 1
+      },
+      "image_count": 0,
+      "path": "packages/dnd5e.addon.rulebook.nlrmev2.7b10861c870a.addon-1.0.0.json"
+    },
+    {
+      "kind": "module_pack",
+      "id": "dnd5e.module.a-guide-to-storm-kings-thunder",
+      "version": "1.0.0",
+      "checksum": "775bee9013b106a34d11026219e349f81a9dd7dfbc4370dbb4dcf554a84c0a03",
+      "title": "A_Guide_to_Storm_Kings_Thunder",
+      "edition": null,
+      "license": "LicenseRef-SagaSmith-Authorized-Redistribution",
+      "attribution": "Published by SagaSmithAI with redistribution authorization explicitly confirmed by the rights holder on 2026-08-08.",
+      "component_counts": {
+        "scene": 35,
+        "asset": 1,
+        "actor_card": 0
+      },
+      "image_count": 0,
+      "path": "packages/dnd5e.module.a-guide-to-storm-kings-thunder-1.0.0.json"
+    },
+    {
+      "kind": "module_pack",
+      "id": "dnd5e.module.hoard-of-the-dragon-queen",
+      "version": "1.0.0",
+      "checksum": "425f80fb734a0d24019937edf7640bc28a03b28ff40b21b876f222a2548935a5",
+      "title": "D&D 5E - Tyranny of Dragons - Hoard of the Dragon Queen",
+      "edition": null,
+      "license": "LicenseRef-SagaSmith-Authorized-Redistribution",
+      "attribution": "Published by SagaSmithAI with redistribution authorization explicitly confirmed by the rights holder on 2026-08-08.",
+      "component_counts": {
+        "scene": 69,
+        "asset": 1,
+        "actor_card": 0
+      },
+      "image_count": 0,
+      "path": "packages/dnd5e.module.hoard-of-the-dragon-queen-1.0.0.json"
+    },
+    {
+      "kind": "module_pack",
+      "id": "dnd5e.module.lost-mine-of-phandelver",
+      "version": "1.0.0",
+      "checksum": "aa628208322ed99aa9b199f238948fe6d9ca79ed78c2f865e200eec4bd3abccb",
+      "title": "Lost Mine of Phandelver",
+      "edition": null,
+      "license": "LicenseRef-SagaSmith-Authorized-Redistribution",
+      "attribution": "Published by SagaSmithAI with redistribution authorization explicitly confirmed by the rights holder on 2026-08-08.",
+      "component_counts": {
+        "scene": 37,
+        "asset": 1,
+        "actor_card": 0
+      },
+      "image_count": 0,
+      "path": "packages/dnd5e.module.lost-mine-of-phandelver-1.0.0.json"
+    },
+    {
+      "kind": "module_pack",
+      "id": "dnd5e.module.storm-kings-thunder",
+      "version": "1.0.0",
+      "checksum": "5bdd2d1b08e66bbf58a6d1fdbfddf92397a65d00bf6d540c904ff473f37a7256",
+      "title": "Storm King's Thunder (1-10)",
+      "edition": null,
+      "license": "LicenseRef-SagaSmith-Authorized-Redistribution",
+      "attribution": "Published by SagaSmithAI with redistribution authorization explicitly confirmed by the rights holder on 2026-08-08.",
+      "component_counts": {
+        "scene": 116,
+        "asset": 1,
+        "actor_card": 0
+      },
+      "image_count": 0,
+      "path": "packages/dnd5e.module.storm-kings-thunder-1.0.0.json"
+    },
+    {
+      "kind": "module_pack",
+      "id": "dnd5e.module.the-rise-of-tiamat",
+      "version": "1.0.0",
+      "checksum": "8cd68a4851148107f56cd3c7f714030067ed6d2c926bf426bb386ae13d19d91d",
+      "title": "D&D 5E - Tyranny of Dragons - The Rise of Tiamat",
+      "edition": null,
+      "license": "LicenseRef-SagaSmith-Authorized-Redistribution",
+      "attribution": "Published by SagaSmithAI with redistribution authorization explicitly confirmed by the rights holder on 2026-08-08.",
+      "component_counts": {
+        "scene": 64,
+        "asset": 1,
+        "actor_card": 0
+      },
+      "image_count": 0,
+      "path": "packages/dnd5e.module.the-rise-of-tiamat-1.0.0.json"
+    },
+    {
+      "kind": "module_pack",
+      "id": "dnd5e.module.tomb-of-annihilation",
+      "version": "1.0.0",
+      "checksum": "f39d44a37fd2e94be634344cb6285d65207a58709223ea6eab09cdc3f7f45fcd",
+      "title": "D&D 5E - Tomb of Annihilation",
+      "edition": null,
+      "license": "LicenseRef-SagaSmith-Authorized-Redistribution",
+      "attribution": "Published by SagaSmithAI with redistribution authorization explicitly confirmed by the rights holder on 2026-08-08.",
+      "component_counts": {
+        "scene": 56,
+        "asset": 1,
+        "actor_card": 0
+      },
+      "image_count": 0,
+      "path": "packages/dnd5e.module.tomb-of-annihilation-1.0.0.json"
+    },
+    {
+      "kind": "module_pack",
+      "id": "dnd5e.module.waterdeep-dragon-heist",
+      "version": "1.0.0",
+      "checksum": "94564d63e4cc58efb24a08949b4603d6cf1cfa06def2b6801bf7cb9208953083",
+      "title": "D&D 5E - Waterdeep - Dragon Heist",
+      "edition": null,
+      "license": "LicenseRef-SagaSmith-Authorized-Redistribution",
+      "attribution": "Published by SagaSmithAI with redistribution authorization explicitly confirmed by the rights holder on 2026-08-08.",
+      "component_counts": {
+        "scene": 193,
+        "asset": 1,
+        "actor_card": 0
+      },
+      "image_count": 0,
+      "path": "packages/dnd5e.module.waterdeep-dragon-heist-1.0.0.json"
+    },
+    {
+      "kind": "preset_pack",
+      "id": "dnd5e.presets.srd2014",
+      "version": "1.2.0",
+      "checksum": "b18b9c6e6130c4c20e17a601ebd5f2ea4b6e1beef86adb1051cd1514bf5267d4",
+      "title": "D&D 5e SRD 5.1 Actor Presets",
+      "edition": "2014",
+      "license": "LicenseRef-SagaSmith-Authorized-Redistribution",
+      "attribution": "Published by SagaSmithAI with redistribution authorization explicitly confirmed by the rights holder on 2026-08-08.",
+      "component_counts": {
+        "actor_card": 317,
+        "monster": 296,
+        "npc": 21
+      },
+      "image_count": 0,
+      "path": "packages/dnd5e.presets.srd2014-1.2.0.json"
+    },
+    {
+      "kind": "preset_pack",
+      "id": "dnd5e.presets.srd2024",
+      "version": "1.2.0",
+      "checksum": "feccfcf5fb61a67c8f798514051f63d2bc08740de69aa156a14964bda58e383e",
+      "title": "D&D 5e SRD 5.2.1 Actor Presets",
+      "edition": "2024",
+      "license": "LicenseRef-SagaSmith-Authorized-Redistribution",
+      "attribution": "Published by SagaSmithAI with redistribution authorization explicitly confirmed by the rights holder on 2026-08-08.",
+      "component_counts": {
+        "actor_card": 330,
+        "monster": 330
+      },
+      "image_count": 0,
+      "path": "packages/dnd5e.presets.srd2024-1.2.0.json"
+    }
+  ]
+}

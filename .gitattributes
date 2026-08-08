@@ -1,0 +1,5 @@
+* text=auto
+*.json text eol=lf
+*.yml text eol=lf
+*.md text eol=lf
+public/content-library/packages/*.json filter=lfs diff=lfs merge=lfs -text
