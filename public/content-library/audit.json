@@ -162,21 +162,12 @@
     },
     {
       "kind": "module_pack",
-      "id": "dnd5e.module.a-guide-to-storm-kings-thunder",
-      "campaign_id": "43516e25-2939-4017-91f7-067b3b19835d",
-      "module_id": "9d143a20-d4d5-4baf-80ac-d44562ca52d7",
-      "source_key": "regression.a-guide-to-storm-kings-thunder.3500e85ab3",
-      "parser_version": "7",
-      "published_checksum": "775bee9013b106a34d11026219e349f81a9dd7dfbc4370dbb4dcf554a84c0a03"
-    },
-    {
-      "kind": "module_pack",
       "id": "dnd5e.module.hoard-of-the-dragon-queen",
       "campaign_id": "af5af37b-950d-4bba-861f-65e52cd3b400",
       "module_id": "5e82cc8f-99bd-4220-b385-8c18976c5d28",
       "source_key": "regression.d-d-5e-tyranny-of-dragons-hoard-of-the-dragon-queen.6209e95912",
       "parser_version": "7",
-      "published_checksum": "425f80fb734a0d24019937edf7640bc28a03b28ff40b21b876f222a2548935a5"
+      "published_checksum": "d24a3abc73586915b0a8042d3265f96158489d1c753c72d6617448f94b3ea4e6"
     },
     {
       "kind": "module_pack",
@@ -185,7 +176,7 @@
       "module_id": "fb04b3ad-dc94-4681-8635-c14c22fe2a8f",
       "source_key": "regression.lost-mine-of-phandelver.924cd72ff7",
       "parser_version": "7",
-      "published_checksum": "aa628208322ed99aa9b199f238948fe6d9ca79ed78c2f865e200eec4bd3abccb"
+      "published_checksum": "86a38d4fec107aea685799dcaff6508e625489fd977952f19b1f35215fa8f55d"
     },
     {
       "kind": "module_pack",
@@ -194,16 +185,7 @@
       "module_id": "6f297096-93b0-4edd-9da7-20264cd7cc99",
       "source_key": "regression.storm-king-s-thunder-1-10.b24e7235a4",
       "parser_version": "7",
-      "published_checksum": "5bdd2d1b08e66bbf58a6d1fdbfddf92397a65d00bf6d540c904ff473f37a7256"
-    },
-    {
-      "kind": "module_pack",
-      "id": "dnd5e.module.the-rise-of-tiamat",
-      "campaign_id": "ee5926e5-8122-4105-adbe-95fbfc442d80",
-      "module_id": "4a1134d6-2d19-448d-81a7-8ea5ae250a77",
-      "source_key": "regression.d-d-5e-tyranny-of-dragons-the-rise-of-tiamat.63fba737da",
-      "parser_version": "7",
-      "published_checksum": "8cd68a4851148107f56cd3c7f714030067ed6d2c926bf426bb386ae13d19d91d"
+      "published_checksum": "eccbc62800f0f2e9cb555f38aacc8e4862affc9e1e7d7efb9efbbaa07d922617"
     },
     {
       "kind": "module_pack",
@@ -212,7 +194,7 @@
       "module_id": "2332f50d-d8c1-4e6c-aea3-2791931fe5f4",
       "source_key": "regression.d-d-5e-tomb-of-annihilation.32517667ca",
       "parser_version": "7",
-      "published_checksum": "f39d44a37fd2e94be634344cb6285d65207a58709223ea6eab09cdc3f7f45fcd"
+      "published_checksum": "64f4e49f94679712487282011077ebb84bb2b055f874797a1833c2892bab9914"
     },
     {
       "kind": "module_pack",
@@ -221,7 +203,25 @@
       "module_id": "b9543fe1-21cb-461f-a6b6-62568097a26d",
       "source_key": "regression.d-d-5e-waterdeep-dragon-heist.f6b1b93d3d",
       "parser_version": "7",
-      "published_checksum": "94564d63e4cc58efb24a08949b4603d6cf1cfa06def2b6801bf7cb9208953083"
+      "published_checksum": "2b60f2ca11a61ca185afc08d18024a1ba1f7fbae317cb4cb7a87f6013f630391"
+    },
+    {
+      "kind": "module_pack",
+      "id": "dnd5e.module.the-rise-of-tiamat",
+      "campaign_id": "ee5926e5-8122-4105-adbe-95fbfc442d80",
+      "module_id": "4a1134d6-2d19-448d-81a7-8ea5ae250a77",
+      "source_key": "regression.d-d-5e-tyranny-of-dragons-the-rise-of-tiamat.63fba737da",
+      "parser_version": "7",
+      "published_checksum": "ce4b410ce676fdceefb9c21ef0d8966e2c591ab7a9f494803cd14b1bce7a34d0"
+    },
+    {
+      "kind": "module_pack",
+      "id": "dnd5e.module.a-guide-to-storm-kings-thunder",
+      "campaign_id": "43516e25-2939-4017-91f7-067b3b19835d",
+      "module_id": "9d143a20-d4d5-4baf-80ac-d44562ca52d7",
+      "source_key": "regression.a-guide-to-storm-kings-thunder.3500e85ab3",
+      "parser_version": "7",
+      "published_checksum": "85634f3a502e61a8553b3218e26861ac93164776e68d5b688848c6bc906c3026"
     }
   ],
   "published": [
@@ -365,45 +365,45 @@
     },
     {
       "kind": "module_pack",
-      "id": "dnd5e.module.a-guide-to-storm-kings-thunder",
-      "version": "1.0.0",
-      "checksum": "775bee9013b106a34d11026219e349f81a9dd7dfbc4370dbb4dcf554a84c0a03"
-    },
-    {
-      "kind": "module_pack",
       "id": "dnd5e.module.hoard-of-the-dragon-queen",
       "version": "1.0.0",
-      "checksum": "425f80fb734a0d24019937edf7640bc28a03b28ff40b21b876f222a2548935a5"
+      "checksum": "d24a3abc73586915b0a8042d3265f96158489d1c753c72d6617448f94b3ea4e6"
     },
     {
       "kind": "module_pack",
       "id": "dnd5e.module.lost-mine-of-phandelver",
       "version": "1.0.0",
-      "checksum": "aa628208322ed99aa9b199f238948fe6d9ca79ed78c2f865e200eec4bd3abccb"
+      "checksum": "86a38d4fec107aea685799dcaff6508e625489fd977952f19b1f35215fa8f55d"
     },
     {
       "kind": "module_pack",
       "id": "dnd5e.module.storm-kings-thunder",
       "version": "1.0.0",
-      "checksum": "5bdd2d1b08e66bbf58a6d1fdbfddf92397a65d00bf6d540c904ff473f37a7256"
-    },
-    {
-      "kind": "module_pack",
-      "id": "dnd5e.module.the-rise-of-tiamat",
-      "version": "1.0.0",
-      "checksum": "8cd68a4851148107f56cd3c7f714030067ed6d2c926bf426bb386ae13d19d91d"
+      "checksum": "eccbc62800f0f2e9cb555f38aacc8e4862affc9e1e7d7efb9efbbaa07d922617"
     },
     {
       "kind": "module_pack",
       "id": "dnd5e.module.tomb-of-annihilation",
       "version": "1.0.0",
-      "checksum": "f39d44a37fd2e94be634344cb6285d65207a58709223ea6eab09cdc3f7f45fcd"
+      "checksum": "64f4e49f94679712487282011077ebb84bb2b055f874797a1833c2892bab9914"
     },
     {
       "kind": "module_pack",
       "id": "dnd5e.module.waterdeep-dragon-heist",
       "version": "1.0.0",
-      "checksum": "94564d63e4cc58efb24a08949b4603d6cf1cfa06def2b6801bf7cb9208953083"
+      "checksum": "2b60f2ca11a61ca185afc08d18024a1ba1f7fbae317cb4cb7a87f6013f630391"
+    },
+    {
+      "kind": "module_pack",
+      "id": "dnd5e.module.the-rise-of-tiamat",
+      "version": "1.0.0",
+      "checksum": "ce4b410ce676fdceefb9c21ef0d8966e2c591ab7a9f494803cd14b1bce7a34d0"
+    },
+    {
+      "kind": "module_pack",
+      "id": "dnd5e.module.a-guide-to-storm-kings-thunder",
+      "version": "1.0.0",
+      "checksum": "85634f3a502e61a8553b3218e26861ac93164776e68d5b688848c6bc906c3026"
     }
   ]
 }

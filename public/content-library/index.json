@@ -1,5 +1,5 @@
 {
-  "schema": "sagasmith.public-content-library.v1",
+  "schema": "sagasmith.public-content-library.v2",
   "system_id": "dnd5e",
   "packages": [
     {
@@ -332,7 +332,7 @@
       "kind": "module_pack",
       "id": "dnd5e.module.a-guide-to-storm-kings-thunder",
       "version": "1.0.0",
-      "checksum": "775bee9013b106a34d11026219e349f81a9dd7dfbc4370dbb4dcf554a84c0a03",
+      "checksum": "85634f3a502e61a8553b3218e26861ac93164776e68d5b688848c6bc906c3026",
       "title": "A_Guide_to_Storm_Kings_Thunder",
       "edition": null,
       "license": "LicenseRef-SagaSmith-Authorized-Redistribution",
@@ -343,13 +343,114 @@
         "actor_card": 0
       },
       "image_count": 0,
-      "path": "packages/dnd5e.module.a-guide-to-storm-kings-thunder-1.0.0.json"
+      "path": "packages/dnd5e.module.a-guide-to-storm-kings-thunder-1.0.0.json",
+      "classification": "dm_guide",
+      "play_profile": {
+        "party_size": {
+          "minimum": null,
+          "maximum": null,
+          "source_refs": []
+        },
+        "starting_level": {
+          "value": null,
+          "source_refs": []
+        },
+        "expected_end_level": {
+          "value": null,
+          "source_refs": []
+        },
+        "advancement": {
+          "modes": [
+            "unknown"
+          ],
+          "recommended": "unknown",
+          "source_refs": []
+        },
+        "pregenerated_characters": {
+          "available": false,
+          "applicability": "Awaiting source-backed review",
+          "source_refs": []
+        }
+      },
+      "continuity": {
+        "series_id": null,
+        "order": null,
+        "continues_from": "dnd5e.module.storm-kings-thunder",
+        "state_policy": {}
+      },
+      "readiness": {
+        "schema_version": 1,
+        "level": "indexed",
+        "dimensions": {
+          "source": {
+            "complete": true,
+            "item_count": 1,
+            "blockers": []
+          },
+          "structure": {
+            "complete": true,
+            "item_count": 35,
+            "blockers": []
+          },
+          "play_profile": {
+            "complete": false,
+            "item_count": 0,
+            "blockers": [
+              {
+                "code": "play_profile_unreviewed",
+                "message": "Recommended party size, levels, advancement, and pregenerated characters require review.",
+                "source_refs": []
+              }
+            ]
+          },
+          "catalog": {
+            "complete": false,
+            "item_count": 0,
+            "blockers": [
+              {
+                "code": "catalog_unreviewed",
+                "message": "Module actors, encounters, items, hazards, and handouts require review.",
+                "source_refs": []
+              }
+            ]
+          },
+          "narrative": {
+            "complete": false,
+            "item_count": 0,
+            "blockers": [
+              {
+                "code": "narrative_unreviewed",
+                "message": "Narrative dossiers, relationships, contingencies, and endings require review.",
+                "source_refs": []
+              }
+            ]
+          },
+          "runtime": {
+            "complete": false,
+            "item_count": 0,
+            "blockers": [
+              {
+                "code": "runtime_unreviewed",
+                "message": "Runtime dependencies and campaign activation require review.",
+                "source_refs": []
+              }
+            ]
+          },
+          "portability": {
+            "complete": true,
+            "item_count": 1,
+            "blockers": []
+          }
+        },
+        "complete": false
+      },
+      "download_path": "packages/dnd5e.module.a-guide-to-storm-kings-thunder-1.0.0.sagasmith-module"
     },
     {
       "kind": "module_pack",
       "id": "dnd5e.module.hoard-of-the-dragon-queen",
       "version": "1.0.0",
-      "checksum": "425f80fb734a0d24019937edf7640bc28a03b28ff40b21b876f222a2548935a5",
+      "checksum": "d24a3abc73586915b0a8042d3265f96158489d1c753c72d6617448f94b3ea4e6",
       "title": "D&D 5E - Tyranny of Dragons - Hoard of the Dragon Queen",
       "edition": null,
       "license": "LicenseRef-SagaSmith-Authorized-Redistribution",
@@ -360,13 +461,114 @@
         "actor_card": 0
       },
       "image_count": 0,
-      "path": "packages/dnd5e.module.hoard-of-the-dragon-queen-1.0.0.json"
+      "path": "packages/dnd5e.module.hoard-of-the-dragon-queen-1.0.0.json",
+      "classification": "campaign",
+      "play_profile": {
+        "party_size": {
+          "minimum": null,
+          "maximum": null,
+          "source_refs": []
+        },
+        "starting_level": {
+          "value": null,
+          "source_refs": []
+        },
+        "expected_end_level": {
+          "value": null,
+          "source_refs": []
+        },
+        "advancement": {
+          "modes": [
+            "unknown"
+          ],
+          "recommended": "unknown",
+          "source_refs": []
+        },
+        "pregenerated_characters": {
+          "available": false,
+          "applicability": "Awaiting source-backed review",
+          "source_refs": []
+        }
+      },
+      "continuity": {
+        "series_id": "dnd5e.series.tyranny-of-dragons",
+        "order": 1,
+        "continues_from": null,
+        "state_policy": {}
+      },
+      "readiness": {
+        "schema_version": 1,
+        "level": "indexed",
+        "dimensions": {
+          "source": {
+            "complete": true,
+            "item_count": 1,
+            "blockers": []
+          },
+          "structure": {
+            "complete": true,
+            "item_count": 69,
+            "blockers": []
+          },
+          "play_profile": {
+            "complete": false,
+            "item_count": 0,
+            "blockers": [
+              {
+                "code": "play_profile_unreviewed",
+                "message": "Recommended party size, levels, advancement, and pregenerated characters require review.",
+                "source_refs": []
+              }
+            ]
+          },
+          "catalog": {
+            "complete": false,
+            "item_count": 0,
+            "blockers": [
+              {
+                "code": "catalog_unreviewed",
+                "message": "Module actors, encounters, items, hazards, and handouts require review.",
+                "source_refs": []
+              }
+            ]
+          },
+          "narrative": {
+            "complete": false,
+            "item_count": 0,
+            "blockers": [
+              {
+                "code": "narrative_unreviewed",
+                "message": "Narrative dossiers, relationships, contingencies, and endings require review.",
+                "source_refs": []
+              }
+            ]
+          },
+          "runtime": {
+            "complete": false,
+            "item_count": 0,
+            "blockers": [
+              {
+                "code": "runtime_unreviewed",
+                "message": "Runtime dependencies and campaign activation require review.",
+                "source_refs": []
+              }
+            ]
+          },
+          "portability": {
+            "complete": true,
+            "item_count": 1,
+            "blockers": []
+          }
+        },
+        "complete": false
+      },
+      "download_path": "packages/dnd5e.module.hoard-of-the-dragon-queen-1.0.0.sagasmith-module"
     },
     {
       "kind": "module_pack",
       "id": "dnd5e.module.lost-mine-of-phandelver",
       "version": "1.0.0",
-      "checksum": "aa628208322ed99aa9b199f238948fe6d9ca79ed78c2f865e200eec4bd3abccb",
+      "checksum": "86a38d4fec107aea685799dcaff6508e625489fd977952f19b1f35215fa8f55d",
       "title": "Lost Mine of Phandelver",
       "edition": null,
       "license": "LicenseRef-SagaSmith-Authorized-Redistribution",
@@ -377,13 +579,114 @@
         "actor_card": 0
       },
       "image_count": 0,
-      "path": "packages/dnd5e.module.lost-mine-of-phandelver-1.0.0.json"
+      "path": "packages/dnd5e.module.lost-mine-of-phandelver-1.0.0.json",
+      "classification": "campaign",
+      "play_profile": {
+        "party_size": {
+          "minimum": null,
+          "maximum": null,
+          "source_refs": []
+        },
+        "starting_level": {
+          "value": null,
+          "source_refs": []
+        },
+        "expected_end_level": {
+          "value": null,
+          "source_refs": []
+        },
+        "advancement": {
+          "modes": [
+            "unknown"
+          ],
+          "recommended": "unknown",
+          "source_refs": []
+        },
+        "pregenerated_characters": {
+          "available": false,
+          "applicability": "Awaiting source-backed review",
+          "source_refs": []
+        }
+      },
+      "continuity": {
+        "series_id": null,
+        "order": null,
+        "continues_from": null,
+        "state_policy": {}
+      },
+      "readiness": {
+        "schema_version": 1,
+        "level": "indexed",
+        "dimensions": {
+          "source": {
+            "complete": true,
+            "item_count": 1,
+            "blockers": []
+          },
+          "structure": {
+            "complete": true,
+            "item_count": 37,
+            "blockers": []
+          },
+          "play_profile": {
+            "complete": false,
+            "item_count": 0,
+            "blockers": [
+              {
+                "code": "play_profile_unreviewed",
+                "message": "Recommended party size, levels, advancement, and pregenerated characters require review.",
+                "source_refs": []
+              }
+            ]
+          },
+          "catalog": {
+            "complete": false,
+            "item_count": 0,
+            "blockers": [
+              {
+                "code": "catalog_unreviewed",
+                "message": "Module actors, encounters, items, hazards, and handouts require review.",
+                "source_refs": []
+              }
+            ]
+          },
+          "narrative": {
+            "complete": false,
+            "item_count": 0,
+            "blockers": [
+              {
+                "code": "narrative_unreviewed",
+                "message": "Narrative dossiers, relationships, contingencies, and endings require review.",
+                "source_refs": []
+              }
+            ]
+          },
+          "runtime": {
+            "complete": false,
+            "item_count": 0,
+            "blockers": [
+              {
+                "code": "runtime_unreviewed",
+                "message": "Runtime dependencies and campaign activation require review.",
+                "source_refs": []
+              }
+            ]
+          },
+          "portability": {
+            "complete": true,
+            "item_count": 1,
+            "blockers": []
+          }
+        },
+        "complete": false
+      },
+      "download_path": "packages/dnd5e.module.lost-mine-of-phandelver-1.0.0.sagasmith-module"
     },
     {
       "kind": "module_pack",
       "id": "dnd5e.module.storm-kings-thunder",
       "version": "1.0.0",
-      "checksum": "5bdd2d1b08e66bbf58a6d1fdbfddf92397a65d00bf6d540c904ff473f37a7256",
+      "checksum": "eccbc62800f0f2e9cb555f38aacc8e4862affc9e1e7d7efb9efbbaa07d922617",
       "title": "Storm King's Thunder (1-10)",
       "edition": null,
       "license": "LicenseRef-SagaSmith-Authorized-Redistribution",
@@ -394,13 +697,114 @@
         "actor_card": 0
       },
       "image_count": 0,
-      "path": "packages/dnd5e.module.storm-kings-thunder-1.0.0.json"
+      "path": "packages/dnd5e.module.storm-kings-thunder-1.0.0.json",
+      "classification": "campaign",
+      "play_profile": {
+        "party_size": {
+          "minimum": null,
+          "maximum": null,
+          "source_refs": []
+        },
+        "starting_level": {
+          "value": null,
+          "source_refs": []
+        },
+        "expected_end_level": {
+          "value": null,
+          "source_refs": []
+        },
+        "advancement": {
+          "modes": [
+            "unknown"
+          ],
+          "recommended": "unknown",
+          "source_refs": []
+        },
+        "pregenerated_characters": {
+          "available": false,
+          "applicability": "Awaiting source-backed review",
+          "source_refs": []
+        }
+      },
+      "continuity": {
+        "series_id": null,
+        "order": null,
+        "continues_from": null,
+        "state_policy": {}
+      },
+      "readiness": {
+        "schema_version": 1,
+        "level": "indexed",
+        "dimensions": {
+          "source": {
+            "complete": true,
+            "item_count": 1,
+            "blockers": []
+          },
+          "structure": {
+            "complete": true,
+            "item_count": 116,
+            "blockers": []
+          },
+          "play_profile": {
+            "complete": false,
+            "item_count": 0,
+            "blockers": [
+              {
+                "code": "play_profile_unreviewed",
+                "message": "Recommended party size, levels, advancement, and pregenerated characters require review.",
+                "source_refs": []
+              }
+            ]
+          },
+          "catalog": {
+            "complete": false,
+            "item_count": 0,
+            "blockers": [
+              {
+                "code": "catalog_unreviewed",
+                "message": "Module actors, encounters, items, hazards, and handouts require review.",
+                "source_refs": []
+              }
+            ]
+          },
+          "narrative": {
+            "complete": false,
+            "item_count": 0,
+            "blockers": [
+              {
+                "code": "narrative_unreviewed",
+                "message": "Narrative dossiers, relationships, contingencies, and endings require review.",
+                "source_refs": []
+              }
+            ]
+          },
+          "runtime": {
+            "complete": false,
+            "item_count": 0,
+            "blockers": [
+              {
+                "code": "runtime_unreviewed",
+                "message": "Runtime dependencies and campaign activation require review.",
+                "source_refs": []
+              }
+            ]
+          },
+          "portability": {
+            "complete": true,
+            "item_count": 1,
+            "blockers": []
+          }
+        },
+        "complete": false
+      },
+      "download_path": "packages/dnd5e.module.storm-kings-thunder-1.0.0.sagasmith-module"
     },
     {
       "kind": "module_pack",
       "id": "dnd5e.module.the-rise-of-tiamat",
       "version": "1.0.0",
-      "checksum": "8cd68a4851148107f56cd3c7f714030067ed6d2c926bf426bb386ae13d19d91d",
+      "checksum": "ce4b410ce676fdceefb9c21ef0d8966e2c591ab7a9f494803cd14b1bce7a34d0",
       "title": "D&D 5E - Tyranny of Dragons - The Rise of Tiamat",
       "edition": null,
       "license": "LicenseRef-SagaSmith-Authorized-Redistribution",
@@ -411,13 +815,129 @@
         "actor_card": 0
       },
       "image_count": 0,
-      "path": "packages/dnd5e.module.the-rise-of-tiamat-1.0.0.json"
+      "path": "packages/dnd5e.module.the-rise-of-tiamat-1.0.0.json",
+      "classification": "campaign",
+      "play_profile": {
+        "party_size": {
+          "minimum": null,
+          "maximum": null,
+          "source_refs": []
+        },
+        "starting_level": {
+          "value": null,
+          "source_refs": []
+        },
+        "expected_end_level": {
+          "value": null,
+          "source_refs": []
+        },
+        "advancement": {
+          "modes": [
+            "unknown"
+          ],
+          "recommended": "unknown",
+          "source_refs": []
+        },
+        "pregenerated_characters": {
+          "available": false,
+          "applicability": "Awaiting source-backed review",
+          "source_refs": []
+        }
+      },
+      "continuity": {
+        "series_id": "dnd5e.series.tyranny-of-dragons",
+        "order": 2,
+        "continues_from": "dnd5e.module.hoard-of-the-dragon-queen",
+        "state_policy": {
+          "inherit": [
+            "party",
+            "levels",
+            "experience",
+            "inventory",
+            "relationships",
+            "quests",
+            "world_state",
+            "actor_knowledge"
+          ],
+          "exclude": [
+            "scene_progress",
+            "temporary_effects"
+          ]
+        }
+      },
+      "readiness": {
+        "schema_version": 1,
+        "level": "indexed",
+        "dimensions": {
+          "source": {
+            "complete": true,
+            "item_count": 1,
+            "blockers": []
+          },
+          "structure": {
+            "complete": true,
+            "item_count": 64,
+            "blockers": []
+          },
+          "play_profile": {
+            "complete": false,
+            "item_count": 0,
+            "blockers": [
+              {
+                "code": "play_profile_unreviewed",
+                "message": "Recommended party size, levels, advancement, and pregenerated characters require review.",
+                "source_refs": []
+              }
+            ]
+          },
+          "catalog": {
+            "complete": false,
+            "item_count": 0,
+            "blockers": [
+              {
+                "code": "catalog_unreviewed",
+                "message": "Module actors, encounters, items, hazards, and handouts require review.",
+                "source_refs": []
+              }
+            ]
+          },
+          "narrative": {
+            "complete": false,
+            "item_count": 0,
+            "blockers": [
+              {
+                "code": "narrative_unreviewed",
+                "message": "Narrative dossiers, relationships, contingencies, and endings require review.",
+                "source_refs": []
+              }
+            ]
+          },
+          "runtime": {
+            "complete": false,
+            "item_count": 0,
+            "blockers": [
+              {
+                "code": "runtime_unreviewed",
+                "message": "Runtime dependencies and campaign activation require review.",
+                "source_refs": []
+              }
+            ]
+          },
+          "portability": {
+            "complete": true,
+            "item_count": 1,
+            "blockers": []
+          }
+        },
+        "complete": false
+      },
+      "download_path": "packages/dnd5e.module.the-rise-of-tiamat-1.0.0.sagasmith-module"
     },
     {
       "kind": "module_pack",
       "id": "dnd5e.module.tomb-of-annihilation",
       "version": "1.0.0",
-      "checksum": "f39d44a37fd2e94be634344cb6285d65207a58709223ea6eab09cdc3f7f45fcd",
+      "checksum": "64f4e49f94679712487282011077ebb84bb2b055f874797a1833c2892bab9914",
       "title": "D&D 5E - Tomb of Annihilation",
       "edition": null,
       "license": "LicenseRef-SagaSmith-Authorized-Redistribution",
@@ -428,13 +948,114 @@
         "actor_card": 0
       },
       "image_count": 0,
-      "path": "packages/dnd5e.module.tomb-of-annihilation-1.0.0.json"
+      "path": "packages/dnd5e.module.tomb-of-annihilation-1.0.0.json",
+      "classification": "campaign",
+      "play_profile": {
+        "party_size": {
+          "minimum": null,
+          "maximum": null,
+          "source_refs": []
+        },
+        "starting_level": {
+          "value": null,
+          "source_refs": []
+        },
+        "expected_end_level": {
+          "value": null,
+          "source_refs": []
+        },
+        "advancement": {
+          "modes": [
+            "unknown"
+          ],
+          "recommended": "unknown",
+          "source_refs": []
+        },
+        "pregenerated_characters": {
+          "available": false,
+          "applicability": "Awaiting source-backed review",
+          "source_refs": []
+        }
+      },
+      "continuity": {
+        "series_id": null,
+        "order": null,
+        "continues_from": null,
+        "state_policy": {}
+      },
+      "readiness": {
+        "schema_version": 1,
+        "level": "indexed",
+        "dimensions": {
+          "source": {
+            "complete": true,
+            "item_count": 1,
+            "blockers": []
+          },
+          "structure": {
+            "complete": true,
+            "item_count": 56,
+            "blockers": []
+          },
+          "play_profile": {
+            "complete": false,
+            "item_count": 0,
+            "blockers": [
+              {
+                "code": "play_profile_unreviewed",
+                "message": "Recommended party size, levels, advancement, and pregenerated characters require review.",
+                "source_refs": []
+              }
+            ]
+          },
+          "catalog": {
+            "complete": false,
+            "item_count": 0,
+            "blockers": [
+              {
+                "code": "catalog_unreviewed",
+                "message": "Module actors, encounters, items, hazards, and handouts require review.",
+                "source_refs": []
+              }
+            ]
+          },
+          "narrative": {
+            "complete": false,
+            "item_count": 0,
+            "blockers": [
+              {
+                "code": "narrative_unreviewed",
+                "message": "Narrative dossiers, relationships, contingencies, and endings require review.",
+                "source_refs": []
+              }
+            ]
+          },
+          "runtime": {
+            "complete": false,
+            "item_count": 0,
+            "blockers": [
+              {
+                "code": "runtime_unreviewed",
+                "message": "Runtime dependencies and campaign activation require review.",
+                "source_refs": []
+              }
+            ]
+          },
+          "portability": {
+            "complete": true,
+            "item_count": 1,
+            "blockers": []
+          }
+        },
+        "complete": false
+      },
+      "download_path": "packages/dnd5e.module.tomb-of-annihilation-1.0.0.sagasmith-module"
     },
     {
       "kind": "module_pack",
       "id": "dnd5e.module.waterdeep-dragon-heist",
       "version": "1.0.0",
-      "checksum": "94564d63e4cc58efb24a08949b4603d6cf1cfa06def2b6801bf7cb9208953083",
+      "checksum": "2b60f2ca11a61ca185afc08d18024a1ba1f7fbae317cb4cb7a87f6013f630391",
       "title": "D&D 5E - Waterdeep - Dragon Heist",
       "edition": null,
       "license": "LicenseRef-SagaSmith-Authorized-Redistribution",
@@ -445,7 +1066,108 @@
         "actor_card": 0
       },
       "image_count": 0,
-      "path": "packages/dnd5e.module.waterdeep-dragon-heist-1.0.0.json"
+      "path": "packages/dnd5e.module.waterdeep-dragon-heist-1.0.0.json",
+      "classification": "campaign",
+      "play_profile": {
+        "party_size": {
+          "minimum": null,
+          "maximum": null,
+          "source_refs": []
+        },
+        "starting_level": {
+          "value": null,
+          "source_refs": []
+        },
+        "expected_end_level": {
+          "value": null,
+          "source_refs": []
+        },
+        "advancement": {
+          "modes": [
+            "unknown"
+          ],
+          "recommended": "unknown",
+          "source_refs": []
+        },
+        "pregenerated_characters": {
+          "available": false,
+          "applicability": "Awaiting source-backed review",
+          "source_refs": []
+        }
+      },
+      "continuity": {
+        "series_id": null,
+        "order": null,
+        "continues_from": null,
+        "state_policy": {}
+      },
+      "readiness": {
+        "schema_version": 1,
+        "level": "indexed",
+        "dimensions": {
+          "source": {
+            "complete": true,
+            "item_count": 1,
+            "blockers": []
+          },
+          "structure": {
+            "complete": true,
+            "item_count": 193,
+            "blockers": []
+          },
+          "play_profile": {
+            "complete": false,
+            "item_count": 0,
+            "blockers": [
+              {
+                "code": "play_profile_unreviewed",
+                "message": "Recommended party size, levels, advancement, and pregenerated characters require review.",
+                "source_refs": []
+              }
+            ]
+          },
+          "catalog": {
+            "complete": false,
+            "item_count": 0,
+            "blockers": [
+              {
+                "code": "catalog_unreviewed",
+                "message": "Module actors, encounters, items, hazards, and handouts require review.",
+                "source_refs": []
+              }
+            ]
+          },
+          "narrative": {
+            "complete": false,
+            "item_count": 0,
+            "blockers": [
+              {
+                "code": "narrative_unreviewed",
+                "message": "Narrative dossiers, relationships, contingencies, and endings require review.",
+                "source_refs": []
+              }
+            ]
+          },
+          "runtime": {
+            "complete": false,
+            "item_count": 0,
+            "blockers": [
+              {
+                "code": "runtime_unreviewed",
+                "message": "Runtime dependencies and campaign activation require review.",
+                "source_refs": []
+              }
+            ]
+          },
+          "portability": {
+            "complete": true,
+            "item_count": 1,
+            "blockers": []
+          }
+        },
+        "complete": false
+      },
+      "download_path": "packages/dnd5e.module.waterdeep-dragon-heist-1.0.0.sagasmith-module"
     },
     {
       "kind": "preset_pack",

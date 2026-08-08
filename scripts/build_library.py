@@ -26,6 +26,8 @@ from sagasmith_core.portable import (  # noqa: E402
     build_module_pack,
     build_preset_pack,
     build_rule_pack,
+    dumps_module_archive,
+    loads_module_archive,
 )
 from sagasmith_dnd.portable_cards import (  # noqa: E402
     build_srd2014_preset_pack,
@@ -152,12 +154,16 @@ def _rebuild_component(package: Mapping[str, Any]) -> dict[str, Any]:
     elif package["kind"] == "module_pack":
         rebuilt = build_module_pack(
             **common,
+            manifest=payload["manifest"],
             source=payload["source"],
             document=payload["document"],
             scene_atlas=payload["scene_atlas"],
             assets=payload.get("assets"),
             content_reviews=payload.get("content_reviews"),
             actors=[_rebuild_actor(card) for card in payload.get("actors") or []],
+            catalogs=payload["catalogs"],
+            narrative=payload["narrative"],
+            readiness=payload["readiness"],
         )
     else:
         raise ValueError(f"unsupported nested package kind: {package['kind']}")
@@ -243,7 +249,69 @@ def _parser_rank(campaign: Mapping[str, Any], module: Mapping[str, Any]) -> tupl
     )
 
 
-async def _export_modules() -> tuple[list[dict[str, Any]], list[dict[str, Any]]]:
+def _module_manifest(slug: str, title: str) -> dict[str, Any]:
+    series_id = None
+    order = None
+    continues_from = None
+    classification = "campaign"
+    state_policy: dict[str, Any] = {}
+    if slug in {"hoard-of-the-dragon-queen", "the-rise-of-tiamat"}:
+        series_id = "dnd5e.series.tyranny-of-dragons"
+        order = 1 if slug == "hoard-of-the-dragon-queen" else 2
+        if order == 2:
+            continues_from = "dnd5e.module.hoard-of-the-dragon-queen"
+            state_policy = {
+                "inherit": [
+                    "party",
+                    "levels",
+                    "experience",
+                    "inventory",
+                    "relationships",
+                    "quests",
+                    "world_state",
+                    "actor_knowledge",
+                ],
+                "exclude": ["scene_progress", "temporary_effects"],
+            }
+    if slug == "a-guide-to-storm-kings-thunder":
+        classification = "dm_guide"
+        continues_from = "dnd5e.module.storm-kings-thunder"
+    return {
+        "title": title,
+        "classification": classification,
+        "compatibility": {
+            "editions": ["2014"],
+            "required_capabilities": ["module_pack_v2", "agent_narrative_ruling"],
+        },
+        "play_profile": {
+            "party_size": {"minimum": None, "maximum": None, "source_refs": []},
+            "starting_level": {"value": None, "source_refs": []},
+            "expected_end_level": {"value": None, "source_refs": []},
+            "advancement": {
+                "modes": ["unknown"],
+                "recommended": "unknown",
+                "source_refs": [],
+            },
+            "pregenerated_characters": {
+                "available": False,
+                "applicability": "Awaiting source-backed review",
+                "source_refs": [],
+            },
+        },
+        "continuity": {
+            "series_id": series_id,
+            "order": order,
+            "continues_from": continues_from,
+            "state_policy": state_policy,
+        },
+        "activation": {"mode": "campaign_attach", "default_active": False},
+        "content_summary": {},
+    }
+
+
+async def _export_modules() -> tuple[
+    list[dict[str, Any]], list[dict[str, Any]], dict[str, bytes]
+]:
     base = McpConfig.from_environment()
     home = WORKSPACE / ".regression-cache" / "campaign-corpus-home-v3"
     config = McpConfig(
@@ -286,9 +354,37 @@ async def _export_modules() -> tuple[list[dict[str, Any]], list[dict[str, Any]]]
         raise RuntimeError(f"missing canonical module sources: {sorted(missing)}")
     packages = []
     audit = []
-    for slug, (campaign, active) in sorted(selected.items()):
+    archives: dict[str, bytes] = {}
+    published_by_slug: dict[str, dict[str, Any]] = {}
+    order = [
+        "hoard-of-the-dragon-queen",
+        "lost-mine-of-phandelver",
+        "storm-kings-thunder",
+        "tomb-of-annihilation",
+        "waterdeep-dragon-heist",
+        "the-rise-of-tiamat",
+        "a-guide-to-storm-kings-thunder",
+    ]
+    for slug in order:
+        campaign, active = selected[slug]
         source_key = str(active["logical_source_key"])
         portable_id = "dnd5e.module." + slug
+        dependencies = []
+        dependency_slug = {
+            "the-rise-of-tiamat": "hoard-of-the-dragon-queen",
+            "a-guide-to-storm-kings-thunder": "storm-kings-thunder",
+        }.get(slug)
+        if dependency_slug is not None:
+            dependency = published_by_slug[dependency_slug]
+            dependencies.append(
+                {
+                    "kind": "module_pack",
+                    "id": dependency["id"],
+                    "version": dependency["version"],
+                    "checksum": dependency["checksum"],
+                    "optional": False,
+                }
+            )
         metadata = _public_metadata(
             {
                 "title": active.get("title") or source_key,
@@ -307,13 +403,22 @@ async def _export_modules() -> tuple[list[dict[str, Any]], list[dict[str, Any]]]
                     "portable_id": portable_id,
                     "version": "1.0.0",
                     "metadata": metadata,
+                    "dependencies": dependencies,
+                    "manifest": _module_manifest(
+                        slug, str(active.get("title") or source_key)
+                    ),
                     "include_package": True,
                 },
             },
         )
+        archive_path = config.portable_packages_dir / exported["artifact"]
+        _exported_package, blobs = loads_module_archive(archive_path.read_bytes())
         rebuilt = _rebuild_component(exported["package"])
         validate_public_package(rebuilt)
+        archive = dumps_module_archive(rebuilt, blobs)
         packages.append(rebuilt)
+        published_by_slug[slug] = rebuilt
+        archives[rebuilt["checksum"]] = archive
         audit.append(
             {
                 "kind": "module_pack",
@@ -325,14 +430,14 @@ async def _export_modules() -> tuple[list[dict[str, Any]], list[dict[str, Any]]]
                 "published_checksum": rebuilt["checksum"],
             }
         )
-    return packages, audit
+    return packages, audit, archives
 
 
 def main() -> None:
     skill_root = WORKSPACE / "SagaSmith-dnd-skills"
     output = REPO / "public" / "content-library"
     addons, addon_audit = _select_addons()
-    modules, module_audit = asyncio.run(_export_modules())
+    modules, module_audit, module_archives = asyncio.run(_export_modules())
     presets = [
         _rebuild_component(build_srd2014_preset_pack(skill_root)),
         _rebuild_component(build_srd2024_preset_pack(skill_root)),
@@ -340,9 +445,13 @@ def main() -> None:
     packages = [*presets, *addons, *modules]
     package_dir = output / "packages"
     if package_dir.exists():
-        for stale_package in package_dir.glob("*.json"):
+        for stale_package in package_dir.iterdir():
+            if not stale_package.is_file():
+                continue
             stale_package.unlink()
-    index = build_public_library(output, packages)
+    index = build_public_library(
+        output, packages, module_archives=module_archives
+    )
     audit = {
         "schema": "sagasmith.public-content-library-audit.v1",
         "generated_on": date.today().isoformat(),

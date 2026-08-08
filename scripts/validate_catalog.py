@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import hashlib
 import json
+import zipfile
 from collections import Counter
 from pathlib import Path
 
@@ -19,6 +20,7 @@ def main() -> None:
     index = json.loads((ROOT / "index.json").read_text(encoding="utf-8"))
     audit = json.loads((ROOT / "audit.json").read_text(encoding="utf-8"))
     expected_paths = set()
+    expected_downloads = set()
     identities = set()
     counts: Counter[str] = Counter()
     for entry in index["packages"]:
@@ -33,8 +35,27 @@ def main() -> None:
         identities.add(identity)
         assert identity == (entry["kind"], entry["id"], entry["version"]), path
         counts[package["kind"]] += 1
-    actual_paths = {path.resolve() for path in (ROOT / "packages").glob("*.json")}
-    assert actual_paths == expected_paths
+        if package["kind"] == "module_pack":
+            archive_path = ROOT / entry["download_path"]
+            expected_downloads.add(archive_path.resolve())
+            with zipfile.ZipFile(archive_path) as archive:
+                archived = json.loads(
+                    archive.read("module.sagasmith.json").decode("utf-8")
+                )
+                assert archived == package
+                expected_blobs = {
+                    asset["blob_key"] for asset in package["payload"]["assets"]
+                }
+                actual_blobs = {
+                    name
+                    for name in archive.namelist()
+                    if name != "module.sagasmith.json"
+                }
+                assert actual_blobs == expected_blobs
+    actual_paths = {
+        path.resolve() for path in (ROOT / "packages").iterdir() if path.is_file()
+    }
+    assert actual_paths == expected_paths | expected_downloads
     assert sum(counts.values()) == audit["counts"]["total"]
     for kind, count in counts.items():
         assert count == audit["counts"][kind]
