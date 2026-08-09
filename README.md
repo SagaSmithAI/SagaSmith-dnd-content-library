@@ -27,8 +27,11 @@ serialization and fresh checksums, then passed through
 SagaSmith's package, dependency, blob, D&D semantic, and public-license validators.
 The web index publishes both the descriptor checksum and the complete archive
 SHA-256/byte size so a client can verify the download before opening it.
-Editable sources and review decisions remain outside the library. A module enters
-the catalog only after the Agent confirms its sourced play profile and narrative.
+Editable drafts remain outside the immutable library. Final source bindings,
+review dispositions, correction provenance, and Agent confirmation travel in the
+Pack so a decision can be audited and replayed without changing the source. A
+module enters the catalog only after the Agent confirms its sourced play profile
+and narrative.
 Actor images are package assets referenced by static actor cards or
 owner-dependent statblock template cards and are never copied into runtime
 snapshots. In the private build, normalized text, source documents,
@@ -62,8 +65,8 @@ while the final crop decision remains a small, replayable JSON record.
 
 ## Rebuild
 
-First compile every rulebook through the public MCP workflow, including the
-cross-instance import/re-export check. Then rebuild all 31 private packages,
+First finalize every rulebook through the public MCP workflow, including the
+cross-instance import/re-export check. Then rebuild all 30 private packages,
 embed each original rulebook/module PDF, and re-extract source-backed portraits.
 Finally derive the public SRD-only catalog:
 
