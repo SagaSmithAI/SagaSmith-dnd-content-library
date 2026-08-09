@@ -3,4 +3,5 @@
 *.yml text eol=lf
 *.md text eol=lf
 public/content-library/packages/*.json filter=lfs diff=lfs merge=lfs -text
-public/content-library/packages/*.sagasmith-module filter=lfs diff=lfs merge=lfs -text
+public/content-library/packages/*.sagasmith-pack filter=lfs diff=lfs merge=lfs -text
+public/content-library/blobs/sha256/* filter=lfs diff=lfs merge=lfs -text
