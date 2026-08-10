@@ -9,7 +9,7 @@ Checksum-verified unified content tooling for SagaSmith D&D 5e:
   play/continuity contracts, catalogs, narrative metadata, and actor cards.
 
 The private build is closed over the current corpus: 18 addons, 3 core-rule
-packages, 7 Agent-finalized modules, and 2 preset libraries (30 packages total). Its validator
+packages, 7 current module packages, and 2 preset libraries (30 packages total). Its validator
 fails if a rebuild silently drops or reclassifies any one of them. The committed
 public catalog contains only the two CC-BY-4.0 SRD preset packages. Commercial
 books, adventures, their normalized text, and extracted artwork are never
@@ -21,6 +21,8 @@ machine-readable index from
 <https://sagasmithai.github.io/SagaSmith-dnd-content-library/content-library/index.json>.
 
 Every published descriptor and archive uses `sagasmith.content-package` v2.
+The current public preset release is `2.1.0`, rebuilt from actor-card.v3 inputs
+with the current core and D&D package validators.
 Core rules, addons, modules, and presets share the same physical structure while
 retaining distinct activation semantics. Each is rebuilt with canonical
 serialization and fresh checksums, then passed through
@@ -65,33 +67,23 @@ while the final crop decision remains a small, replayable JSON record.
 
 ## Rebuild
 
-First finalize every rulebook through the public MCP workflow, including the
-cross-instance import/re-export check. Then rebuild all 30 private packages,
-embed each original rulebook/module PDF, and re-extract source-backed portraits.
-Finally derive the public SRD-only catalog:
+First finalize every rulebook through the current public MCP draft/finalization
+workflow and export the resulting `.sagasmith-pack` archives. Then rebuild all
+30 private packages, embed each original rulebook/module PDF, and re-extract
+source-backed portraits. Finally derive the public SRD-only catalog:
 
 ```powershell
-& ..\SagaSmith-dnd-mcp\.venv\Scripts\python.exe `
-  ..\SagaSmith-dnd-mcp\scripts\regression_rulebooks.py `
-  ..\reference\DnD-Books\5e\Books `
-  --home ..\tmp\content-source `
-  --document-cache ..\tmp\document-cache `
-  --content-roundtrip `
-  --content-target-home ..\tmp\content-target `
-  --addon-output-dir ..\tmp\current-rulebook-packs `
-  --output ..\tmp\rulebook-audit.json
-
-& ..\sagasmith-dnd\.venv\Scripts\python.exe `
+uv run --project ..\SagaSmith-dnd-mcp --python 3.12 python `
   scripts\rebuild_catalog.py `
   --rulebook-pack-dir ..\tmp\current-rulebook-packs `
   --portrait-review-file ..\tmp\portrait-reviews.json `
   --portrait-review-output ..\tmp\portrait-review-needed.json
 
-& ..\sagasmith-dnd\.venv\Scripts\python.exe `
+uv run --project ..\SagaSmith-dnd-mcp --python 3.12 python `
   scripts\validate_catalog.py `
   --root ..\tmp\unified-private-content-library
 
-& ..\sagasmith-dnd\.venv\Scripts\python.exe scripts\build_public_catalog.py
+uv run --project ..\SagaSmith-dnd-mcp --python 3.12 python scripts\build_public_catalog.py
 ```
 
 The repository's software is Apache-2.0. See `NOTICE` and each package's

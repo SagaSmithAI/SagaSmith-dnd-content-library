@@ -19,11 +19,9 @@ for source_root in (
 
 from sagasmith_core.content_pack import build_content_package, dumps_content_archive
 from sagasmith_dnd.content_packages import build_preset_content_package
-from sagasmith_dnd.portable_cards import (
-    build_srd2014_preset_pack,
-    build_srd2024_preset_pack,
-)
 from sagasmith_dnd.public_library import build_public_library
+
+from preset_packages import current_srd_preset_inputs
 
 PUBLIC_PRESETS = {
     "dnd5e.presets.srd2014": {
@@ -128,19 +126,11 @@ def main() -> None:
     packages = []
     archives = {}
     skill_root = WORKSPACE / "SagaSmith-dnd-skills"
-    for portable in (
-        build_srd2014_preset_pack(skill_root),
-        build_srd2024_preset_pack(skill_root),
-    ):
-        if not portable:
+    for preset_input in current_srd_preset_inputs(skill_root):
+        if not preset_input["cards"]:
             raise ValueError("bundled SRD actor presets are unavailable")
         package, blobs = build_preset_content_package(
-            package_id=str(portable["id"]),
-            version="2.0.0",
-            system_id=str(portable["system_id"]),
-            title=str(dict(portable["metadata"])["title"]),
-            cards=list(portable["payload"]["cards"]),
-            metadata=dict(portable["metadata"]),
+            **preset_input,
         )
         package, blobs = _open_srd_preset(package, blobs)
         archive = dumps_content_archive(package, blobs)

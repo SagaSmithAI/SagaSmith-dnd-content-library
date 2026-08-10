@@ -38,13 +38,11 @@ from sagasmith_dnd.content_packages import (
     build_preset_content_package,
     canonicalize_dnd_content_package,
 )
-from sagasmith_dnd.portable_cards import (
-    build_srd2014_preset_pack,
-    build_srd2024_preset_pack,
-)
 from sagasmith_dnd.public_library import build_content_library
 
-VERSION = "2.0.0"
+from preset_packages import PRESET_PACKAGE_VERSION, current_srd_preset_inputs
+
+VERSION = PRESET_PACKAGE_VERSION
 PRIVATE_LICENSE = "user-supplied"
 PRIVATE_ATTRIBUTION = "User supplied source; redistribution rights not asserted."
 CORE_PACKAGE_IDS = {
@@ -575,7 +573,8 @@ def main() -> None:
         args.portrait_review_file
     )
 
-    # Semantic inputs are current, already Agent-finalized module packages.
+    # Semantic inputs are current module packages; finalization evidence remains
+    # package-owned and is preserved by the current content-package builder.
     # Legacy descriptors and editable drafts are intentionally rejected here.
     current = _load_archives(
         args.semantic_input_dir,
@@ -596,22 +595,14 @@ def main() -> None:
     }
     if sum(value[0]["kind"] == "module" for value in retained.values()) != 7:
         raise ValueError(
-            "catalog must retain seven Agent-finalized source adventure modules"
+            "catalog must retain seven current source adventure module packages"
         )
     skill_root = WORKSPACE / "SagaSmith-dnd-skills"
-    for portable in (
-        build_srd2014_preset_pack(skill_root),
-        build_srd2024_preset_pack(skill_root),
-    ):
-        if not portable:
+    for preset_input in current_srd_preset_inputs(skill_root):
+        if not preset_input["cards"]:
             raise ValueError("bundled SRD actor presets are unavailable")
         preset, preset_blobs = build_preset_content_package(
-            package_id=str(portable["id"]),
-            version=VERSION,
-            system_id=str(portable["system_id"]),
-            title=str(dict(portable["metadata"])["title"]),
-            cards=list(portable["payload"]["cards"]),
-            metadata=dict(portable["metadata"]),
+            **preset_input,
         )
         retained[str(preset["id"])] = (preset, preset_blobs)
 

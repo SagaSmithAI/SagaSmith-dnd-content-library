@@ -14,8 +14,8 @@
     {
       "kind": "preset",
       "id": "dnd5e.presets.srd2014",
-      "version": "2.0.0",
-      "checksum": "94c60f43de3bfeccd08f7d9c931e5b31fd266b71f31cfd29532e4535781bcfd6",
+      "version": "2.1.0",
+      "checksum": "d9c13e9bfff32bd942a166b386fecef5309434db60facac22276ed4bf2e07992",
       "title": "D&D 5e SRD 5.1 Actor Presets",
       "editions": [],
       "classification": "actor_library",
@@ -30,16 +30,16 @@
         "npc": 21
       },
       "image_count": 0,
-      "path": "packages/dnd5e.presets.srd2014-2.0.0.json",
-      "download_path": "packages/dnd5e.presets.srd2014-2.0.0.sagasmith-pack",
-      "archive_checksum": "90450c1cd25f83f318b78f0497d44bfc21accd6895b20377e9d97557dfb3f404",
-      "archive_size": 739245
+      "path": "packages/dnd5e.presets.srd2014-2.1.0.json",
+      "download_path": "packages/dnd5e.presets.srd2014-2.1.0.sagasmith-pack",
+      "archive_checksum": "3c1a39f6b09e410bc40afc27b3e8771f992ee82a4a3735b25c9e9c16d17b9e84",
+      "archive_size": 739302
     },
     {
       "kind": "preset",
       "id": "dnd5e.presets.srd2024",
-      "version": "2.0.0",
-      "checksum": "663e1b624a3912c0672a7893721de6b1ae746e9706f168db8d4b768c0b5e2684",
+      "version": "2.1.0",
+      "checksum": "9e1f59ae5305bbbf20ce0aa1fde9708e62ccc3f0383df5eb11bbcd8d54b9936d",
       "title": "D&D 5e SRD 5.2.1 Actor Presets",
       "editions": [],
       "classification": "actor_library",
@@ -53,10 +53,10 @@
         "monster": 330
       },
       "image_count": 0,
-      "path": "packages/dnd5e.presets.srd2024-2.0.0.json",
-      "download_path": "packages/dnd5e.presets.srd2024-2.0.0.sagasmith-pack",
-      "archive_checksum": "0a5d7fa8c195cb07abf2d5d0c387146b45d8087bdae52887d0136790634d409b",
-      "archive_size": 686277
+      "path": "packages/dnd5e.presets.srd2024-2.1.0.json",
+      "download_path": "packages/dnd5e.presets.srd2024-2.1.0.sagasmith-pack",
+      "archive_checksum": "a7768a05ef708a4ac5c37a56c8850cb334293c595af614d1ec022044a1e4ede4",
+      "archive_size": 686373
     }
   ]
 }
