@@ -1,0 +1,378 @@
+{
+  "schema": "sagasmith.pack-public-import-evidence.v1",
+  "dnd": [
+    {
+      "id": "dnd5e.addon.rulebook.d-d-5e-dungeon-master-s-guide.28b0d385f4d2.addon",
+      "kind": "addon",
+      "checksum": "94f1f37b65cb1845767f0be2fd3b1c5194e1efe11e84cad93b0efdedea515424",
+      "campaign_id": "4895d862-680c-43ef-9ab7-87c7b791ecf0",
+      "idempotent_replay": true,
+      "listed_count": 1
+    },
+    {
+      "id": "dnd5e.addon.rulebook.d-d-5e-eberron-rising-from-the-last-war.31293633134f.addon",
+      "kind": "addon",
+      "checksum": "208e603266337eca76b52e036bd8ecca95c48ffa02c910dd006f445c5b868e7e",
+      "campaign_id": "dce4d5f1-cbcf-4682-929a-274dee3a9299",
+      "idempotent_replay": true,
+      "listed_count": 2
+    },
+    {
+      "id": "dnd5e.addon.rulebook.d-d-5e-elemental-evil-player-s-companion.490f88d2c84c.addon",
+      "kind": "addon",
+      "checksum": "d6bb111e494663d45be3f367e4c51379fc922289b57913d6a1dc9362a73832da",
+      "campaign_id": "3a9796df-564a-406e-8352-a3cb20d24250",
+      "idempotent_replay": true,
+      "listed_count": 3
+    },
+    {
+      "id": "dnd5e.addon.rulebook.d-d-5e-guildmasters-guide-to-ravnica.59317c5cf3da.addon",
+      "kind": "addon",
+      "checksum": "852a5d488e25745daa6f4633fa14af00849fab71a8f1f050ad428946f2f36e83",
+      "campaign_id": "cb8db919-b396-4c60-bc7c-b30290eba38d",
+      "idempotent_replay": true,
+      "listed_count": 4
+    },
+    {
+      "id": "dnd5e.addon.rulebook.d-d-5e-hb-school-of-geometry.9f4f4edec61a.addon",
+      "kind": "addon",
+      "checksum": "79e213e2e07a2c7bcc4712be9ece84d454232800e7166d53c21eb5b222e7b740",
+      "campaign_id": "8579a0e9-704f-47df-af1a-582ae693fe5c",
+      "idempotent_replay": true,
+      "listed_count": 5
+    },
+    {
+      "id": "dnd5e.addon.rulebook.d-d-5e-monster-manual.13193b8c22ea.addon",
+      "kind": "addon",
+      "checksum": "358240f5b3e67cc78523ebdf148a892549dc81e572b47c5b699ce8134138887b",
+      "campaign_id": "211dee9e-9388-418d-86cb-3ed9100cf662",
+      "idempotent_replay": true,
+      "listed_count": 6
+    },
+    {
+      "id": "dnd5e.addon.rulebook.d-d-5e-mordenkainen-s-tome-of-foes.2768304ef1af.addon",
+      "kind": "addon",
+      "checksum": "f4fb310143b6c908f528c60e6db0eab0cd0120cdc576c302a565a83dc8ac7e13",
+      "campaign_id": "d6dcd4b6-8b7e-400d-ad50-4232dcc3eba0",
+      "idempotent_replay": true,
+      "listed_count": 7
+    },
+    {
+      "id": "dnd5e.addon.rulebook.d-d-5e-player-s-handbook.7ad6d3e9c93c.addon",
+      "kind": "addon",
+      "checksum": "e879447c1dd00139f12a30ee42e3e30b323af771d3abceacbd6e6e6d17c9de00",
+      "campaign_id": "afd32495-11ac-45e1-9c02-fb58bd82c0a0",
+      "idempotent_replay": true,
+      "listed_count": 8
+    },
+    {
+      "id": "dnd5e.addon.rulebook.d-d-5e-sword-coast-adventurer-s-guide.16e6a243ef0a.addon",
+      "kind": "addon",
+      "checksum": "efbba0006ef837961a3d87203c60a49b1ed57428cdb10999aa8b6378964a5bb9",
+      "campaign_id": "2887d856-373c-4bb9-8d8f-d0df458c3f38",
+      "idempotent_replay": true,
+      "listed_count": 9
+    },
+    {
+      "id": "dnd5e.addon.rulebook.d-d-5e-tasha-s-cauldron-of-everything.89a729b37a4b.addon",
+      "kind": "addon",
+      "checksum": "9f8059a4e9839c51fe046bd00d1776530b7e8caa729cb5deeeb1e625143e1bb4",
+      "campaign_id": "341aae83-131a-4518-9236-5a7483c92b11",
+      "idempotent_replay": true,
+      "listed_count": 10
+    },
+    {
+      "id": "dnd5e.addon.rulebook.d-d-5e-the-tortle-package.e3234de670da.addon",
+      "kind": "addon",
+      "checksum": "356cbf231ea7ecf8dab48b7cca127523d1d0bd3f5b5535899f45641f24bc5759",
+      "campaign_id": "cd0728e1-a3af-4209-b949-6812ddd68ffa",
+      "idempotent_replay": true,
+      "listed_count": 11
+    },
+    {
+      "id": "dnd5e.addon.rulebook.d-d-5e-ua-aberrantlurk.41bdf48914d3.addon",
+      "kind": "addon",
+      "checksum": "8ed16a7bf8b39128daaa9a9de01857c62158cb0fbecfda3b68d47a6fc581e761",
+      "campaign_id": "70c284c4-550b-41ad-8d5d-8cb08a0a0457",
+      "idempotent_replay": true,
+      "listed_count": 12
+    },
+    {
+      "id": "dnd5e.addon.rulebook.d-d-5e-ua-artificer.e99920471b34.addon",
+      "kind": "addon",
+      "checksum": "1a9be2f99ec4992b763e722f3a7e9e672a307b98a5286d08151da8180519aa5c",
+      "campaign_id": "4083430a-8826-42b6-af21-8aec29650186",
+      "idempotent_replay": true,
+      "listed_count": 13
+    },
+    {
+      "id": "dnd5e.addon.rulebook.d-d-5e-ua-artificerv2.3c339a885211.addon",
+      "kind": "addon",
+      "checksum": "4c01e62ca31390dc3c80f129b6e016ebffbe1ae7e27930c93186f2a1705b6b1a",
+      "campaign_id": "87e7cae1-b436-453b-8c8e-87239615bd9b",
+      "idempotent_replay": true,
+      "listed_count": 14
+    },
+    {
+      "id": "dnd5e.addon.rulebook.d-d-5e-ua-blood-hunter-class-1-2.4a5898befd39.addon",
+      "kind": "addon",
+      "checksum": "12097c3d07dd31a4b7d68fc7bf812cb2a44cf7a224b7c33040b562ead5743932",
+      "campaign_id": "291bafda-d5b9-4fdd-b6ed-1a4fb70d10bb",
+      "idempotent_replay": true,
+      "listed_count": 15
+    },
+    {
+      "id": "dnd5e.addon.rulebook.d-d-5e-ua-revisedranger.02b7259256ea.addon",
+      "kind": "addon",
+      "checksum": "702c5526bed39b88aa34a627ef65a377327c76e6d8980026e457ad885694a9f2",
+      "campaign_id": "d15e0968-dbcb-4296-a8ad-6f2234431dc5",
+      "idempotent_replay": true,
+      "listed_count": 16
+    },
+    {
+      "id": "dnd5e.addon.rulebook.d-d-5e-ua-twilightfirenames.26d993a19acb.addon",
+      "kind": "addon",
+      "checksum": "a7cfc6fc62325c4b149a210c5054fee2939c0921f2960774f444a10bd462542b",
+      "campaign_id": "2f5342d1-5648-4ea0-9881-7ee70d48e51a",
+      "idempotent_replay": true,
+      "listed_count": 17
+    },
+    {
+      "id": "dnd5e.addon.rulebook.d-d-5e-volo-s-guide-to-monsters.962933255634.addon",
+      "kind": "addon",
+      "checksum": "58a355611d7a685f60bca9620bf84cdfcd0310f4b98a6059a3c8488aafaa06f4",
+      "campaign_id": "b58cb2d7-b161-4923-b5f2-bfe72eecd809",
+      "idempotent_replay": true,
+      "listed_count": 18
+    },
+    {
+      "id": "dnd5e.addon.rulebook.d-d-5e-wayfinders-guide-to-eberron.38e71ffb60c7.addon",
+      "kind": "addon",
+      "checksum": "6a3ad8f67cf3937610afeb872617548d7b2bd675366f3d7cf96d6d4e145d7c2e",
+      "campaign_id": "37cb7718-d9ae-4614-9ffb-693f0ba6991e",
+      "idempotent_replay": true,
+      "listed_count": 19
+    },
+    {
+      "id": "dnd5e.addon.rulebook.d-d-5e-xanathar-s-guide-to-everything.72d56f4f8dae.addon",
+      "kind": "addon",
+      "checksum": "0458985b14073c3ddc1bcf134bcc0545dfe86af2e7b806ac2064411bbf1618f5",
+      "campaign_id": "7df71b8d-41e8-472c-af35-9acf42ad51dc",
+      "idempotent_replay": true,
+      "listed_count": 20
+    },
+    {
+      "id": "dnd5e.addon.rulebook.nlrmev2.7b10861c870a.addon",
+      "kind": "addon",
+      "checksum": "de6aa3b79f2cc256c65c82daac949787f40385a1648d71ffee692cf55229ea96",
+      "campaign_id": "24d43b20-9370-4fd7-b873-08ea242f2b0f",
+      "idempotent_replay": true,
+      "listed_count": 21
+    },
+    {
+      "id": "dnd5e.addon.waterdeep-halfling-reviewed",
+      "kind": "core_rules",
+      "checksum": "b8466b9b51c3fd2015eba6dba8a08fa3c4f342b2796b4a565a3ae69fb3daf3a4",
+      "campaign_id": "9b09baea-96a2-42c1-830e-3f47e1bbf5bb",
+      "idempotent_replay": true,
+      "listed_count": 4
+    },
+    {
+      "id": "dnd5e.rule.kenku.monster-manual-2014",
+      "kind": "core_rules",
+      "checksum": "ffe79da1581e4f2afddcd33a5fbd161c741f6a2533dab24d363cf6d44efd1f3b",
+      "campaign_id": "b0fbcd14-fa6f-4267-913d-7df4b3070f46",
+      "idempotent_replay": true,
+      "listed_count": 5
+    },
+    {
+      "id": "906e1c57-005d-4bf1-8b03-221e0726e27d",
+      "kind": "module",
+      "checksum": "ba02c41714d0766873e247c8ae9b36e430d56d0431605ef2437e7010fdd3b5aa",
+      "campaign_id": "700ea6fe-f311-435b-a301-7b88dab4f075",
+      "idempotent_replay": true,
+      "listed_count": 1
+    },
+    {
+      "id": "d0871484-131a-418f-aba3-016e944411ab",
+      "kind": "module",
+      "checksum": "1d10008f0eeb18459b3c83583920d54002a4b7109834c92e6ba856ef831d2257",
+      "campaign_id": "ec77836b-79bf-418c-9699-e3bcebe8959f",
+      "idempotent_replay": true,
+      "listed_count": 1
+    },
+    {
+      "id": "dnd5e.module.descent-into-avernus-zh",
+      "kind": "module",
+      "checksum": "81725fead988743f6f2c27032ec627f1809636a7a72628cbb90b574dbf7e25be",
+      "campaign_id": "24282ac2-4d5a-4c1c-9216-c3a1445022c4",
+      "idempotent_replay": true,
+      "listed_count": 1
+    },
+    {
+      "id": "dnd5e.module.descent-into-avernus-zh-master-of-souls-review-v3",
+      "kind": "module",
+      "checksum": "498dee824d04700619fb5005d18c45f8fcb724732df6aa4d8fd9864ed2a30de3",
+      "campaign_id": "68a5c6df-b1b6-41ae-81ee-e386d6630d2c",
+      "idempotent_replay": true,
+      "listed_count": 1
+    },
+    {
+      "id": "dnd5e.module.descent-into-avernus-zh-master-of-souls-review-v4",
+      "kind": "module",
+      "checksum": "a32745a8cb2af6f1ee560b5b865751b898d28fbe87c285750746c60693850fea",
+      "campaign_id": "fa508b21-8f62-4296-8dcd-6646395b3607",
+      "idempotent_replay": true,
+      "listed_count": 1
+    },
+    {
+      "id": "dnd5e.module.descent-into-avernus-zh-opposition-hydration-cycle-38",
+      "kind": "module",
+      "checksum": "a69fdd971e982d85313b95c96756794695e7352b4e9cbf07bd6aae324b235048",
+      "campaign_id": "f6722bc9-fe9a-46f7-977f-d6cfa1e7e550",
+      "idempotent_replay": true,
+      "listed_count": 1
+    },
+    {
+      "id": "dnd5e.module.lost-mine-of-phandelver",
+      "kind": "module",
+      "checksum": "97bd1fb9946179f9409848087bb5885ea0b8471618aafe888e9e2bb2b9484141",
+      "campaign_id": "ba9d7180-7797-4bc7-a787-73352051e49a",
+      "idempotent_replay": true,
+      "listed_count": 1
+    },
+    {
+      "id": "dnd5e.module.lost-mine-of-phandelver-full-agent-corpus-v15",
+      "kind": "module",
+      "checksum": "14ee3400a68b7e25a8090948d199a342893e3663bc83da4c46d4d762ead690b3",
+      "campaign_id": "5c4f2007-092d-4dde-8662-92ec5fbb5763",
+      "idempotent_replay": true,
+      "listed_count": 1
+    },
+    {
+      "id": "dnd5e.module.lost-mine-of-phandelver-full-agent-corpus-v22",
+      "kind": "module",
+      "checksum": "8d135d0b15fa88c29ebc0664ea7e091335e965e7f8b8560a431b21cdb652c4c5",
+      "campaign_id": "50340c59-2791-4c3b-88d0-3697e9976e20",
+      "idempotent_replay": true,
+      "listed_count": 1
+    },
+    {
+      "id": "dnd5e.module.lost-mine-of-phandelver.cycle-42",
+      "kind": "module",
+      "checksum": "ab6fe520813f868ca97d903d46773bfaf45f879833a5125fa270bfe4fd003c02",
+      "campaign_id": "00cef0a1-84cf-41e9-9c46-9303222cb5b6",
+      "idempotent_replay": true,
+      "listed_count": 1
+    },
+    {
+      "id": "dnd5e.module.lost-mine-of-phandelver.cycle48",
+      "kind": "module",
+      "checksum": "06528a39490db0e6fb56cf8cad738ae51c2dc7df6746b7248aed5cd8c7ffbe14",
+      "campaign_id": "32687a5d-ffef-4a04-809f-573e5061f1fd",
+      "idempotent_replay": true,
+      "listed_count": 1
+    },
+    {
+      "id": "dnd5e.module.lost-mine-of-phandelver.full-agent-corpus-v12",
+      "kind": "module",
+      "checksum": "6156dfc99b03e660907c20ef4bf37a8f252d77b85a81dc8d83df879f24379d48",
+      "campaign_id": "68a3a53e-2915-4ab5-93e6-dcb4f6992d28",
+      "idempotent_replay": true,
+      "listed_count": 1
+    },
+    {
+      "id": "dnd5e.module.lost-mine-of-phandelver.regression.v2",
+      "kind": "module",
+      "checksum": "e8c562fc019b5f9355f2c8e1fa82834afb7153a6f6282d95e528221e6ce87f29",
+      "campaign_id": "aada0641-24fb-4e93-97a5-2aa3331d0798",
+      "idempotent_replay": true,
+      "listed_count": 1
+    },
+    {
+      "id": "dnd5e.module.storm-kings-thunder",
+      "kind": "module",
+      "checksum": "de6cf72e1d5f1d462bb532f07af0911f851ba67dddd653d8a3be77781cddcf36",
+      "campaign_id": "74130cf5-4348-4eb7-850e-1b14d107b504",
+      "idempotent_replay": true,
+      "listed_count": 1
+    },
+    {
+      "id": "dnd5e.module.tomb-of-annihilation",
+      "kind": "module",
+      "checksum": "121b8f961b6fcdba6438ce7a9bfa23500f61d4b49dc4199d5291139e16ccac40",
+      "campaign_id": "65d86979-0bd6-4b35-a539-efcf790f67fe",
+      "idempotent_replay": true,
+      "listed_count": 1
+    },
+    {
+      "id": "dnd5e.module.tyranny-of-dragons.hoard",
+      "kind": "module",
+      "checksum": "4a23649d271a527824aa2ecf4a6bd436361e0f2bce1b0a94f66f48993377f145",
+      "campaign_id": "c648f485-dc1a-452b-8da4-fcff64144ac2",
+      "idempotent_replay": true,
+      "listed_count": 1
+    },
+    {
+      "id": "dnd5e.module.tyranny-of-dragons.rise.sagasmith",
+      "kind": "module",
+      "checksum": "eba59fe1051a54ff9bdbd1db5e4fa91681a27b74aad29f224e24c1ff2bd45c3e",
+      "campaign_id": "9e548255-b756-4d40-a531-f02001acb359",
+      "idempotent_replay": true,
+      "listed_count": 1
+    },
+    {
+      "id": "dnd5e.module.waterdeep-dragon-heist",
+      "kind": "module",
+      "checksum": "5ef0c7d18d2caae64097012f7697ef91bc4c05544bfcd4736479e2c90bf08858",
+      "campaign_id": "300cad22-651f-4421-b9f7-cc61f2185b62",
+      "idempotent_replay": true,
+      "listed_count": 1
+    },
+    {
+      "id": "dnd5e.presets.srd2014",
+      "kind": "preset",
+      "checksum": "d9c13e9bfff32bd942a166b386fecef5309434db60facac22276ed4bf2e07992",
+      "campaign_id": "339813ed-f353-4b14-87d6-aadcfe608d8f",
+      "idempotent_replay": true,
+      "listed_count": 2
+    },
+    {
+      "id": "dnd5e.presets.srd2024",
+      "kind": "preset",
+      "checksum": "9e1f59ae5305bbbf20ce0aa1fde9708e62ccc3f0383df5eb11bbcd8d54b9936d",
+      "campaign_id": "f8a91646-fe51-46dd-92b4-6db787229cee",
+      "idempotent_replay": true,
+      "listed_count": 2
+    }
+  ],
+  "coc": [
+    {
+      "id": "coc7e.rules.quick-start.private",
+      "kind": "core_rules",
+      "checksum": "4e81da77aa22ab2da12ea06ca0f9443a14df5a5e7eeb797c759bd38584c8b26d",
+      "campaign_id": "b8c033be-3e4a-4831-9173-9bd543336fe8",
+      "idempotent_replay": true,
+      "listed_module_count": 0,
+      "listed_rule_count": 1
+    },
+    {
+      "id": "coc7e.module.alone-against-the-flames.private",
+      "kind": "module",
+      "checksum": "aa9788faeaffd86d8a263a421179edd71cb592e8c64572ed5f0de51aad899444",
+      "campaign_id": "55466a48-aba3-4aeb-91d4-2bd68f85c5c3",
+      "idempotent_replay": true,
+      "listed_module_count": 1,
+      "listed_rule_count": 1
+    },
+    {
+      "id": "coc7e.module.the-lightless-beacon.private",
+      "kind": "module",
+      "checksum": "134061b7a859eee3be58ad1f867040393bd1c4526908a5191546ddb5bbb4b75c",
+      "campaign_id": "41684d7e-726a-4d01-9c51-5e5653eeda39",
+      "idempotent_replay": true,
+      "listed_module_count": 1,
+      "listed_rule_count": 1
+    }
+  ]
+}

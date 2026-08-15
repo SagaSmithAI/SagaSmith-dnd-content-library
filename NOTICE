@@ -1,11 +1,10 @@
-SagaSmith D&D Content Library
+SagaSmith Private Content Pack Library
 Copyright 2026 SagaSmithAI
 
-The catalog generator, website configuration, and original software in this
-repository are licensed under Apache-2.0.
+The validation and repository automation software is licensed under
+Apache-2.0.
 
-Content packages retain their own source, attribution, and license metadata.
-Apache-2.0 applies only to this repository's original software and does not
-replace third-party rights. The public catalog contains only packages whose
-open-license evidence passes the release gate. User-supplied books, adventures,
-normalized text, and extracted artwork remain in the local private library.
+Content Packs retain their own source, attribution, license, and distribution
+metadata. Apache-2.0 applies only to this repository's original software and
+does not replace third-party rights. This repository contains private content
+and must not be made public or redistributed without separate authorization.

@@ -1,0 +1,52 @@
+{
+  "schema": "sagasmith.pack-migration-validation.v1",
+  "archive_validation": {
+    "archives": 46,
+    "bytes": 1062811533,
+    "dependencies_closed": true,
+    "hashes_match_report": true,
+    "full_archive_validation": true,
+    "scene_visibility": {
+      "restricted": 1537,
+      "group": 270
+    }
+  },
+  "public_mcp_import": {
+    "dnd": 43,
+    "coc": 3,
+    "idempotent_retry": true,
+    "evidence": "import-validation-final2/evidence.json"
+  },
+  "database_validation": {
+    "migration_heads": [
+      "20260815_33"
+    ],
+    "dnd": {
+      "quick_check": "ok",
+      "foreign_key_violations": 0,
+      "alembic_version": "20260815_33",
+      "campaigns": 43,
+      "imported_modules": 18
+    },
+    "coc": {
+      "quick_check": "ok",
+      "foreign_key_violations": 0,
+      "alembic_version": "20260815_33",
+      "campaigns": 3,
+      "imported_modules": 2
+    }
+  },
+  "repository_validation": {
+    "sagasmith-core": {
+      "pytest": "passed",
+      "ruff": "passed"
+    },
+    "sagasmith-dnd": {
+      "pytest": "passed",
+      "ruff": "passed"
+    },
+    "SagaSmith-dnd-mcp": {
+      "pytest": "tests/test_content_packages_mcp.py passed"
+    }
+  }
+}

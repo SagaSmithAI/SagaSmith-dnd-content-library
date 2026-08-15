@@ -1,0 +1,1034 @@
+{
+  "schema": "sagasmith.current-content-packs.v1",
+  "generated_on": "2026-08-16",
+  "packages": [
+    {
+      "system_id": "coc7e",
+      "kind": "core_rules",
+      "id": "coc7e.rules.quick-start.private",
+      "action": "retained_current",
+      "source_version": "1.0.0",
+      "source_checksum": "4e81da77aa22ab2da12ea06ca0f9443a14df5a5e7eeb797c759bd38584c8b26d",
+      "version": "1.0.0",
+      "checksum": "4e81da77aa22ab2da12ea06ca0f9443a14df5a5e7eeb797c759bd38584c8b26d",
+      "archive_sha256": "22ed87ece361d9434cc0570a186b78531fc93cd85bc80910163e0116d67f6b00",
+      "archive_size": 123482,
+      "source_path": ".runs/coc-private-v1/mcp-home-parallel/flames/artifacts/content-packages/4e81da77aa22-coc7e.rules.quick-start.private.sagasmith-pack",
+      "path": "packages/4e81da77aa22-coc7e.rules.quick-start.private-1.0.0.sagasmith-pack",
+      "dependencies": [],
+      "provided_rule_definitions": [],
+      "runtime_rule_dependencies": []
+    },
+    {
+      "system_id": "coc7e",
+      "kind": "module",
+      "id": "coc7e.module.alone-against-the-flames.private",
+      "action": "migrated",
+      "source_version": "1.0.1",
+      "source_checksum": "21de0e364cb2f43371c334210122c11f1931e668fd12a78cc91b62a8d601f801",
+      "version": "1.0.2",
+      "checksum": "aa9788faeaffd86d8a263a421179edd71cb592e8c64572ed5f0de51aad899444",
+      "archive_sha256": "e808aef2b03ecbe88b4ed95e8fc10c293f96c6aac5b148a936213015626f6c4a",
+      "archive_size": 39059539,
+      "source_path": ".runs/coc-private-v1/mcp-home-parallel/flames/artifacts/content-packages/21de0e364cb2-coc7e.module.alone-against-the-flames.private.sagasmith-pack",
+      "path": "packages/aa9788faeaff-coc7e.module.alone-against-the-flames.private-1.0.2.sagasmith-pack",
+      "dependencies": [],
+      "provided_rule_definitions": [],
+      "runtime_rule_dependencies": []
+    },
+    {
+      "system_id": "coc7e",
+      "kind": "module",
+      "id": "coc7e.module.the-lightless-beacon.private",
+      "action": "migrated",
+      "source_version": "1.0.1",
+      "source_checksum": "fadf9736579b2dd1ef5bedcee4b66e6a8e56a91bcd2da3486c45489a11e191e0",
+      "version": "1.0.2",
+      "checksum": "134061b7a859eee3be58ad1f867040393bd1c4526908a5191546ddb5bbb4b75c",
+      "archive_sha256": "f02da104a8894ca150f900fa5ccb831b6e491d2b48cdddb3f67b37b711454bf8",
+      "archive_size": 16885942,
+      "source_path": ".runs/coc-private-v1/mcp-home-parallel/beacon/artifacts/content-packages/fadf9736579b-coc7e.module.the-lightless-beacon.private.sagasmith-pack",
+      "path": "packages/134061b7a859-coc7e.module.the-lightless-beacon.private-1.0.2.sagasmith-pack",
+      "dependencies": [],
+      "provided_rule_definitions": [],
+      "runtime_rule_dependencies": []
+    },
+    {
+      "system_id": "dnd5e",
+      "kind": "addon",
+      "id": "dnd5e.addon.rulebook.d-d-5e-dungeon-master-s-guide.28b0d385f4d2.addon",
+      "action": "migrated",
+      "source_version": "1.0.0",
+      "source_checksum": "3d5c5ef38e6df8cceb4d93d93f0b817892358504fe3340b5d0058766760c158b",
+      "version": "1.0.1",
+      "checksum": "94f1f37b65cb1845767f0be2fd3b1c5194e1efe11e84cad93b0efdedea515424",
+      "archive_sha256": "b0319231862b72cc62ec70097a8b0b49efd3806968754ea05efea5cbd1b35845",
+      "archive_size": 1786676,
+      "source_path": "tmp/unified-current-packs-all-v3/d-d-5e-dungeon-master-s-guide-28b0d385f4.sagasmith-pack",
+      "path": "packages/94f1f37b65cb-dnd5e.addon.rulebook.d-d-5e-dungeon-master-s-guide.28b0d385f4d2.addon-1.0.1.sagasmith-pack",
+      "dependencies": [],
+      "provided_rule_definitions": [
+        {
+          "id": "dnd5e.addon.rulebook.d-d-5e-dungeon-master-s-guide.28b0d385f4d2",
+          "version": "1.0.0"
+        }
+      ],
+      "runtime_rule_dependencies": [
+        {
+          "checksum": "3f7508a4177c3dd4a9678d55d55d67a48c282a17f03a0943e092de486f850670",
+          "id": "dnd5e.content.srd2014",
+          "version": "1.24.0"
+        }
+      ]
+    },
+    {
+      "system_id": "dnd5e",
+      "kind": "addon",
+      "id": "dnd5e.addon.rulebook.d-d-5e-eberron-rising-from-the-last-war.31293633134f.addon",
+      "action": "migrated",
+      "source_version": "1.0.0",
+      "source_checksum": "1ab3cee2d20cea58ca2ddc21ba62a297e4612ae23ea99904ca78aa92ce04534d",
+      "version": "1.0.1",
+      "checksum": "208e603266337eca76b52e036bd8ecca95c48ffa02c910dd006f445c5b868e7e",
+      "archive_sha256": "7311b8460842ccecbbed9e51820ef41ee017be23803c58f02f6b4452ff26a5cb",
+      "archive_size": 1805723,
+      "source_path": "tmp/unified-current-packs-all-v3/d-d-5e-eberron-rising-from-the-last-war-3129363313.sagasmith-pack",
+      "path": "packages/208e60326633-dnd5e.addon.rulebook.d-d-5e-eberron-rising-from-the-last-war.31293633134f.addon-1.0.1.sagasmith-pack",
+      "dependencies": [],
+      "provided_rule_definitions": [
+        {
+          "id": "dnd5e.addon.rulebook.d-d-5e-eberron-rising-from-the-last-war.31293633134f",
+          "version": "1.0.0"
+        }
+      ],
+      "runtime_rule_dependencies": [
+        {
+          "checksum": "3f7508a4177c3dd4a9678d55d55d67a48c282a17f03a0943e092de486f850670",
+          "id": "dnd5e.content.srd2014",
+          "version": "1.24.0"
+        }
+      ]
+    },
+    {
+      "system_id": "dnd5e",
+      "kind": "addon",
+      "id": "dnd5e.addon.rulebook.d-d-5e-elemental-evil-player-s-companion.490f88d2c84c.addon",
+      "action": "migrated",
+      "source_version": "1.0.0",
+      "source_checksum": "78007e0b60bcba4af4c0923aa67b575ed8c423e53c82938c5d1732a850183c22",
+      "version": "1.0.1",
+      "checksum": "d6bb111e494663d45be3f367e4c51379fc922289b57913d6a1dc9362a73832da",
+      "archive_sha256": "ca76db33f97cb362a9d6aa58130298e5a6da4dea04fca51781dee18180985eca",
+      "archive_size": 130663,
+      "source_path": "tmp/unified-current-packs-all-v3/d-d-5e-elemental-evil-player-s-companion-490f88d2c8.sagasmith-pack",
+      "path": "packages/d6bb111e4946-dnd5e.addon.rulebook.d-d-5e-elemental-evil-player-s-companion.490f88d2c84c.addon-1.0.1.sagasmith-pack",
+      "dependencies": [],
+      "provided_rule_definitions": [
+        {
+          "id": "dnd5e.addon.rulebook.d-d-5e-elemental-evil-player-s-companion.490f88d2c84c",
+          "version": "1.0.0"
+        }
+      ],
+      "runtime_rule_dependencies": [
+        {
+          "checksum": "3f7508a4177c3dd4a9678d55d55d67a48c282a17f03a0943e092de486f850670",
+          "id": "dnd5e.content.srd2014",
+          "version": "1.24.0"
+        }
+      ]
+    },
+    {
+      "system_id": "dnd5e",
+      "kind": "addon",
+      "id": "dnd5e.addon.rulebook.d-d-5e-guildmasters-guide-to-ravnica.59317c5cf3da.addon",
+      "action": "migrated",
+      "source_version": "1.0.0",
+      "source_checksum": "2e66a9b22f5ea4ef1cd40c8c9244e04078f50f96de230c2a221831dfde037581",
+      "version": "1.0.1",
+      "checksum": "852a5d488e25745daa6f4633fa14af00849fab71a8f1f050ad428946f2f36e83",
+      "archive_sha256": "b6cbed528c5f54b5a6e11cba44c5b423eb97636e055228754aa93248e346c1bf",
+      "archive_size": 1485216,
+      "source_path": "tmp/unified-current-packs-all-v3/d-d-5e-guildmasters-guide-to-ravnica-59317c5cf3.sagasmith-pack",
+      "path": "packages/852a5d488e25-dnd5e.addon.rulebook.d-d-5e-guildmasters-guide-to-ravnica.59317c5cf3da.addon-1.0.1.sagasmith-pack",
+      "dependencies": [],
+      "provided_rule_definitions": [
+        {
+          "id": "dnd5e.addon.rulebook.d-d-5e-guildmasters-guide-to-ravnica.59317c5cf3da",
+          "version": "1.0.0"
+        }
+      ],
+      "runtime_rule_dependencies": [
+        {
+          "checksum": "3f7508a4177c3dd4a9678d55d55d67a48c282a17f03a0943e092de486f850670",
+          "id": "dnd5e.content.srd2014",
+          "version": "1.24.0"
+        }
+      ]
+    },
+    {
+      "system_id": "dnd5e",
+      "kind": "addon",
+      "id": "dnd5e.addon.rulebook.d-d-5e-hb-school-of-geometry.9f4f4edec61a.addon",
+      "action": "migrated",
+      "source_version": "1.0.0",
+      "source_checksum": "4e65e35a7bea94d4636297bd988bd65ba4e997da9287de2c0eb18482fcfc9b5a",
+      "version": "1.0.1",
+      "checksum": "79e213e2e07a2c7bcc4712be9ece84d454232800e7166d53c21eb5b222e7b740",
+      "archive_sha256": "ed02833994420ee2553057299c644399bdd953e42d20567880827df12ff49a65",
+      "archive_size": 15705,
+      "source_path": "tmp/unified-current-packs-all-v3/d-d-5e-hb-school-of-geometry-9f4f4edec6.sagasmith-pack",
+      "path": "packages/79e213e2e07a-dnd5e.addon.rulebook.d-d-5e-hb-school-of-geometry.9f4f4edec61a.addon-1.0.1.sagasmith-pack",
+      "dependencies": [],
+      "provided_rule_definitions": [
+        {
+          "id": "dnd5e.addon.rulebook.d-d-5e-hb-school-of-geometry.9f4f4edec61a",
+          "version": "1.0.0"
+        }
+      ],
+      "runtime_rule_dependencies": [
+        {
+          "checksum": "3f7508a4177c3dd4a9678d55d55d67a48c282a17f03a0943e092de486f850670",
+          "id": "dnd5e.content.srd2014",
+          "version": "1.24.0"
+        }
+      ]
+    },
+    {
+      "system_id": "dnd5e",
+      "kind": "addon",
+      "id": "dnd5e.addon.rulebook.d-d-5e-monster-manual.13193b8c22ea.addon",
+      "action": "migrated",
+      "source_version": "1.0.0",
+      "source_checksum": "bf4eb1a8fbad63579607a961d502135aaa9a44fb0875f4f10c00220827199835",
+      "version": "1.0.1",
+      "checksum": "358240f5b3e67cc78523ebdf148a892549dc81e572b47c5b699ce8134138887b",
+      "archive_sha256": "6765601031b2e8e9d2bd3a3d7c9e40b8a95be83776dfda0524cf944ba7a920f8",
+      "archive_size": 3148053,
+      "source_path": "tmp/unified-current-packs-all-v3/d-d-5e-monster-manual-13193b8c22.sagasmith-pack",
+      "path": "packages/358240f5b3e6-dnd5e.addon.rulebook.d-d-5e-monster-manual.13193b8c22ea.addon-1.0.1.sagasmith-pack",
+      "dependencies": [],
+      "provided_rule_definitions": [
+        {
+          "id": "dnd5e.addon.rulebook.d-d-5e-monster-manual.13193b8c22ea",
+          "version": "1.0.0"
+        }
+      ],
+      "runtime_rule_dependencies": [
+        {
+          "checksum": "3f7508a4177c3dd4a9678d55d55d67a48c282a17f03a0943e092de486f850670",
+          "id": "dnd5e.content.srd2014",
+          "version": "1.24.0"
+        }
+      ]
+    },
+    {
+      "system_id": "dnd5e",
+      "kind": "addon",
+      "id": "dnd5e.addon.rulebook.d-d-5e-mordenkainen-s-tome-of-foes.2768304ef1af.addon",
+      "action": "migrated",
+      "source_version": "1.0.0",
+      "source_checksum": "99996f8cc1f0b7eda2ff46e2428d66410d024e0e6a3f356d51d6389d9d60ad64",
+      "version": "1.0.1",
+      "checksum": "f4fb310143b6c908f528c60e6db0eab0cd0120cdc576c302a565a83dc8ac7e13",
+      "archive_sha256": "17853e1d46a7a29bba0239bf41a28c369fe5c3abe0a884cc37414712f0b45841",
+      "archive_size": 1874319,
+      "source_path": "tmp/unified-current-packs-all-v3/d-d-5e-mordenkainen-s-tome-of-foes-2768304ef1.sagasmith-pack",
+      "path": "packages/f4fb310143b6-dnd5e.addon.rulebook.d-d-5e-mordenkainen-s-tome-of-foes.2768304ef1af.addon-1.0.1.sagasmith-pack",
+      "dependencies": [],
+      "provided_rule_definitions": [
+        {
+          "id": "dnd5e.addon.rulebook.d-d-5e-mordenkainen-s-tome-of-foes.2768304ef1af",
+          "version": "1.0.0"
+        }
+      ],
+      "runtime_rule_dependencies": [
+        {
+          "checksum": "3f7508a4177c3dd4a9678d55d55d67a48c282a17f03a0943e092de486f850670",
+          "id": "dnd5e.content.srd2014",
+          "version": "1.24.0"
+        }
+      ]
+    },
+    {
+      "system_id": "dnd5e",
+      "kind": "addon",
+      "id": "dnd5e.addon.rulebook.d-d-5e-player-s-handbook.7ad6d3e9c93c.addon",
+      "action": "migrated",
+      "source_version": "1.0.0",
+      "source_checksum": "71138413a28349b2668e436dd12b28f096e78581a2bce8da0d0acaf7846ca16a",
+      "version": "1.0.1",
+      "checksum": "e879447c1dd00139f12a30ee42e3e30b323af771d3abceacbd6e6e6d17c9de00",
+      "archive_sha256": "500a8bf596e58ba1f6fe8b7fbea2fba2c69da1f58e548c0d8c6993d1280a2c76",
+      "archive_size": 2128364,
+      "source_path": "tmp/unified-current-packs-all-v3/d-d-5e-player-s-handbook-7ad6d3e9c9.sagasmith-pack",
+      "path": "packages/e879447c1dd0-dnd5e.addon.rulebook.d-d-5e-player-s-handbook.7ad6d3e9c93c.addon-1.0.1.sagasmith-pack",
+      "dependencies": [],
+      "provided_rule_definitions": [
+        {
+          "id": "dnd5e.addon.rulebook.d-d-5e-player-s-handbook.7ad6d3e9c93c",
+          "version": "1.0.0"
+        }
+      ],
+      "runtime_rule_dependencies": [
+        {
+          "checksum": "3f7508a4177c3dd4a9678d55d55d67a48c282a17f03a0943e092de486f850670",
+          "id": "dnd5e.content.srd2014",
+          "version": "1.24.0"
+        }
+      ]
+    },
+    {
+      "system_id": "dnd5e",
+      "kind": "addon",
+      "id": "dnd5e.addon.rulebook.d-d-5e-sword-coast-adventurer-s-guide.16e6a243ef0a.addon",
+      "action": "migrated",
+      "source_version": "1.0.0",
+      "source_checksum": "b6763ab448db75a461a3d291e94f1ab3a24e3375e1ab49b72c02eaba0f3574b7",
+      "version": "1.0.1",
+      "checksum": "efbba0006ef837961a3d87203c60a49b1ed57428cdb10999aa8b6378964a5bb9",
+      "archive_sha256": "d7e755e914f94871b0bf59966109e84f0ae2302776be9127bb558971d8d125d3",
+      "archive_size": 905067,
+      "source_path": "tmp/unified-current-packs-all-v3/d-d-5e-sword-coast-adventurer-s-guide-16e6a243ef.sagasmith-pack",
+      "path": "packages/efbba0006ef8-dnd5e.addon.rulebook.d-d-5e-sword-coast-adventurer-s-guide.16e6a243ef0a.addon-1.0.1.sagasmith-pack",
+      "dependencies": [],
+      "provided_rule_definitions": [
+        {
+          "id": "dnd5e.addon.rulebook.d-d-5e-sword-coast-adventurer-s-guide.16e6a243ef0a",
+          "version": "1.0.0"
+        }
+      ],
+      "runtime_rule_dependencies": [
+        {
+          "checksum": "3f7508a4177c3dd4a9678d55d55d67a48c282a17f03a0943e092de486f850670",
+          "id": "dnd5e.content.srd2014",
+          "version": "1.24.0"
+        }
+      ]
+    },
+    {
+      "system_id": "dnd5e",
+      "kind": "addon",
+      "id": "dnd5e.addon.rulebook.d-d-5e-tasha-s-cauldron-of-everything.89a729b37a4b.addon",
+      "action": "migrated",
+      "source_version": "1.0.0",
+      "source_checksum": "a9c2015f8776f663e4889cb763029e1ae890a76ebc4e9d8567e1e1fd1cb50551",
+      "version": "1.0.1",
+      "checksum": "9f8059a4e9839c51fe046bd00d1776530b7e8caa729cb5deeeb1e625143e1bb4",
+      "archive_sha256": "127dbe5841a24feaa27a3efbbe0dc239adba958a79ced3c63292d1f32dd6dac7",
+      "archive_size": 1058889,
+      "source_path": "tmp/unified-current-packs-all-v3/d-d-5e-tasha-s-cauldron-of-everything-89a729b37a.sagasmith-pack",
+      "path": "packages/9f8059a4e983-dnd5e.addon.rulebook.d-d-5e-tasha-s-cauldron-of-everything.89a729b37a4b.addon-1.0.1.sagasmith-pack",
+      "dependencies": [],
+      "provided_rule_definitions": [
+        {
+          "id": "dnd5e.addon.rulebook.d-d-5e-tasha-s-cauldron-of-everything.89a729b37a4b",
+          "version": "1.0.0"
+        }
+      ],
+      "runtime_rule_dependencies": [
+        {
+          "checksum": "3f7508a4177c3dd4a9678d55d55d67a48c282a17f03a0943e092de486f850670",
+          "id": "dnd5e.content.srd2014",
+          "version": "1.24.0"
+        }
+      ]
+    },
+    {
+      "system_id": "dnd5e",
+      "kind": "addon",
+      "id": "dnd5e.addon.rulebook.d-d-5e-the-tortle-package.e3234de670da.addon",
+      "action": "migrated",
+      "source_version": "1.0.0",
+      "source_checksum": "f95434549028ea51648dfa7ccba5aa120bfb3ab54d6022975b890e4927531ab4",
+      "version": "1.0.1",
+      "checksum": "356cbf231ea7ecf8dab48b7cca127523d1d0bd3f5b5535899f45641f24bc5759",
+      "archive_sha256": "c61d41ec634f2ba130802ea2505a40dba0c24fb79d7ea9a22629fdd9f3849747",
+      "archive_size": 178781,
+      "source_path": "tmp/unified-current-packs-all-v3/d-d-5e-the-tortle-package-e3234de670.sagasmith-pack",
+      "path": "packages/356cbf231ea7-dnd5e.addon.rulebook.d-d-5e-the-tortle-package.e3234de670da.addon-1.0.1.sagasmith-pack",
+      "dependencies": [],
+      "provided_rule_definitions": [
+        {
+          "id": "dnd5e.addon.rulebook.d-d-5e-the-tortle-package.e3234de670da",
+          "version": "1.0.0"
+        }
+      ],
+      "runtime_rule_dependencies": [
+        {
+          "checksum": "3f7508a4177c3dd4a9678d55d55d67a48c282a17f03a0943e092de486f850670",
+          "id": "dnd5e.content.srd2014",
+          "version": "1.24.0"
+        }
+      ]
+    },
+    {
+      "system_id": "dnd5e",
+      "kind": "addon",
+      "id": "dnd5e.addon.rulebook.d-d-5e-ua-aberrantlurk.41bdf48914d3.addon",
+      "action": "migrated",
+      "source_version": "1.0.0",
+      "source_checksum": "1d354f7346d11fe6bd91d6a7638f1d5915ae4c78aac18991069230a1c4cd570a",
+      "version": "1.0.1",
+      "checksum": "8ed16a7bf8b39128daaa9a9de01857c62158cb0fbecfda3b68d47a6fc581e761",
+      "archive_sha256": "1920fe4ff512338760868c8e7e9a72ee4ca2422ca4f7860cebcf844ffc291530",
+      "archive_size": 30630,
+      "source_path": "tmp/unified-current-packs-all-v3/d-d-5e-ua-aberrantlurk-41bdf48914.sagasmith-pack",
+      "path": "packages/8ed16a7bf8b3-dnd5e.addon.rulebook.d-d-5e-ua-aberrantlurk.41bdf48914d3.addon-1.0.1.sagasmith-pack",
+      "dependencies": [],
+      "provided_rule_definitions": [
+        {
+          "id": "dnd5e.addon.rulebook.d-d-5e-ua-aberrantlurk.41bdf48914d3",
+          "version": "1.0.0"
+        }
+      ],
+      "runtime_rule_dependencies": [
+        {
+          "checksum": "3f7508a4177c3dd4a9678d55d55d67a48c282a17f03a0943e092de486f850670",
+          "id": "dnd5e.content.srd2014",
+          "version": "1.24.0"
+        }
+      ]
+    },
+    {
+      "system_id": "dnd5e",
+      "kind": "addon",
+      "id": "dnd5e.addon.rulebook.d-d-5e-ua-artificer.e99920471b34.addon",
+      "action": "migrated",
+      "source_version": "1.0.0",
+      "source_checksum": "a7994034ab895665e82701388b4d97ff6812addb06fd44d5ae613fa9429276ea",
+      "version": "1.0.1",
+      "checksum": "1a9be2f99ec4992b763e722f3a7e9e672a307b98a5286d08151da8180519aa5c",
+      "archive_sha256": "2ca07f6019a02279f803f407d0cf9e1f2926a68d9e8e81481872592dee8d440d",
+      "archive_size": 49394,
+      "source_path": "tmp/unified-current-packs-all-v3/d-d-5e-ua-artificer-e99920471b.sagasmith-pack",
+      "path": "packages/1a9be2f99ec4-dnd5e.addon.rulebook.d-d-5e-ua-artificer.e99920471b34.addon-1.0.1.sagasmith-pack",
+      "dependencies": [],
+      "provided_rule_definitions": [
+        {
+          "id": "dnd5e.addon.rulebook.d-d-5e-ua-artificer.e99920471b34",
+          "version": "1.0.0"
+        }
+      ],
+      "runtime_rule_dependencies": [
+        {
+          "checksum": "3f7508a4177c3dd4a9678d55d55d67a48c282a17f03a0943e092de486f850670",
+          "id": "dnd5e.content.srd2014",
+          "version": "1.24.0"
+        }
+      ]
+    },
+    {
+      "system_id": "dnd5e",
+      "kind": "addon",
+      "id": "dnd5e.addon.rulebook.d-d-5e-ua-artificerv2.3c339a885211.addon",
+      "action": "migrated",
+      "source_version": "1.0.0",
+      "source_checksum": "5b6f2d70da735c640852bb9e7fe26a5a1c573939a0cf62b952439874cdbba5ac",
+      "version": "1.0.1",
+      "checksum": "4c01e62ca31390dc3c80f129b6e016ebffbe1ae7e27930c93186f2a1705b6b1a",
+      "archive_sha256": "c53f97624f957935afe496a9484d3701c70421e86c11c9e026b64149aabe0284",
+      "archive_size": 71035,
+      "source_path": "tmp/unified-current-packs-all-v3/d-d-5e-ua-artificerv2-3c339a8852.sagasmith-pack",
+      "path": "packages/4c01e62ca313-dnd5e.addon.rulebook.d-d-5e-ua-artificerv2.3c339a885211.addon-1.0.1.sagasmith-pack",
+      "dependencies": [],
+      "provided_rule_definitions": [
+        {
+          "id": "dnd5e.addon.rulebook.d-d-5e-ua-artificerv2.3c339a885211",
+          "version": "1.0.0"
+        }
+      ],
+      "runtime_rule_dependencies": [
+        {
+          "checksum": "3f7508a4177c3dd4a9678d55d55d67a48c282a17f03a0943e092de486f850670",
+          "id": "dnd5e.content.srd2014",
+          "version": "1.24.0"
+        }
+      ]
+    },
+    {
+      "system_id": "dnd5e",
+      "kind": "addon",
+      "id": "dnd5e.addon.rulebook.d-d-5e-ua-blood-hunter-class-1-2.4a5898befd39.addon",
+      "action": "migrated",
+      "source_version": "1.0.0",
+      "source_checksum": "6d47ecf5fd53720e449abbbc8b6d48c33ec294f332e4614bdd354bb36b1aee5c",
+      "version": "1.0.1",
+      "checksum": "12097c3d07dd31a4b7d68fc7bf812cb2a44cf7a224b7c33040b562ead5743932",
+      "archive_sha256": "12bcde08b44eb2e396697eefdbc2f0c809da69d1ec5d9e8c744972d08c80818c",
+      "archive_size": 65694,
+      "source_path": "tmp/unified-current-packs-all-v3/d-d-5e-ua-blood-hunter-class-1-2-4a5898befd.sagasmith-pack",
+      "path": "packages/12097c3d07dd-dnd5e.addon.rulebook.d-d-5e-ua-blood-hunter-class-1-2.4a5898befd39.addon-1.0.1.sagasmith-pack",
+      "dependencies": [],
+      "provided_rule_definitions": [
+        {
+          "id": "dnd5e.addon.rulebook.d-d-5e-ua-blood-hunter-class-1-2.4a5898befd39",
+          "version": "1.0.0"
+        }
+      ],
+      "runtime_rule_dependencies": [
+        {
+          "checksum": "3f7508a4177c3dd4a9678d55d55d67a48c282a17f03a0943e092de486f850670",
+          "id": "dnd5e.content.srd2014",
+          "version": "1.24.0"
+        }
+      ]
+    },
+    {
+      "system_id": "dnd5e",
+      "kind": "addon",
+      "id": "dnd5e.addon.rulebook.d-d-5e-ua-revisedranger.02b7259256ea.addon",
+      "action": "migrated",
+      "source_version": "1.0.0",
+      "source_checksum": "ab287eeaafed2e4d2168264ea900fa9c0d20ee347868c57f5e26ba6e7616d5b0",
+      "version": "1.0.1",
+      "checksum": "702c5526bed39b88aa34a627ef65a377327c76e6d8980026e457ad885694a9f2",
+      "archive_sha256": "101c0c8c163982476d707cef6395c59467fd8ff56cffc2c91495987188d010f4",
+      "archive_size": 60866,
+      "source_path": "tmp/unified-current-packs-all-v3/d-d-5e-ua-revisedranger-02b7259256.sagasmith-pack",
+      "path": "packages/702c5526bed3-dnd5e.addon.rulebook.d-d-5e-ua-revisedranger.02b7259256ea.addon-1.0.1.sagasmith-pack",
+      "dependencies": [],
+      "provided_rule_definitions": [
+        {
+          "id": "dnd5e.addon.rulebook.d-d-5e-ua-revisedranger.02b7259256ea",
+          "version": "1.0.0"
+        }
+      ],
+      "runtime_rule_dependencies": [
+        {
+          "checksum": "3f7508a4177c3dd4a9678d55d55d67a48c282a17f03a0943e092de486f850670",
+          "id": "dnd5e.content.srd2014",
+          "version": "1.24.0"
+        }
+      ]
+    },
+    {
+      "system_id": "dnd5e",
+      "kind": "addon",
+      "id": "dnd5e.addon.rulebook.d-d-5e-ua-twilightfirenames.26d993a19acb.addon",
+      "action": "migrated",
+      "source_version": "1.0.0",
+      "source_checksum": "307ccb885319938d5d989fbed38584bfcc82e28db7b5cc461596d97601859d16",
+      "version": "1.0.1",
+      "checksum": "a7cfc6fc62325c4b149a210c5054fee2939c0921f2960774f444a10bd462542b",
+      "archive_sha256": "aeed2f0a1f7fe2b5f47d41db2058f45562d57662a8ba5b502a1ff968c98d93c2",
+      "archive_size": 39638,
+      "source_path": "tmp/unified-current-packs-all-v3/d-d-5e-ua-twilightfirenames-26d993a19a.sagasmith-pack",
+      "path": "packages/a7cfc6fc6232-dnd5e.addon.rulebook.d-d-5e-ua-twilightfirenames.26d993a19acb.addon-1.0.1.sagasmith-pack",
+      "dependencies": [],
+      "provided_rule_definitions": [
+        {
+          "id": "dnd5e.addon.rulebook.d-d-5e-ua-twilightfirenames.26d993a19acb",
+          "version": "1.0.0"
+        }
+      ],
+      "runtime_rule_dependencies": [
+        {
+          "checksum": "3f7508a4177c3dd4a9678d55d55d67a48c282a17f03a0943e092de486f850670",
+          "id": "dnd5e.content.srd2014",
+          "version": "1.24.0"
+        }
+      ]
+    },
+    {
+      "system_id": "dnd5e",
+      "kind": "addon",
+      "id": "dnd5e.addon.rulebook.d-d-5e-volo-s-guide-to-monsters.962933255634.addon",
+      "action": "migrated",
+      "source_version": "1.0.0",
+      "source_checksum": "68b905d0c0b8245019866fb521abd8b9731e6b3ffe9947453ee6f0d53c07acfd",
+      "version": "1.0.1",
+      "checksum": "58a355611d7a685f60bca9620bf84cdfcd0310f4b98a6059a3c8488aafaa06f4",
+      "archive_sha256": "e2f7d2ba7435ea68f9dc0a36a6466bc7dd3ce19a9f5d1d4c71af7b2047592607",
+      "archive_size": 1702018,
+      "source_path": "tmp/unified-current-packs-all-v3/d-d-5e-volo-s-guide-to-monsters-9629332556.sagasmith-pack",
+      "path": "packages/58a355611d7a-dnd5e.addon.rulebook.d-d-5e-volo-s-guide-to-monsters.962933255634.addon-1.0.1.sagasmith-pack",
+      "dependencies": [],
+      "provided_rule_definitions": [
+        {
+          "id": "dnd5e.addon.rulebook.d-d-5e-volo-s-guide-to-monsters.962933255634",
+          "version": "1.0.0"
+        }
+      ],
+      "runtime_rule_dependencies": [
+        {
+          "checksum": "3f7508a4177c3dd4a9678d55d55d67a48c282a17f03a0943e092de486f850670",
+          "id": "dnd5e.content.srd2014",
+          "version": "1.24.0"
+        }
+      ]
+    },
+    {
+      "system_id": "dnd5e",
+      "kind": "addon",
+      "id": "dnd5e.addon.rulebook.d-d-5e-wayfinders-guide-to-eberron.38e71ffb60c7.addon",
+      "action": "migrated",
+      "source_version": "1.0.0",
+      "source_checksum": "326984dbdecdccf07d30129518bcecac41f8b3e0a1ff3c6e6013b50aa1e1bb18",
+      "version": "1.0.1",
+      "checksum": "6a3ad8f67cf3937610afeb872617548d7b2bd675366f3d7cf96d6d4e145d7c2e",
+      "archive_sha256": "41a60a99be6cb93259b0cfdbed584137f5484d6ab276f5fd26ecbb6de85a5d4f",
+      "archive_size": 698574,
+      "source_path": "tmp/unified-current-packs-all-v3/d-d-5e-wayfinders-guide-to-eberron-38e71ffb60.sagasmith-pack",
+      "path": "packages/6a3ad8f67cf3-dnd5e.addon.rulebook.d-d-5e-wayfinders-guide-to-eberron.38e71ffb60c7.addon-1.0.1.sagasmith-pack",
+      "dependencies": [],
+      "provided_rule_definitions": [
+        {
+          "id": "dnd5e.addon.rulebook.d-d-5e-wayfinders-guide-to-eberron.38e71ffb60c7",
+          "version": "1.0.0"
+        }
+      ],
+      "runtime_rule_dependencies": [
+        {
+          "checksum": "3f7508a4177c3dd4a9678d55d55d67a48c282a17f03a0943e092de486f850670",
+          "id": "dnd5e.content.srd2014",
+          "version": "1.24.0"
+        }
+      ]
+    },
+    {
+      "system_id": "dnd5e",
+      "kind": "addon",
+      "id": "dnd5e.addon.rulebook.d-d-5e-xanathar-s-guide-to-everything.72d56f4f8dae.addon",
+      "action": "migrated",
+      "source_version": "1.0.0",
+      "source_checksum": "b95e9c2eaaf0512fe84decf9073394159c69320c54346fb0a168685c88a08d8a",
+      "version": "1.0.1",
+      "checksum": "0458985b14073c3ddc1bcf134bcc0545dfe86af2e7b806ac2064411bbf1618f5",
+      "archive_sha256": "edf201f3c4e6868bb72099cd58bcae13b8a9e45173a3d6f1d5cfeaede5b2cd69",
+      "archive_size": 1010770,
+      "source_path": "tmp/unified-current-packs-all-v3/d-d-5e-xanathar-s-guide-to-everything-72d56f4f8d.sagasmith-pack",
+      "path": "packages/0458985b1407-dnd5e.addon.rulebook.d-d-5e-xanathar-s-guide-to-everything.72d56f4f8dae.addon-1.0.1.sagasmith-pack",
+      "dependencies": [],
+      "provided_rule_definitions": [
+        {
+          "id": "dnd5e.addon.rulebook.d-d-5e-xanathar-s-guide-to-everything.72d56f4f8dae",
+          "version": "1.0.0"
+        }
+      ],
+      "runtime_rule_dependencies": [
+        {
+          "checksum": "3f7508a4177c3dd4a9678d55d55d67a48c282a17f03a0943e092de486f850670",
+          "id": "dnd5e.content.srd2014",
+          "version": "1.24.0"
+        },
+        {
+          "checksum": "de7196ee37f7246f0cff0fb698587eb2cd08ca830c9a14988a88e42cb1af96b6",
+          "id": "dnd5e.addon.rulebook.d-d-5e-player-s-handbook.7ad6d3e9c93c",
+          "version": "1.0.0"
+        }
+      ]
+    },
+    {
+      "system_id": "dnd5e",
+      "kind": "addon",
+      "id": "dnd5e.addon.rulebook.nlrmev2.7b10861c870a.addon",
+      "action": "migrated",
+      "source_version": "1.0.0",
+      "source_checksum": "42dd3853b88fae6f4c22cfbb3c63d81fb0913c3229fc4851ecabe568be7ce19f",
+      "version": "1.0.1",
+      "checksum": "de6aa3b79f2cc256c65c82daac949787f40385a1648d71ffee692cf55229ea96",
+      "archive_sha256": "e0ec60b0c5c21c2d1852a746563ef2fc6562f1eb22d4c63c1727dbaff64d9d1a",
+      "archive_size": 980001,
+      "source_path": "tmp/unified-current-packs-all-v3/nlrmev2-7b10861c87.sagasmith-pack",
+      "path": "packages/de6aa3b79f2c-dnd5e.addon.rulebook.nlrmev2.7b10861c870a.addon-1.0.1.sagasmith-pack",
+      "dependencies": [],
+      "provided_rule_definitions": [
+        {
+          "id": "dnd5e.addon.rulebook.nlrmev2.7b10861c870a",
+          "version": "1.0.0"
+        }
+      ],
+      "runtime_rule_dependencies": [
+        {
+          "checksum": "3f7508a4177c3dd4a9678d55d55d67a48c282a17f03a0943e092de486f850670",
+          "id": "dnd5e.content.srd2014",
+          "version": "1.24.0"
+        }
+      ]
+    },
+    {
+      "system_id": "dnd5e",
+      "kind": "core_rules",
+      "id": "dnd5e.addon.waterdeep-halfling-reviewed",
+      "action": "retained_current",
+      "source_version": "1.0.2",
+      "source_checksum": "b8466b9b51c3fd2015eba6dba8a08fa3c4f342b2796b4a565a3ae69fb3daf3a4",
+      "version": "1.0.2",
+      "checksum": "b8466b9b51c3fd2015eba6dba8a08fa3c4f342b2796b4a565a3ae69fb3daf3a4",
+      "archive_sha256": "f24d9cf7912be964e165965826c7160a8c01940da062bbab702cd337cf781cf7",
+      "archive_size": 6361,
+      "source_path": ".runs/parallel-waterdeep-latest-v1/campaigns/waterdeep-dragon-heist/mcp-home/artifacts/content-packages/b8466b9b51c3-dnd5e.addon.waterdeep-halfling-reviewed.sagasmith-pack",
+      "path": "packages/b8466b9b51c3-dnd5e.addon.waterdeep-halfling-reviewed-1.0.2.sagasmith-pack",
+      "dependencies": [],
+      "provided_rule_definitions": [
+        {
+          "id": "dnd5e.addon.waterdeep-halfling-reviewed",
+          "version": "1.0.2"
+        }
+      ],
+      "runtime_rule_dependencies": []
+    },
+    {
+      "system_id": "dnd5e",
+      "kind": "core_rules",
+      "id": "dnd5e.rule.kenku.monster-manual-2014",
+      "action": "retained_current",
+      "source_version": "1.0.0",
+      "source_checksum": "ffe79da1581e4f2afddcd33a5fbd161c741f6a2533dab24d363cf6d44efd1f3b",
+      "version": "1.0.0",
+      "checksum": "ffe79da1581e4f2afddcd33a5fbd161c741f6a2533dab24d363cf6d44efd1f3b",
+      "archive_sha256": "661b92945d98b6ee7713728edb41d34ded284aa375012580d7ea84f8bc5d51e5",
+      "archive_size": 1502053,
+      "source_path": ".runs/parallel-waterdeep-latest-v1/campaigns/waterdeep-dragon-heist/mcp-home/artifacts/content-packages/ffe79da1581e-dnd5e.rule.kenku.monster-manual-2014.sagasmith-pack",
+      "path": "packages/ffe79da1581e-dnd5e.rule.kenku.monster-manual-2014-1.0.0.sagasmith-pack",
+      "dependencies": [],
+      "provided_rule_definitions": [
+        {
+          "id": "dnd5e.rule.kenku.monster-manual-2014",
+          "version": "1.0.0"
+        }
+      ],
+      "runtime_rule_dependencies": []
+    },
+    {
+      "system_id": "dnd5e",
+      "kind": "module",
+      "id": "906e1c57-005d-4bf1-8b03-221e0726e27d",
+      "action": "migrated",
+      "source_version": "1.0.0",
+      "source_checksum": "474e0fb3e0576ac879467f88d3543142d921040759cf85ed776eea6864c3999f",
+      "version": "1.0.1",
+      "checksum": "ba02c41714d0766873e247c8ae9b36e430d56d0431605ef2437e7010fdd3b5aa",
+      "archive_sha256": "b6f2d3cc1d8d789388f39ebbf72216ce132547507bbabae640c77b7dea083399",
+      "archive_size": 56290655,
+      "source_path": ".runs/full-agent-corpus-v9/campaigns/lost-mine-of-phandelver/mcp-home/artifacts/content-packages/474e0fb3e057-906e1c57-005d-4bf1-8b03-221e0726e27d.sagasmith-pack",
+      "path": "packages/ba02c41714d0-906e1c57-005d-4bf1-8b03-221e0726e27d-1.0.1.sagasmith-pack",
+      "dependencies": [],
+      "provided_rule_definitions": [],
+      "runtime_rule_dependencies": []
+    },
+    {
+      "system_id": "dnd5e",
+      "kind": "module",
+      "id": "d0871484-131a-418f-aba3-016e944411ab",
+      "action": "migrated",
+      "source_version": "1.0.0",
+      "source_checksum": "7d986826e2274337e0473327f2d33c3b26c7c456533b0364d3335cf34acba75d",
+      "version": "1.0.1",
+      "checksum": "1d10008f0eeb18459b3c83583920d54002a4b7109834c92e6ba856ef831d2257",
+      "archive_sha256": "833dd2a0b4f785acb9569db4c1059cd46c5ffd70480a68309bc3de6c85cff0b1",
+      "archive_size": 56290844,
+      "source_path": ".runs/full-agent-corpus-v7/campaigns/lost-mine-of-phandelver/mcp-home/artifacts/content-packages/7d986826e227-d0871484-131a-418f-aba3-016e944411ab.sagasmith-pack",
+      "path": "packages/1d10008f0eeb-d0871484-131a-418f-aba3-016e944411ab-1.0.1.sagasmith-pack",
+      "dependencies": [],
+      "provided_rule_definitions": [],
+      "runtime_rule_dependencies": []
+    },
+    {
+      "system_id": "dnd5e",
+      "kind": "module",
+      "id": "dnd5e.module.descent-into-avernus-zh",
+      "action": "migrated",
+      "source_version": "1.0.0",
+      "source_checksum": "851133924871111ff5dc2dd29b88d1ebbc17e44e1850502f1cacef6384947245",
+      "version": "1.0.1",
+      "checksum": "81725fead988743f6f2c27032ec627f1809636a7a72628cbb90b574dbf7e25be",
+      "archive_sha256": "1d4a850f75a157e22d5ae9c881717a36da8fa6a5782e7f298dbe9e2dd34de183",
+      "archive_size": 47748575,
+      "source_path": ".runs/avernus-clean-v29/campaigns/descent-into-avernus-zh/mcp-home/artifacts/content-packages/851133924871-dnd5e.module.descent-into-avernus-zh.sagasmith-pack",
+      "path": "packages/81725fead988-dnd5e.module.descent-into-avernus-zh-1.0.1.sagasmith-pack",
+      "dependencies": [],
+      "provided_rule_definitions": [],
+      "runtime_rule_dependencies": []
+    },
+    {
+      "system_id": "dnd5e",
+      "kind": "module",
+      "id": "dnd5e.module.descent-into-avernus-zh-master-of-souls-review-v3",
+      "action": "migrated",
+      "source_version": "1.0.0",
+      "source_checksum": "3941fbcc2ffdae7fdcccf821d7326d63ea4124f29d29170ffcf16ffa803ca541",
+      "version": "1.0.1",
+      "checksum": "498dee824d04700619fb5005d18c45f8fcb724732df6aa4d8fd9864ed2a30de3",
+      "archive_sha256": "414adc5b6867d101abda4760e62951b5d9b13335730e2d3d7aeb681d07f28a29",
+      "archive_size": 47749811,
+      "source_path": ".runs/full-agent-corpus-v26/campaigns/descent-into-avernus-zh/mcp-home/artifacts/content-packages/3941fbcc2ffd-dnd5e.module.descent-into-avernus-zh-master-of-souls-review-v3.sagasmith-pack",
+      "path": "packages/498dee824d04-dnd5e.module.descent-into-avernus-zh-master-of-souls-review-v3-1.0.1.sagasmith-pack",
+      "dependencies": [],
+      "provided_rule_definitions": [],
+      "runtime_rule_dependencies": []
+    },
+    {
+      "system_id": "dnd5e",
+      "kind": "module",
+      "id": "dnd5e.module.descent-into-avernus-zh-master-of-souls-review-v4",
+      "action": "migrated",
+      "source_version": "1.0.0",
+      "source_checksum": "662f68fe1540167482975ebcd6e31821d732bdfe25f3023fd5726624788c0cb5",
+      "version": "1.0.1",
+      "checksum": "a32745a8cb2af6f1ee560b5b865751b898d28fbe87c285750746c60693850fea",
+      "archive_sha256": "732f3ae0a60e69ccb5782d98f0e2001842b8348d7b02bf24b8b20692402ef015",
+      "archive_size": 47749940,
+      "source_path": ".runs/full-agent-corpus-v26/campaigns/descent-into-avernus-zh/mcp-home/artifacts/content-packages/662f68fe1540-dnd5e.module.descent-into-avernus-zh-master-of-souls-review-v4.sagasmith-pack",
+      "path": "packages/a32745a8cb2a-dnd5e.module.descent-into-avernus-zh-master-of-souls-review-v4-1.0.1.sagasmith-pack",
+      "dependencies": [],
+      "provided_rule_definitions": [],
+      "runtime_rule_dependencies": []
+    },
+    {
+      "system_id": "dnd5e",
+      "kind": "module",
+      "id": "dnd5e.module.descent-into-avernus-zh-opposition-hydration-cycle-38",
+      "action": "migrated",
+      "source_version": "1.0.0",
+      "source_checksum": "2e54d08241491aa5d45dd9f8121eeaa9fa89a48075ddea72894ffbe484a42743",
+      "version": "1.0.1",
+      "checksum": "a69fdd971e982d85313b95c96756794695e7352b4e9cbf07bd6aae324b235048",
+      "archive_sha256": "c758f77803921eb963a1d751dd27031d73c3ecb047fe9f0ec3228d8ac20abf1f",
+      "archive_size": 47750105,
+      "source_path": ".runs/full-agent-corpus-v26/campaigns/descent-into-avernus-zh/mcp-home/artifacts/content-packages/2e54d0824149-dnd5e.module.descent-into-avernus-zh-opposition-hydration-cycle-38.sagasmith-pack",
+      "path": "packages/a69fdd971e98-dnd5e.module.descent-into-avernus-zh-opposition-hydration-cycle-38-1.0.1.sagasmith-pack",
+      "dependencies": [],
+      "provided_rule_definitions": [],
+      "runtime_rule_dependencies": []
+    },
+    {
+      "system_id": "dnd5e",
+      "kind": "module",
+      "id": "dnd5e.module.lost-mine-of-phandelver",
+      "action": "migrated",
+      "source_version": "1.0.1",
+      "source_checksum": "44323d07e3fd67dbdbde3d854d7be2e8621eac8b01c903de66f96d91dd595d82",
+      "version": "1.0.2",
+      "checksum": "97bd1fb9946179f9409848087bb5885ea0b8471618aafe888e9e2bb2b9484141",
+      "archive_sha256": "22577a9ba2d100a57f9eb42abddc862c35b46807ec7ba45422893f9821511599",
+      "archive_size": 56292114,
+      "source_path": ".runs/parallel-lmop-latest-v1/campaigns/lost-mine-of-phandelver/mcp-home/artifacts/content-packages/44323d07e3fd-dnd5e.module.lost-mine-of-phandelver.sagasmith-pack",
+      "path": "packages/97bd1fb99461-dnd5e.module.lost-mine-of-phandelver-1.0.2.sagasmith-pack",
+      "dependencies": [],
+      "provided_rule_definitions": [],
+      "runtime_rule_dependencies": []
+    },
+    {
+      "system_id": "dnd5e",
+      "kind": "module",
+      "id": "dnd5e.module.lost-mine-of-phandelver-full-agent-corpus-v15",
+      "action": "migrated",
+      "source_version": "1.0.0",
+      "source_checksum": "cb628cc8c7a4dec924c4fa0a72bb13a1585d3ade56ec3cb05ebba813b340fb53",
+      "version": "1.0.1",
+      "checksum": "14ee3400a68b7e25a8090948d199a342893e3663bc83da4c46d4d762ead690b3",
+      "archive_sha256": "f83fe6b65916af6d5c42b2adf9e7762252579f89ef6890321cdba4559cfbfe4a",
+      "archive_size": 56290925,
+      "source_path": ".runs/full-agent-corpus-v15/campaigns/lost-mine-of-phandelver/mcp-home/artifacts/content-packages/cb628cc8c7a4-dnd5e.module.lost-mine-of-phandelver-full-agent-corpus-v15.sagasmith-pack",
+      "path": "packages/14ee3400a68b-dnd5e.module.lost-mine-of-phandelver-full-agent-corpus-v15-1.0.1.sagasmith-pack",
+      "dependencies": [],
+      "provided_rule_definitions": [],
+      "runtime_rule_dependencies": []
+    },
+    {
+      "system_id": "dnd5e",
+      "kind": "module",
+      "id": "dnd5e.module.lost-mine-of-phandelver-full-agent-corpus-v22",
+      "action": "migrated",
+      "source_version": "1.0.0",
+      "source_checksum": "a56c4e0b572612dee3810e857ee7ae1e01c9521c5b7cd63c7295828edb8c8afd",
+      "version": "1.0.1",
+      "checksum": "8d135d0b15fa88c29ebc0664ea7e091335e965e7f8b8560a431b21cdb652c4c5",
+      "archive_sha256": "19f7214df328878f9f4a4f6ea610a8e19027df6a2561869b074ccc3f40110177",
+      "archive_size": 56291176,
+      "source_path": ".runs/full-agent-corpus-v22/campaigns/lost-mine-of-phandelver/mcp-home/artifacts/content-packages/a56c4e0b5726-dnd5e.module.lost-mine-of-phandelver-full-agent-corpus-v22.sagasmith-pack",
+      "path": "packages/8d135d0b15fa-dnd5e.module.lost-mine-of-phandelver-full-agent-corpus-v22-1.0.1.sagasmith-pack",
+      "dependencies": [],
+      "provided_rule_definitions": [],
+      "runtime_rule_dependencies": []
+    },
+    {
+      "system_id": "dnd5e",
+      "kind": "module",
+      "id": "dnd5e.module.lost-mine-of-phandelver.cycle-42",
+      "action": "migrated",
+      "source_version": "1.0.0",
+      "source_checksum": "a5ee68236b9808459769524a9a0a74768c9b019e20ba9eb33439e2441c8b61c1",
+      "version": "1.0.1",
+      "checksum": "ab6fe520813f868ca97d903d46773bfaf45f879833a5125fa270bfe4fd003c02",
+      "archive_sha256": "76d308173ab103940a73abfaa43cb14b6504092cbed4ef0cf307b76fd611559d",
+      "archive_size": 56291312,
+      "source_path": ".runs/full-agent-corpus-v25/campaigns/lost-mine-of-phandelver/mcp-home/artifacts/content-packages/a5ee68236b98-dnd5e.module.lost-mine-of-phandelver.cycle-42.sagasmith-pack",
+      "path": "packages/ab6fe520813f-dnd5e.module.lost-mine-of-phandelver.cycle-42-1.0.1.sagasmith-pack",
+      "dependencies": [],
+      "provided_rule_definitions": [],
+      "runtime_rule_dependencies": []
+    },
+    {
+      "system_id": "dnd5e",
+      "kind": "module",
+      "id": "dnd5e.module.lost-mine-of-phandelver.cycle48",
+      "action": "migrated",
+      "source_version": "1.0.0",
+      "source_checksum": "fa8d88df1c497934b7502d9330362cfb0be5c2dd1d94a93fae0791b7600d787c",
+      "version": "1.0.1",
+      "checksum": "06528a39490db0e6fb56cf8cad738ae51c2dc7df6746b7248aed5cd8c7ffbe14",
+      "archive_sha256": "ea95d329008173ba3796fc69c8b413fbb47544c0da2c6db9d99f0fd6ea8f173e",
+      "archive_size": 56293066,
+      "source_path": ".runs/full-agent-corpus-v25/campaigns/lost-mine-of-phandelver/mcp-home/artifacts/content-packages/fa8d88df1c49-dnd5e.module.lost-mine-of-phandelver.cycle48.sagasmith-pack",
+      "path": "packages/06528a39490d-dnd5e.module.lost-mine-of-phandelver.cycle48-1.0.1.sagasmith-pack",
+      "dependencies": [],
+      "provided_rule_definitions": [],
+      "runtime_rule_dependencies": []
+    },
+    {
+      "system_id": "dnd5e",
+      "kind": "module",
+      "id": "dnd5e.module.lost-mine-of-phandelver.full-agent-corpus-v12",
+      "action": "migrated",
+      "source_version": "1.0.0",
+      "source_checksum": "ae2d5f7e01cad31d96c30a6e96f0c5427f8a2efa07feeb95d98b5b45dfea8855",
+      "version": "1.0.1",
+      "checksum": "6156dfc99b03e660907c20ef4bf37a8f252d77b85a81dc8d83df879f24379d48",
+      "archive_sha256": "48fd34e8d0c55b35272e5177888940f11b21c00ea4697674d12dd692f718322e",
+      "archive_size": 56290762,
+      "source_path": ".runs/full-agent-corpus-v12/campaigns/lost-mine-of-phandelver/mcp-home/artifacts/content-packages/ae2d5f7e01ca-dnd5e.module.lost-mine-of-phandelver.full-agent-corpus-v12.sagasmith-pack",
+      "path": "packages/6156dfc99b03-dnd5e.module.lost-mine-of-phandelver.full-agent-corpus-v12-1.0.1.sagasmith-pack",
+      "dependencies": [],
+      "provided_rule_definitions": [],
+      "runtime_rule_dependencies": []
+    },
+    {
+      "system_id": "dnd5e",
+      "kind": "module",
+      "id": "dnd5e.module.lost-mine-of-phandelver.regression.v2",
+      "action": "migrated",
+      "source_version": "1.0.0",
+      "source_checksum": "469458a8b12b13255b999310597c7c09031846d211781d3bebf1d35111844f92",
+      "version": "1.0.1",
+      "checksum": "e8c562fc019b5f9355f2c8e1fa82834afb7153a6f6282d95e528221e6ce87f29",
+      "archive_sha256": "a796805dd60d24f76785e92dfb78d04dd492301cfcd1e2e663df724a2386c647",
+      "archive_size": 56292920,
+      "source_path": ".runs/parallel-lmop-clean-v3/campaigns/lost-mine-of-phandelver/mcp-home/artifacts/content-packages/469458a8b12b-dnd5e.module.lost-mine-of-phandelver.regression.v2.sagasmith-pack",
+      "path": "packages/e8c562fc019b-dnd5e.module.lost-mine-of-phandelver.regression.v2-1.0.1.sagasmith-pack",
+      "dependencies": [],
+      "provided_rule_definitions": [],
+      "runtime_rule_dependencies": []
+    },
+    {
+      "system_id": "dnd5e",
+      "kind": "module",
+      "id": "dnd5e.module.storm-kings-thunder",
+      "action": "migrated",
+      "source_version": "1.0.0",
+      "source_checksum": "d048969c62d127019f8dbec7d133210dd1b4904b6ea5f00b6bd88bc0fdb65eda",
+      "version": "1.0.1",
+      "checksum": "de6cf72e1d5f1d462bb532f07af0911f851ba67dddd653d8a3be77781cddcf36",
+      "archive_sha256": "957e5590de3188b51188bf85df528f6715f7db99e16da70453e516ad6f93e232",
+      "archive_size": 91357831,
+      "source_path": ".runs/parallel-skt-clean-v1/campaigns/storm-kings-thunder/mcp-home/artifacts/content-packages/d048969c62d1-dnd5e.module.storm-kings-thunder.sagasmith-pack",
+      "path": "packages/de6cf72e1d5f-dnd5e.module.storm-kings-thunder-1.0.1.sagasmith-pack",
+      "dependencies": [],
+      "provided_rule_definitions": [],
+      "runtime_rule_dependencies": []
+    },
+    {
+      "system_id": "dnd5e",
+      "kind": "module",
+      "id": "dnd5e.module.tomb-of-annihilation",
+      "action": "migrated",
+      "source_version": "1.1.0",
+      "source_checksum": "911b2117688cdffa8cf507769899bf637f944d7e87a3ddb6938b82fb1bde4698",
+      "version": "1.1.1",
+      "checksum": "121b8f961b6fcdba6438ce7a9bfa23500f61d4b49dc4199d5291139e16ccac40",
+      "archive_sha256": "908fa766da260db2a4b85f8f914bb2d44fd906b21bd44af93dbe730367623935",
+      "archive_size": 93401298,
+      "source_path": ".runs/parallel-tomb-clean-v1/campaigns/tomb-of-annihilation/mcp-home/artifacts/content-packages/911b2117688c-dnd5e.module.tomb-of-annihilation.sagasmith-pack",
+      "path": "packages/121b8f961b6f-dnd5e.module.tomb-of-annihilation-1.1.1.sagasmith-pack",
+      "dependencies": [],
+      "provided_rule_definitions": [],
+      "runtime_rule_dependencies": []
+    },
+    {
+      "system_id": "dnd5e",
+      "kind": "module",
+      "id": "dnd5e.module.tyranny-of-dragons.hoard",
+      "action": "migrated",
+      "source_version": "1.0.0",
+      "source_checksum": "e62a688b09a52a184b9a57d5d6fcb5b3a478e688478228e3776ba1dc5038719a",
+      "version": "1.0.1",
+      "checksum": "4a23649d271a527824aa2ecf4a6bd436361e0f2bce1b0a94f66f48993377f145",
+      "archive_sha256": "6b70d0b38c83082c750d8f31f115431878d8e78e8d18d0bf4be98f4d902d3f7b",
+      "archive_size": 8763011,
+      "source_path": ".runs/parallel-tyranny-clean-v1/campaigns/tyranny-of-dragons/mcp-home/artifacts/content-packages/e62a688b09a5-dnd5e.module.tyranny-of-dragons.hoard.sagasmith-pack",
+      "path": "packages/4a23649d271a-dnd5e.module.tyranny-of-dragons.hoard-1.0.1.sagasmith-pack",
+      "dependencies": [],
+      "provided_rule_definitions": [],
+      "runtime_rule_dependencies": []
+    },
+    {
+      "system_id": "dnd5e",
+      "kind": "module",
+      "id": "dnd5e.module.tyranny-of-dragons.rise.sagasmith",
+      "action": "migrated",
+      "source_version": "1.0.0",
+      "source_checksum": "4fdef1b24e84d5068c251608140353f8242f7d38e8c84260abd33514bc72e4e4",
+      "version": "1.0.1",
+      "checksum": "eba59fe1051a54ff9bdbd1db5e4fa91681a27b74aad29f224e24c1ff2bd45c3e",
+      "archive_sha256": "d962c36e9be3440d8efe084e7dbc65d6b5fd84b7bbb1496e821d58ba6b82bbd7",
+      "archive_size": 9383269,
+      "source_path": ".runs/parallel-tyranny-clean-v1/campaigns/tyranny-of-dragons/mcp-home/artifacts/content-packages/4fdef1b24e84-dnd5e.module.tyranny-of-dragons.rise.sagasmith.sagasmith-pack",
+      "path": "packages/eba59fe1051a-dnd5e.module.tyranny-of-dragons.rise.sagasmith-1.0.1.sagasmith-pack",
+      "dependencies": [],
+      "provided_rule_definitions": [],
+      "runtime_rule_dependencies": []
+    },
+    {
+      "system_id": "dnd5e",
+      "kind": "module",
+      "id": "dnd5e.module.waterdeep-dragon-heist",
+      "action": "migrated",
+      "source_version": "1.0.0",
+      "source_checksum": "848c7df8f5129c8a5aa774675adebcb454577f3125ad07f691accdd4bb40c521",
+      "version": "1.0.1",
+      "checksum": "5ef0c7d18d2caae64097012f7697ef91bc4c05544bfcd4736479e2c90bf08858",
+      "archive_sha256": "0019445dabcada349439575c61f45f1a61cc9af25695603fa6dc90e0524e440d",
+      "archive_size": 84054791,
+      "source_path": ".runs/parallel-waterdeep-clean-v2/campaigns/waterdeep-dragon-heist/mcp-home/artifacts/content-packages/848c7df8f512-dnd5e.module.waterdeep-dragon-heist.sagasmith-pack",
+      "path": "packages/5ef0c7d18d2c-dnd5e.module.waterdeep-dragon-heist-1.0.1.sagasmith-pack",
+      "dependencies": [],
+      "provided_rule_definitions": [],
+      "runtime_rule_dependencies": []
+    },
+    {
+      "system_id": "dnd5e",
+      "kind": "preset",
+      "id": "dnd5e.presets.srd2014",
+      "action": "retained_current",
+      "source_version": "2.1.0",
+      "source_checksum": "d9c13e9bfff32bd942a166b386fecef5309434db60facac22276ed4bf2e07992",
+      "version": "2.1.0",
+      "checksum": "d9c13e9bfff32bd942a166b386fecef5309434db60facac22276ed4bf2e07992",
+      "archive_sha256": "3c1a39f6b09e410bc40afc27b3e8771f992ee82a4a3735b25c9e9c16d17b9e84",
+      "archive_size": 739302,
+      "source_path": "SagaSmith-dnd-content-library/public/content-library/packages/dnd5e.presets.srd2014-2.1.0.sagasmith-pack",
+      "path": "packages/d9c13e9bfff3-dnd5e.presets.srd2014-2.1.0.sagasmith-pack",
+      "dependencies": [],
+      "provided_rule_definitions": [],
+      "runtime_rule_dependencies": []
+    },
+    {
+      "system_id": "dnd5e",
+      "kind": "preset",
+      "id": "dnd5e.presets.srd2024",
+      "action": "retained_current",
+      "source_version": "2.1.0",
+      "source_checksum": "9e1f59ae5305bbbf20ce0aa1fde9708e62ccc3f0383df5eb11bbcd8d54b9936d",
+      "version": "2.1.0",
+      "checksum": "9e1f59ae5305bbbf20ce0aa1fde9708e62ccc3f0383df5eb11bbcd8d54b9936d",
+      "archive_sha256": "a7768a05ef708a4ac5c37a56c8850cb334293c595af614d1ec022044a1e4ede4",
+      "archive_size": 686373,
+      "source_path": "SagaSmith-dnd-content-library/public/content-library/packages/dnd5e.presets.srd2024-2.1.0.sagasmith-pack",
+      "path": "packages/9e1f59ae5305-dnd5e.presets.srd2024-2.1.0.sagasmith-pack",
+      "dependencies": [],
+      "provided_rule_definitions": [],
+      "runtime_rule_dependencies": []
+    }
+  ]
+}
