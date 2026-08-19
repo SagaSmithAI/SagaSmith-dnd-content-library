@@ -48,6 +48,39 @@ The validator checks archive SHA-256 and sizes, descriptor identities, every
 embedded blob, required dependency closure, portable index paths, and the exact
 current system/kind counts.
 
+## Full-chain campaign regression
+
+The long campaign regression rebuilds and recreates the hosted stack from the
+current sibling `SagaSmith-agent`, `sagasmith-core`, `sagasmith-dnd`,
+`sagasmith-coc`, and `sagasmith-narrative` worktrees before it sends any room
+actions. The exact source revisions and Docker build/recreate results are saved
+as `runtime-refresh.json` in the output directory. The runner supplies an
+ephemeral shared authorization-context secret to the refreshed local stack; it
+does not write that secret to source or regression artifacts.
+
+The Service's `compose.regression.yaml` overlay selects the current hosted Agent
+configuration, including the process-local Narrative MCP and signed principal
+context required by the latest domain runtimes.
+
+```powershell
+python scripts/regression_current_campaigns.py --output-dir ../.runs/current-campaigns
+```
+
+Use `--skip-runtime-refresh` only when the Service stack is managed and refreshed
+outside the runner. `--inventory-only` never starts or rebuilds the stack.
+
+Campaigns can run concurrently with isolated HTTP clients and per-campaign logs:
+
+```powershell
+python scripts/regression_current_campaigns.py `
+  --output-dir ../.runs/current-campaigns-parallel `
+  --parallelism 4 --skip-restart
+```
+
+Parallel mode requires `--skip-restart`; restart/resume evidence must be gathered
+by a separate serial run so one campaign cannot restart the Agent while another
+campaign has an in-flight model request.
+
 The repository tooling is Apache-2.0. Each Pack and embedded asset retains its
 own license, attribution, and distribution metadata; the repository license
 does not grant redistribution rights for Pack content.

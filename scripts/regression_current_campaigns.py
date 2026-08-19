@@ -13,12 +13,14 @@ from __future__ import annotations
 import argparse
 import hashlib
 import json
+import os
 import re
 import secrets
 import subprocess
 import time
 import uuid
 import zipfile
+from concurrent.futures import ThreadPoolExecutor, as_completed
 from datetime import UTC, datetime
 from functools import lru_cache
 from pathlib import Path
@@ -34,6 +36,24 @@ DESCRIPTOR = "package.sagasmith.json"
 MODEL = "openai-codex/gpt-5.6-luna"
 SERVICE_PACK_ROOT = "/srv/sagasmith/content-library/packages"
 PREFIXES = ("mcp_sagasmith_dnd_", "mcp_sagasmith_coc_")
+COMPOSE_FILES = (
+    "compose.yaml",
+    "compose.workspace.yaml",
+    "compose.regression.yaml",
+    "secrets/compose.lan.yaml",
+)
+BUILD_SERVICES = ("api", "module-worker", "dnd-mcp", "coc-mcp", "agent")
+WORKSPACE_COMPONENTS = (
+    "SagaSmith-agent",
+    "sagasmith-core",
+    "sagasmith-dnd",
+    "sagasmith-coc",
+    "sagasmith-narrative",
+)
+_COMPOSE_ENVIRONMENT = os.environ.copy()
+_COMPOSE_ENVIRONMENT.setdefault(
+    "SAGASMITH_AUTH_CONTEXT_SECRET", secrets.token_urlsafe(48)
+)
 
 
 class ApiFailure(RuntimeError):
@@ -46,6 +66,12 @@ def _arguments() -> argparse.Namespace:
     parser.add_argument("--base-url", default="http://127.0.0.1:8080")
     parser.add_argument("--campaign", action="append", default=[])
     parser.add_argument("--max-cycles", type=int, default=6)
+    parser.add_argument(
+        "--parallelism",
+        type=int,
+        default=1,
+        help="number of campaigns to exercise concurrently",
+    )
     parser.add_argument("--timeout-seconds", type=int, default=1800)
     parser.add_argument(
         "--tool-audit",
@@ -57,6 +83,14 @@ def _arguments() -> argparse.Namespace:
     parser.add_argument("--resume", action="store_true")
     parser.add_argument("--fail-fast", action="store_true")
     parser.add_argument("--skip-restart", action="store_true")
+    parser.add_argument(
+        "--skip-runtime-refresh",
+        action="store_true",
+        help=(
+            "use an externally managed Service stack instead of rebuilding and "
+            "recreating it from the current sibling SagaSmith worktrees"
+        ),
+    )
     return parser.parse_args()
 
 
@@ -72,6 +106,114 @@ def _write_json(path: Path, value: Any) -> None:
     path.write_text(
         json.dumps(value, ensure_ascii=False, indent=2) + "\n", encoding="utf-8"
     )
+
+
+def _compose_command(*arguments: str) -> list[str]:
+    command = ["docker", "compose"]
+    for compose_file in COMPOSE_FILES:
+        command.extend(("-f", compose_file))
+    command.extend(arguments)
+    return command
+
+
+def _run_command(
+    command: list[str], *, cwd: Path, timeout: int
+) -> tuple[subprocess.CompletedProcess[str], dict[str, Any]]:
+    started = datetime.now(UTC)
+    completed = subprocess.run(
+        command,
+        cwd=cwd,
+        env=_COMPOSE_ENVIRONMENT,
+        capture_output=True,
+        text=True,
+        encoding="utf-8",
+        errors="replace",
+        timeout=timeout,
+        check=False,
+    )
+    result = {
+        "command": command,
+        "started_at": started.isoformat(),
+        "completed_at": datetime.now(UTC).isoformat(),
+        "returncode": completed.returncode,
+        "stdout": completed.stdout,
+        "stderr": completed.stderr,
+    }
+    return completed, result
+
+
+def _git_metadata(repository: Path) -> dict[str, Any]:
+    if not (repository / ".git").exists():
+        raise ValueError(f"required SagaSmith worktree is absent: {repository}")
+
+    def git(*arguments: str) -> str:
+        completed = subprocess.run(
+            ["git", *arguments],
+            cwd=repository,
+            capture_output=True,
+            text=True,
+            encoding="utf-8",
+            errors="replace",
+            timeout=30,
+            check=False,
+        )
+        if completed.returncode != 0:
+            message = completed.stderr.strip() or completed.stdout.strip()
+            raise RuntimeError(f"git {' '.join(arguments)} failed in {repository}: {message}")
+        return completed.stdout.strip()
+
+    status = git("status", "--porcelain=v1", "--untracked-files=normal")
+    return {
+        "path": str(repository.resolve()),
+        "revision": git("rev-parse", "HEAD"),
+        "branch": git("branch", "--show-current"),
+        "committed_at": git("show", "-s", "--format=%cI", "HEAD"),
+        "dirty": bool(status),
+        "status": status.splitlines(),
+    }
+
+
+def _runtime_sources(service_repo: Path) -> dict[str, dict[str, Any]]:
+    workspace = service_repo.resolve().parent
+    repositories = {
+        "SagaSmith-service": service_repo.resolve(),
+        **{name: workspace / name for name in WORKSPACE_COMPONENTS},
+        "SagaSmith-dnd-content-library": REPO,
+    }
+    return {name: _git_metadata(path) for name, path in repositories.items()}
+
+
+def _refresh_runtime(args: argparse.Namespace) -> dict[str, Any]:
+    report: dict[str, Any] = {
+        "schema": "sagasmith.contentlib-runtime-refresh/v1",
+        "generated_at": datetime.now(UTC).isoformat(),
+        "workspace_sources": _runtime_sources(args.service_repo),
+        "skipped": bool(args.skip_runtime_refresh),
+    }
+    report_path = args.output_dir / "runtime-refresh.json"
+    if args.skip_runtime_refresh:
+        _write_json(report_path, report)
+        return report
+
+    timeout = max(int(args.timeout_seconds), 1800)
+    build, report["build"] = _run_command(
+        _compose_command("build", "--pull", *BUILD_SERVICES),
+        cwd=args.service_repo,
+        timeout=timeout,
+    )
+    _write_json(report_path, report)
+    if build.returncode != 0:
+        raise RuntimeError("failed to rebuild the Service runtime from workspace sources")
+
+    recreate, report["recreate"] = _run_command(
+        _compose_command("up", "-d", "--force-recreate", "--remove-orphans"),
+        cwd=args.service_repo,
+        timeout=timeout,
+    )
+    _write_json(report_path, report)
+    if recreate.returncode != 0:
+        raise RuntimeError("failed to recreate the refreshed Service runtime")
+    return report
 
 
 def _safe_id(value: str) -> str:
@@ -193,22 +335,9 @@ def _read_persisted_tool_output(path: str, service_repo: Path) -> str:
     if not normalized.startswith("/workspaces/") or "/../" in f"{normalized}/":
         return ""
     completed = subprocess.run(
-        [
-            "docker",
-            "compose",
-            "-f",
-            "compose.yaml",
-            "-f",
-            "compose.workspace.yaml",
-            "-f",
-            "secrets/compose.lan.yaml",
-            "exec",
-            "-T",
-            "agent",
-            "cat",
-            normalized,
-        ],
+        _compose_command("exec", "-T", "agent", "cat", normalized),
         cwd=service_repo,
+        env=_COMPOSE_ENVIRONMENT,
         capture_output=True,
         text=True,
         encoding="utf-8",
@@ -692,37 +821,12 @@ DM 创建的 party member 填进 actor_refs。公开范围不得宽于任何被�
 
 
 def _restart_service(args: argparse.Namespace) -> dict[str, Any]:
-    command = [
-        "docker",
-        "compose",
-        "-f",
-        "compose.yaml",
-        "-f",
-        "compose.workspace.yaml",
-        "-f",
-        "secrets/compose.lan.yaml",
-        "restart",
-        "api",
-        "agent",
-    ]
-    started = datetime.now(UTC)
-    completed = subprocess.run(
-        command,
+    _, result = _run_command(
+        _compose_command("restart", "api", "agent"),
         cwd=args.service_repo,
-        capture_output=True,
-        text=True,
-        encoding="utf-8",
-        errors="replace",
         timeout=240,
-        check=False,
     )
-    return {
-        "started_at": started.isoformat(),
-        "completed_at": datetime.now(UTC).isoformat(),
-        "returncode": completed.returncode,
-        "stdout": completed.stdout,
-        "stderr": completed.stderr,
-    }
+    return result
 
 
 def _service_checks(
@@ -914,7 +1018,8 @@ def _run_unit(
         return prior
     campaign_id = str(prior.get("campaign_id") or checkpoint.get("campaign_id") or "")
     unit_hash = hashlib.sha256(unit["id"].encode()).hexdigest()
-    campaign_key = f"contentlib-v2-{unit_hash[:24]}"
+    run_namespace = str(owner_user["id"]).replace("-", "")[:12]
+    campaign_key = f"contentlib-v3-{run_namespace}-{unit_hash[:12]}"
     if not campaign_id:
         campaign = _retry_idempotent_request(
             owner,
@@ -923,7 +1028,9 @@ def _run_unit(
             expected=201,
             headers={"Idempotency-Key": campaign_key},
             json_body={
-                "name": f"Contentlib · {unit['title']} · {unit_hash[:10]}",
+                "name": (
+                    f"Contentlib · {unit['title']} · {run_namespace}-{unit_hash[:8]}"
+                ),
                 "description": f"Full-chain Luna regression for {unit['id']}@{unit['version']}",
                 "system_id": unit["system_id"],
                 "edition": unit["edition"],
@@ -1180,7 +1287,7 @@ def _run_unit(
             *[f"tool:{item}" for item in tool_coverage["gaps"]],
         ],
         "artifacts": {
-            "http_log": str((args.output_dir / "service-http.jsonl").resolve()),
+            "http_log": str(owner.log_path.resolve()),
             "room_events": str((unit_dir / "room-events.json").resolve()),
             "usage": str((unit_dir / "usage.json").resolve()),
             "tool_audit": str(args.tool_audit.resolve()),
@@ -1190,11 +1297,15 @@ def _run_unit(
     return report
 
 
-def _summary(selected: set[str], reports: list[dict[str, Any]]) -> dict[str, Any]:
+def _summary(
+    selected: set[str], reports: list[dict[str, Any]], parallelism: int
+) -> dict[str, Any]:
+    ordered_reports = sorted(reports, key=lambda item: str(item["unit"]["id"]))
     return {
         "schema": "sagasmith.contentlib-service-chain-regression-summary.v2",
         "generated_at": datetime.now(UTC).isoformat(),
         "model": MODEL,
+        "parallelism": parallelism,
         "selected": sorted(selected),
         "complete": len(reports) == len(selected)
         and all(item["complete"] for item in reports),
@@ -1208,14 +1319,93 @@ def _summary(selected: set[str], reports: list[dict[str, Any]]) -> dict[str, Any
                 "gaps": item["gaps"],
                 "tool_calls": item["tool_coverage"]["tool_calls"],
             }
-            for item in reports
+            for item in ordered_reports
         ],
     }
+
+
+RUNNER_EXCEPTIONS = (
+    AttributeError,
+    httpx.HTTPError,
+    KeyError,
+    OSError,
+    RuntimeError,
+    subprocess.SubprocessError,
+    TypeError,
+    ValueError,
+)
+
+
+def _error_report(
+    args: argparse.Namespace, unit: dict[str, Any], exc: BaseException
+) -> dict[str, Any]:
+    unit_dir = args.output_dir / "campaigns" / _safe_id(unit["id"])
+    unit_dir.mkdir(parents=True, exist_ok=True)
+    error = {
+        "at": datetime.now(UTC).isoformat(),
+        "type": type(exc).__name__,
+        "message": str(exc),
+    }
+    error_path = unit_dir / "runner-error.json"
+    _write_json(error_path, error)
+    report = {
+        "schema": "sagasmith.contentlib-service-chain-regression.v2",
+        "generated_at": error["at"],
+        "model": MODEL,
+        "base_url": args.base_url,
+        "unit": unit,
+        "campaign_id": "",
+        "service_coverage": {"complete": False, "checks": {}, "gaps": []},
+        "tool_coverage": {
+            "complete": False,
+            "checks": {},
+            "gaps": [],
+            "tool_calls": 0,
+        },
+        "complete": False,
+        "gaps": [f"runner:{type(exc).__name__}:{exc}"],
+        "artifacts": {"runner_error": str(error_path.resolve())},
+    }
+    _write_json(unit_dir / "campaign-report.json", report)
+    return report
+
+
+def _run_isolated_unit(
+    args: argparse.Namespace,
+    unit: dict[str, Any],
+    owner_user: dict[str, Any],
+    player_user: dict[str, Any],
+    owner_cookies: dict[str, str],
+    player_cookies: dict[str, str],
+) -> dict[str, Any]:
+    unit_dir = args.output_dir / "campaigns" / _safe_id(unit["id"])
+    http_log = unit_dir / "service-http.jsonl"
+    owner = ServiceClient(
+        args.base_url, args.timeout_seconds, http_log, f"owner:{unit['id']}"
+    )
+    player = ServiceClient(
+        args.base_url, args.timeout_seconds, http_log, f"player:{unit['id']}"
+    )
+    try:
+        owner.client.cookies.update(owner_cookies)
+        player.client.cookies.update(player_cookies)
+        return _run_unit(args, unit, owner, player, owner_user, player_user)
+    except RUNNER_EXCEPTIONS as exc:
+        return _error_report(args, unit, exc)
+    finally:
+        owner.close()
+        player.close()
 
 
 def _run(args: argparse.Namespace) -> int:
     if args.max_cycles < 2:
         raise ValueError("--max-cycles must be at least 2 for restart/resume evidence")
+    if args.parallelism < 1:
+        raise ValueError("--parallelism must be at least 1")
+    if args.parallelism > 1 and not args.skip_restart:
+        raise ValueError("parallel campaigns require --skip-restart")
+    if args.parallelism > 1 and args.fail_fast:
+        raise ValueError("--fail-fast cannot be combined with parallel campaigns")
     if args.output_dir.exists() and any(args.output_dir.iterdir()) and not args.resume:
         raise ValueError("--output-dir is not empty; use --resume or a fresh directory")
     args.output_dir.mkdir(parents=True, exist_ok=True)
@@ -1231,6 +1421,7 @@ def _run(args: argparse.Namespace) -> int:
             "schema": "sagasmith.current-campaign-service-regression-inventory.v2",
             "generated_at": datetime.now(UTC).isoformat(),
             "model": MODEL,
+            "parallelism": args.parallelism,
             "modules": inventory,
             "selected": sorted(selected),
             "explicit_exclusions": [
@@ -1242,6 +1433,8 @@ def _run(args: argparse.Namespace) -> int:
     )
     if args.inventory_only:
         return 0
+
+    _refresh_runtime(args)
 
     credentials_path = args.output_dir / "accounts.json"
     if args.resume and credentials_path.is_file():
@@ -1278,58 +1471,57 @@ def _run(args: argparse.Namespace) -> int:
                 "player": {"user": player_user, "auth": player_auth},
             },
         )
-        for unit in inventory:
-            if unit["id"] not in selected:
-                continue
-            try:
-                report = _run_unit(
-                    args, unit, owner, player, owner_user, player_user
+        owner_cookies = dict(owner.client.cookies.items())
+        player_cookies = dict(player.client.cookies.items())
+        units = [unit for unit in inventory if unit["id"] in selected]
+        if args.parallelism == 1:
+            for unit in units:
+                report = _run_isolated_unit(
+                    args,
+                    unit,
+                    owner_user,
+                    player_user,
+                    owner_cookies,
+                    player_cookies,
                 )
-            except (
-                AttributeError,
-                httpx.HTTPError,
-                KeyError,
-                OSError,
-                RuntimeError,
-                subprocess.SubprocessError,
-                TypeError,
-                ValueError,
-            ) as exc:
-                unit_dir = args.output_dir / "campaigns" / _safe_id(unit["id"])
-                unit_dir.mkdir(parents=True, exist_ok=True)
-                error = {
-                    "at": datetime.now(UTC).isoformat(),
-                    "type": type(exc).__name__,
-                    "message": str(exc),
+                reports.append(report)
+                _write_json(
+                    args.output_dir / "summary.json",
+                    _summary(selected, reports, args.parallelism),
+                )
+                if args.fail_fast and not report["complete"]:
+                    break
+        else:
+            with ThreadPoolExecutor(
+                max_workers=min(args.parallelism, len(units)),
+                thread_name_prefix="campaign-regression",
+            ) as executor:
+                futures = {
+                    executor.submit(
+                        _run_isolated_unit,
+                        args,
+                        unit,
+                        owner_user,
+                        player_user,
+                        owner_cookies,
+                        player_cookies,
+                    ): unit
+                    for unit in units
                 }
-                _write_json(unit_dir / "runner-error.json", error)
-                report = {
-                    "schema": "sagasmith.contentlib-service-chain-regression.v2",
-                    "generated_at": error["at"],
-                    "model": MODEL,
-                    "base_url": args.base_url,
-                    "unit": unit,
-                    "campaign_id": "",
-                    "service_coverage": {"complete": False, "checks": {}, "gaps": []},
-                    "tool_coverage": {
-                        "complete": False,
-                        "checks": {},
-                        "gaps": [],
-                        "tool_calls": 0,
-                    },
-                    "complete": False,
-                    "gaps": [f"runner:{type(exc).__name__}:{exc}"],
-                    "artifacts": {"runner_error": str((unit_dir / "runner-error.json").resolve())},
-                }
-                _write_json(unit_dir / "campaign-report.json", report)
-            reports.append(report)
-            _write_json(args.output_dir / "summary.json", _summary(selected, reports))
-            if args.fail_fast and not report["complete"]:
-                break
+                for future in as_completed(futures):
+                    reports.append(future.result())
+                    _write_json(
+                        args.output_dir / "summary.json",
+                        _summary(selected, reports, args.parallelism),
+                    )
     finally:
         owner.close()
         player.close()
-    return 0 if reports and all(item["complete"] for item in reports) else 1
+    return (
+        0
+        if len(reports) == len(selected) and all(item["complete"] for item in reports)
+        else 1
+    )
 
 
 def main() -> None:
