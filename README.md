@@ -8,6 +8,20 @@ content license: every Pack, source document, and embedded asset retains its own
 license, attribution, and distribution restrictions. Download, import, or
 redistribute only content you are authorized to use.
 
+## Producers and consumers
+
+- [`sagasmith-dnd`](https://github.com/SagaSmithAI/sagasmith-dnd) and
+  [`sagasmith-coc`](https://github.com/SagaSmithAI/sagasmith-coc) define and
+  validate current system-specific Pack semantics.
+- Their repository-local MCP servers import, activate, export, and remove Packs
+  through the authoritative `content_pack` facade.
+- [`SagaSmith-service`](https://github.com/SagaSmithAI/SagaSmith-service) and
+  the domain Workbenches may surface this catalog, but the catalog never grants
+  runtime permission or content rights.
+
+Former standalone MCP, Skills, UI, and Module Generator repositories are
+archived history and are not current producers or consumers.
+
 The current collection contains 46 immutable Packs:
 
 - D&D: 21 addons, 2 core-rule Packs, 18 modules, and 2 actor presets.
