@@ -81,6 +81,15 @@ Parallel mode requires `--skip-restart`; restart/resume evidence must be gathere
 by a separate serial run so one campaign cannot restart the Agent while another
 campaign has an in-flight model request.
 
+### Verified current-runtime baseline
+
+On 2026-08-20 the runner rebuilt the stack from the current Agent, Core, D&D,
+CoC, Narrative, and Service worktrees, then completed the D&D and CoC reference
+campaigns concurrently with isolated clients and no reported regression gaps.
+The D&D result recorded a legal ending. `summary.json`, per-campaign logs, and
+`runtime-refresh.json` are the evidence boundary; discovered modules that were
+not run remain explicit machine-readable exclusions rather than implicit passes.
+
 The repository tooling is Apache-2.0. Each Pack and embedded asset retains its
 own license, attribution, and distribution metadata; the repository license
 does not grant redistribution rights for Pack content.
