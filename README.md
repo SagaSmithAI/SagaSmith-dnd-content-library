@@ -90,6 +90,29 @@ The D&D result recorded a legal ending. `summary.json`, per-campaign logs, and
 `runtime-refresh.json` are the evidence boundary; discovered modules that were
 not run remain explicit machine-readable exclusions rather than implicit passes.
 
+The content library remains the authority for this long regression because its
+Pack inventory, declared endings, and explicit exclusions define what must be
+played. The run still begins at the hosted Agent's public room/channel boundary
+and exercises concurrent campaigns through the real Agent, Service, and domain
+MCP stack.
+
+Raw run directories are local-only because they contain account credentials,
+cookies, session identifiers, HTTP traces, and potentially OAuth login state.
+Export only the explicit public evidence allow-list:
+
+```powershell
+python scripts/export_regression_evidence.py `
+  ../.runs/current-campaigns-parallel `
+  regression-evidence/2026-08-20-parallel-current-runtime.json
+python scripts/validate_regression_evidence.py regression-evidence
+```
+
+The exporter never reads `accounts.json` or raw HTTP logs. It removes campaign,
+account, session, filesystem-path, and authentication details, then rejects the
+output if credential-, cookie-, token-, OAuth-, or local-path patterns remain.
+Committed evidence contains only Pack identities and checksums, component Git
+revisions, coverage booleans/counts, explicit exclusions, and the final result.
+
 The repository tooling is Apache-2.0. Each Pack and embedded asset retains its
 own license, attribution, and distribution metadata; the repository license
 does not grant redistribution rights for Pack content.

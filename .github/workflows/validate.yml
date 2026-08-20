@@ -18,5 +18,11 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
+      - name: Install regression test dependencies
+        run: python -m pip install -r requirements-test.txt
       - name: Validate current Pack collection
         run: python scripts/validate_library.py
+      - name: Validate committed long-regression evidence
+        run: python scripts/validate_regression_evidence.py regression-evidence
+      - name: Test long-regression tooling
+        run: python -m pytest tests -q
