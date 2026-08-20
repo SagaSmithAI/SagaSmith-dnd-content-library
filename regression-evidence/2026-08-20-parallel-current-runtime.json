@@ -1,0 +1,287 @@
+{
+  "schema": "sagasmith.content-library-regression-evidence/v1",
+  "generated_at": "2026-08-19T19:34:29.041803+00:00",
+  "model": "openai-codex/gpt-5.6-luna",
+  "redaction": {
+    "profile": "credentials-and-session-state-v1",
+    "allow_listed_fields_only": true,
+    "authentication_state_included": false,
+    "account_data_included": false,
+    "raw_http_included": false
+  },
+  "runtime": {
+    "generated_at": "2026-08-19T19:21:42.373239+00:00",
+    "refresh_skipped": false,
+    "components": {
+      "SagaSmith-agent": {
+        "revision": "357f90cb224e6ba13db6bf846f9751fce0cdb13c",
+        "branch": "agent/current-topology-docs",
+        "committed_at": "2026-08-20T01:35:33+08:00",
+        "dirty": true
+      },
+      "SagaSmith-dnd-content-library": {
+        "revision": "50ed125c8230ae05fef386948f61230fa31ba570",
+        "branch": "agent/current-topology-docs",
+        "committed_at": "2026-08-19T14:32:14+08:00",
+        "dirty": true
+      },
+      "SagaSmith-service": {
+        "revision": "a06eb89f853086f043cfcec71706124234eff21b",
+        "branch": "agent/current-topology-docs",
+        "committed_at": "2026-08-19T21:19:29+08:00",
+        "dirty": true
+      },
+      "sagasmith-coc": {
+        "revision": "81cb1af757374f89d813ea8c688876ba2bed15b4",
+        "branch": "main",
+        "committed_at": "2026-08-20T01:38:41+08:00",
+        "dirty": false
+      },
+      "sagasmith-core": {
+        "revision": "af0e1f64acda7dcac87760cc4ae5b2ffe183c28d",
+        "branch": "main",
+        "committed_at": "2026-08-20T01:26:16+08:00",
+        "dirty": false
+      },
+      "sagasmith-dnd": {
+        "revision": "c1031cc1d1ec82b3f533c0296f07f34b57491ebf",
+        "branch": "agent/current-topology-docs",
+        "committed_at": "2026-08-19T21:18:00+08:00",
+        "dirty": false
+      },
+      "sagasmith-narrative": {
+        "revision": "fb3399b0a7b9e9f6c168f16c4a7f074b9cb375eb",
+        "branch": "agent/current-topology-docs",
+        "committed_at": "2026-08-19T21:18:00+08:00",
+        "dirty": false
+      }
+    }
+  },
+  "inventory": {
+    "selected": [
+      {
+        "id": "coc7e.module.the-lightless-beacon.private",
+        "version": "1.0.2",
+        "checksum": "134061b7a859eee3be58ad1f867040393bd1c4526908a5191546ddb5bbb4b75c",
+        "archive_sha256": "f02da104a8894ca150f900fa5ccb831b6e491d2b48cdddb3f67b37b711454bf8",
+        "system_id": "coc7e",
+        "logical_campaign_line": "the-lightless-beacon",
+        "title": "The Lightless Beacon",
+        "declared_endings": [
+          {
+            "id": "ending:survived-rescue"
+          },
+          {
+            "id": "ending:overrun"
+          }
+        ]
+      },
+      {
+        "id": "dnd5e.module.lost-mine-of-phandelver",
+        "version": "1.0.2",
+        "checksum": "97bd1fb9946179f9409848087bb5885ea0b8471618aafe888e9e2bb2b9484141",
+        "archive_sha256": "22577a9ba2d100a57f9eb42abddc862c35b46807ec7ba45422893f9821511599",
+        "system_id": "dnd5e",
+        "logical_campaign_line": "lost-mine-of-phandelver",
+        "title": "Lost Mine of Phandelver",
+        "declared_endings": [
+          {
+            "id": "wave-echo-conclusion",
+            "status": "legal_complete",
+            "title": "Wave Echo Cave conclusion"
+          }
+        ]
+      }
+    ],
+    "explicit_exclusions": [
+      {
+        "id": "coc7e.module.alone-against-the-flames.private",
+        "reason": "not selected by --campaign"
+      },
+      {
+        "id": "906e1c57-005d-4bf1-8b03-221e0726e27d",
+        "reason": "not selected by --campaign"
+      },
+      {
+        "id": "d0871484-131a-418f-aba3-016e944411ab",
+        "reason": "not selected by --campaign"
+      },
+      {
+        "id": "dnd5e.module.descent-into-avernus-zh",
+        "reason": "not selected by --campaign"
+      },
+      {
+        "id": "dnd5e.module.descent-into-avernus-zh-master-of-souls-review-v3",
+        "reason": "not selected by --campaign"
+      },
+      {
+        "id": "dnd5e.module.descent-into-avernus-zh-master-of-souls-review-v4",
+        "reason": "not selected by --campaign"
+      },
+      {
+        "id": "dnd5e.module.descent-into-avernus-zh-opposition-hydration-cycle-38",
+        "reason": "not selected by --campaign"
+      },
+      {
+        "id": "dnd5e.module.lost-mine-of-phandelver-full-agent-corpus-v15",
+        "reason": "not selected by --campaign"
+      },
+      {
+        "id": "dnd5e.module.lost-mine-of-phandelver-full-agent-corpus-v22",
+        "reason": "not selected by --campaign"
+      },
+      {
+        "id": "dnd5e.module.lost-mine-of-phandelver.cycle-42",
+        "reason": "not selected by --campaign"
+      },
+      {
+        "id": "dnd5e.module.lost-mine-of-phandelver.cycle48",
+        "reason": "not selected by --campaign"
+      },
+      {
+        "id": "dnd5e.module.lost-mine-of-phandelver.full-agent-corpus-v12",
+        "reason": "not selected by --campaign"
+      },
+      {
+        "id": "dnd5e.module.lost-mine-of-phandelver.regression.v2",
+        "reason": "not selected by --campaign"
+      },
+      {
+        "id": "dnd5e.module.storm-kings-thunder",
+        "reason": "not selected by --campaign"
+      },
+      {
+        "id": "dnd5e.module.tomb-of-annihilation",
+        "reason": "not selected by --campaign"
+      },
+      {
+        "id": "dnd5e.module.tyranny-of-dragons.hoard",
+        "reason": "not selected by --campaign"
+      },
+      {
+        "id": "dnd5e.module.tyranny-of-dragons.rise.sagasmith",
+        "reason": "not selected by --campaign"
+      },
+      {
+        "id": "dnd5e.module.waterdeep-dragon-heist",
+        "reason": "not selected by --campaign"
+      }
+    ]
+  },
+  "result": {
+    "parallelism": 2,
+    "complete": true,
+    "campaigns": [
+      {
+        "id": "coc7e.module.the-lightless-beacon.private",
+        "system_id": "coc7e",
+        "logical_campaign_line": "the-lightless-beacon",
+        "complete": true,
+        "gaps": [],
+        "tool_calls": 69
+      },
+      {
+        "id": "dnd5e.module.lost-mine-of-phandelver",
+        "system_id": "dnd5e",
+        "logical_campaign_line": "lost-mine-of-phandelver",
+        "complete": true,
+        "gaps": [],
+        "tool_calls": 103
+      }
+    ],
+    "reports": [
+      {
+        "module_id": "coc7e.module.the-lightless-beacon.private",
+        "module_version": "1.0.2",
+        "module_checksum": "134061b7a859eee3be58ad1f867040393bd1c4526908a5191546ddb5bbb4b75c",
+        "complete": true,
+        "gaps": [],
+        "service_coverage": {
+          "complete": true,
+          "checks": {
+            "agent_reply_visible_to_player": true,
+            "both_accounts_loaded_snapshot": true,
+            "luna_usage_settled": true,
+            "ordered_room_events": true,
+            "player_action_completed": true,
+            "player_joined_room": true,
+            "room_action_idempotent": true,
+            "service_agent_restart_resume": true,
+            "two_authenticated_accounts": true
+          },
+          "gaps": [],
+          "event_count": 20,
+          "event_types": [
+            "agent.completed",
+            "agent.started",
+            "message.created",
+            "room.activity",
+            "state.changed"
+          ]
+        },
+        "tool_coverage": {
+          "complete": true,
+          "checks": {
+            "entered_play": true,
+            "exact_pack_imported": true,
+            "idempotent_import_replayed": true,
+            "legal_ending_recorded": true,
+            "module_source_queried": true,
+            "native_skill_read": true,
+            "pack_activated": true
+          },
+          "gaps": [],
+          "tool_calls": 69,
+          "successful_tool_calls": 45,
+          "tool_errors": 12
+        }
+      },
+      {
+        "module_id": "dnd5e.module.lost-mine-of-phandelver",
+        "module_version": "1.0.2",
+        "module_checksum": "97bd1fb9946179f9409848087bb5885ea0b8471618aafe888e9e2bb2b9484141",
+        "complete": true,
+        "gaps": [],
+        "service_coverage": {
+          "complete": true,
+          "checks": {
+            "agent_reply_visible_to_player": true,
+            "both_accounts_loaded_snapshot": true,
+            "luna_usage_settled": true,
+            "ordered_room_events": true,
+            "player_action_completed": true,
+            "player_joined_room": true,
+            "room_action_idempotent": true,
+            "service_agent_restart_resume": true,
+            "two_authenticated_accounts": true
+          },
+          "gaps": [],
+          "event_count": 21,
+          "event_types": [
+            "agent.completed",
+            "agent.started",
+            "message.created",
+            "room.activity",
+            "state.changed"
+          ]
+        },
+        "tool_coverage": {
+          "complete": true,
+          "checks": {
+            "entered_play": true,
+            "exact_pack_imported": true,
+            "idempotent_import_replayed": true,
+            "legal_ending_recorded": true,
+            "module_source_queried": true,
+            "native_skill_read": true,
+            "pack_activated": true
+          },
+          "gaps": [],
+          "tool_calls": 103,
+          "successful_tool_calls": 65,
+          "tool_errors": 20
+        }
+      }
+    ]
+  }
+}
