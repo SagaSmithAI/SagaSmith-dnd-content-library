@@ -18,6 +18,7 @@ TARGET_IDS = frozenset(
         "dnd5e.addon.rulebook.d-d-5e-eberron-rising-from-the-last-war.31293633134f.addon",
         "dnd5e.addon.rulebook.d-d-5e-guildmasters-guide-to-ravnica.59317c5cf3da.addon",
         "dnd5e.addon.rulebook.d-d-5e-mordenkainen-s-tome-of-foes.2768304ef1af.addon",
+        "dnd5e.addon.rulebook.d-d-5e-player-s-handbook.7ad6d3e9c93c.addon",
         "dnd5e.addon.rulebook.d-d-5e-volo-s-guide-to-monsters.962933255634.addon",
     }
 )

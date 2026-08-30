@@ -13,7 +13,7 @@
       "id": "dnd5e.addon.rulebook.d-d-5e-eberron-rising-from-the-last-war.31293633134f.addon",
       "kind": "addon",
       "checksum": "41088d90a6a8cc8cf325cc61143b95f7c46e50bdd6a590fa9689701affd9fa98",
-      "campaign_id": "051ce6f8-6d74-44dd-8647-4b7df2f63416",
+      "campaign_id": "ac54f179-1ffb-4dc3-b52f-384fa2f620bb",
       "idempotent_replay": true,
       "listed_count": 1
     },
@@ -29,7 +29,7 @@
       "id": "dnd5e.addon.rulebook.d-d-5e-guildmasters-guide-to-ravnica.59317c5cf3da.addon",
       "kind": "addon",
       "checksum": "ec8c5c3080db2071148fb430e0aeaca4a207e15fb9a02de5f91e00b6d5d719b3",
-      "campaign_id": "61c5b8bb-21fd-4dc8-9231-9d3354ff120b",
+      "campaign_id": "400fc848-8c4c-4c03-b839-7943598c4a2e",
       "idempotent_replay": true,
       "listed_count": 2
     },
@@ -53,17 +53,17 @@
       "id": "dnd5e.addon.rulebook.d-d-5e-mordenkainen-s-tome-of-foes.2768304ef1af.addon",
       "kind": "addon",
       "checksum": "2b514e0e1c6de5aed1ceb02ce4a0944b1f920e4a1ab3b4d5bb4ef923559bf480",
-      "campaign_id": "c4fcc5a1-9c4b-4f6b-8074-1743ad009257",
+      "campaign_id": "e76119c0-bbb5-45c3-97c9-eae571c4bd1e",
       "idempotent_replay": true,
       "listed_count": 3
     },
     {
       "id": "dnd5e.addon.rulebook.d-d-5e-player-s-handbook.7ad6d3e9c93c.addon",
       "kind": "addon",
-      "checksum": "e879447c1dd00139f12a30ee42e3e30b323af771d3abceacbd6e6e6d17c9de00",
-      "campaign_id": "afd32495-11ac-45e1-9c02-fb58bd82c0a0",
+      "checksum": "1f5afda5790bd4d3f892ff092cd7d114fcb39d3b552e09a26414e2a851f17192",
+      "campaign_id": "81a273a6-3d39-4e10-85f1-7b08b15a4ab7",
       "idempotent_replay": true,
-      "listed_count": 8
+      "listed_count": 4
     },
     {
       "id": "dnd5e.addon.rulebook.d-d-5e-sword-coast-adventurer-s-guide.16e6a243ef0a.addon",
@@ -141,9 +141,9 @@
       "id": "dnd5e.addon.rulebook.d-d-5e-volo-s-guide-to-monsters.962933255634.addon",
       "kind": "addon",
       "checksum": "a43fe91cf1d6a10944ff266edb319ac463cb3b5a8555f8d8b5f73d05413a8189",
-      "campaign_id": "8050388c-25d0-46da-973a-70fd0d683480",
+      "campaign_id": "a5df043b-171e-4cf9-b3f6-3fdcfa477d11",
       "idempotent_replay": true,
-      "listed_count": 4
+      "listed_count": 5
     },
     {
       "id": "dnd5e.addon.rulebook.d-d-5e-wayfinders-guide-to-eberron.38e71ffb60c7.addon",
