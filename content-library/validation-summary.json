@@ -2,7 +2,7 @@
   "schema": "sagasmith.pack-migration-validation.v1",
   "archive_validation": {
     "archives": 46,
-    "bytes": 1062811533,
+    "bytes": 1062812157,
     "dependencies_closed": true,
     "hashes_match_report": true,
     "full_archive_validation": true,

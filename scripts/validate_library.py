@@ -53,6 +53,28 @@ def main() -> None:
     ):
         raise ValueError("public MCP import retry evidence is incomplete")
 
+    evidence_identities = {
+        key: {
+            (str(item.get("id")), str(item.get("kind")), str(item.get("checksum")))
+            for item in evidence[key]
+        }
+        for key in ("dnd", "coc")
+    }
+    indexed_identities = {
+        "dnd": {
+            (str(item["id"]), str(item["kind"]), str(item["checksum"]))
+            for item in indexed
+            if item["system_id"] == "dnd5e"
+        },
+        "coc": {
+            (str(item["id"]), str(item["kind"]), str(item["checksum"]))
+            for item in indexed
+            if item["system_id"] == "coc7e"
+        },
+    }
+    if evidence_identities != indexed_identities:
+        raise ValueError("public MCP import evidence does not match current Pack identities")
+
     checksum_set = {str(item["checksum"]) for item in indexed}
     counts: Counter[str] = Counter()
     expected_files: set[Path] = set()
