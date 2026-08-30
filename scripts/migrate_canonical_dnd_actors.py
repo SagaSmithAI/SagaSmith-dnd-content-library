@@ -31,6 +31,10 @@ SOURCE_IDENTITIES = {
         "1.0.1",
         "f4fb310143b6c908f528c60e6db0eab0cd0120cdc576c302a565a83dc8ac7e13",
     ),
+    "dnd5e.addon.rulebook.d-d-5e-player-s-handbook.7ad6d3e9c93c.addon": (
+        "1.0.1",
+        "e879447c1dd00139f12a30ee42e3e30b323af771d3abceacbd6e6e6d17c9de00",
+    ),
     "dnd5e.addon.rulebook.d-d-5e-volo-s-guide-to-monsters.962933255634.addon": (
         "1.0.1",
         "58a355611d7a685f60bca9620bf84cdfcd0310f4b98a6059a3c8488aafaa06f4",
