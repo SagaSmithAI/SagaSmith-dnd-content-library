@@ -375,6 +375,36 @@ def _source_retained() -> dict[str, Any]:
     }
 
 
+def _is_reparse_point(path: Path) -> bool:
+    if not path.exists() and not path.is_symlink():
+        return False
+    try:
+        if path.is_symlink():
+            return True
+        is_junction = getattr(path, "is_junction", None)
+        if is_junction is not None and is_junction():
+            return True
+        return bool(getattr(path.lstat(), "st_file_attributes", 0) & 0x400)
+    except OSError as error:
+        raise PublicationConflictError(
+            f"cannot verify path for links or reparse points: {path}"
+        ) from error
+
+
+def _safe_package_root(root: Path) -> Path:
+    lexical = root / "packages"
+    if _is_reparse_point(lexical):
+        raise PublicationConflictError("packages/ must not be a link or reparse point")
+    if not lexical.is_dir():
+        raise PublicationConflictError("packages/ must be a real directory")
+    resolved = lexical.resolve()
+    if resolved != lexical or resolved.parent != root:
+        raise PublicationConflictError(
+            "packages/ resolves outside content-library root"
+        )
+    return resolved
+
+
 def _safe_archive_path(root: Path, relative: object) -> Path:
     text = str(relative)
     if "\\" in text or Path(text).is_absolute():
@@ -382,8 +412,12 @@ def _safe_archive_path(root: Path, relative: object) -> Path:
     parts = text.split("/")
     if len(parts) != 2 or parts[0] != "packages" or parts[1] in {"", ".", ".."}:
         raise PublicationConflictError(f"unsafe archive path: {text!r}")
-    path = (root / text).resolve()
-    if path.parent != (root / "packages").resolve():
+    package_root = _safe_package_root(root)
+    lexical = root / text
+    if _is_reparse_point(lexical):
+        raise PublicationConflictError(f"archive must not be a link: {text!r}")
+    path = lexical.resolve()
+    if not path.is_relative_to(root) or path.parent != package_root:
         raise PublicationConflictError(f"archive path escapes packages/: {text!r}")
     return path
 
@@ -558,9 +592,9 @@ def publish(
     fail_after_replace: int | None = None,
 ) -> dict[str, Any]:
     root = root.resolve()
-    package_root = (root / "packages").resolve()
-    if not root.is_dir() or not package_root.is_dir():
-        raise PublicationConflictError("content-library root and packages/ must exist")
+    if not root.is_dir():
+        raise PublicationConflictError("content-library root must exist")
+    _safe_package_root(root)
     index_path = root / "index.json"
     report_path = root / "migration-report.json"
     summary_path = root / "validation-summary.json"

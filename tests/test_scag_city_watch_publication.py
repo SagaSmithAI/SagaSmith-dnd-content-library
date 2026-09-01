@@ -73,6 +73,13 @@ def _target_bytes() -> bytes:
     return (LIBRARY_ROOT / publication.TARGET_PATH).read_bytes()
 
 
+def _symlink_or_skip(link: Path, target: Path, *, directory: bool) -> None:
+    try:
+        link.symlink_to(target, target_is_directory=directory)
+    except OSError as error:
+        pytest.skip(f"symlink creation is unavailable: {error}")
+
+
 def _builder(source: bytes) -> bytes:
     assert len(source) == publication.SOURCE_ARCHIVE_SIZE
     return _target_bytes()
@@ -198,3 +205,46 @@ def test_metadata_path_traversal_fails_before_writes(tmp_path: Path) -> None:
     ):
         publication.publish(root=root, archive_builder=_builder)
     assert not (root / publication.TARGET_PATH).exists()
+
+
+def test_packages_directory_link_outside_root_is_rejected_without_external_write(
+    tmp_path: Path,
+) -> None:
+    root = _make_library(tmp_path)
+    packages = root / "packages"
+    (root / publication.SOURCE_PATH).unlink()
+    packages.rmdir()
+    outside = tmp_path / "outside-packages"
+    outside.mkdir()
+    marker = outside / "marker"
+    marker.write_bytes(b"unchanged")
+    _symlink_or_skip(packages, outside, directory=True)
+    with pytest.raises(publication.PublicationConflictError, match="link or reparse"):
+        publication.publish(root=root, archive_builder=_builder)
+    assert marker.read_bytes() == b"unchanged"
+    assert not (outside / Path(publication.TARGET_PATH).name).exists()
+
+
+@pytest.mark.parametrize("archive_kind", ["source", "target"])
+def test_archive_file_link_outside_root_is_rejected(
+    tmp_path: Path, archive_kind: str
+) -> None:
+    root = _make_library(tmp_path)
+    if archive_kind == "source":
+        archive = root / publication.SOURCE_PATH
+        outside = tmp_path / "outside-source.sagasmith-pack"
+        outside.write_bytes(archive.read_bytes())
+        archive.unlink()
+    else:
+        archive = root / publication.TARGET_PATH
+        outside = tmp_path / "outside-target.sagasmith-pack"
+        outside.write_bytes(_target_bytes())
+    before = outside.read_bytes()
+    _symlink_or_skip(archive, outside, directory=False)
+    with pytest.raises(
+        publication.PublicationConflictError, match="must not be a link"
+    ):
+        publication.publish(root=root, archive_builder=_builder)
+    assert outside.read_bytes() == before
+    if archive_kind == "source":
+        assert not (root / publication.TARGET_PATH).exists()
