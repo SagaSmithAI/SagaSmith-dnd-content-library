@@ -8,8 +8,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1] / "content-library"
 PACKAGE_ID = (
-    "dnd5e.addon.rulebook.d-d-5e-sword-coast-adventurer-s-guide."
-    "16e6a243ef0a.addon"
+    "dnd5e.addon.rulebook.d-d-5e-sword-coast-adventurer-s-guide.16e6a243ef0a.addon"
 )
 
 
@@ -37,20 +36,31 @@ def test_scag_republication_preserves_finalized_source_and_investigator() -> Non
         for item in report["superseded_archives"]
         if item.get("retained_finalized") is True and item["identity"][2] == PACKAGE_ID
     ]
-    assert len(retained) == 1
-    retained_item = retained[0]
-    assert current["version"] == "1.0.2"
-    assert retained_item["version"] == "1.0.1"
-    assert retained_item["superseded_by"] == {
-        "version": current["version"],
-        "checksum": current["checksum"],
-    }
-    old_path = ROOT / retained_item["path"]
-    assert hashlib.sha256(old_path.read_bytes()).hexdigest() == retained_item["archive_sha256"]
+    assert [item["version"] for item in retained] == ["1.0.1", "1.0.2"]
+    source_item, watcher_eye_item = retained
+    assert current["version"] == "1.0.3"
+    assert (
+        source_item["superseded_by"]
+        == watcher_eye_item["superseded_by"]
+        == {
+            "version": current["version"],
+            "checksum": current["checksum"],
+        }
+    )
+    old_path = ROOT / source_item["path"]
+    watcher_eye_path = ROOT / watcher_eye_item["path"]
+    assert (
+        hashlib.sha256(old_path.read_bytes()).hexdigest()
+        == source_item["archive_sha256"]
+    )
+    assert (
+        hashlib.sha256(watcher_eye_path.read_bytes()).hexdigest()
+        == watcher_eye_item["archive_sha256"]
+    )
 
     old_package = _descriptor(old_path)
-    new_package = _descriptor(ROOT / current["path"])
-    assert _artifact(new_package, ".background.investigator") == _artifact(
+    watcher_eye_package = _descriptor(watcher_eye_path)
+    assert _artifact(watcher_eye_package, ".background.investigator") == _artifact(
         old_package, ".background.investigator"
     )
 
@@ -85,7 +95,9 @@ def test_city_watch_has_one_complete_source_bound_watchers_eye() -> None:
     investigator = _artifact(package, ".background.investigator")
     chunk_key = section["chunks"][0]["key"]
     assert city_watch["card"]["description"].count(text) == 1
-    assert city_watch["card"]["ruling_requirements"][0]["source_excerpt"].count(text) == 1
+    assert (
+        city_watch["card"]["ruling_requirements"][0]["source_excerpt"].count(text) == 1
+    )
     assert [
         citation
         for clause in city_watch["rule_clauses"]
@@ -98,24 +110,35 @@ def test_city_watch_has_one_complete_source_bound_watchers_eye() -> None:
             "source_ref": {"chunk_key": chunk_key},
         }
     ]
-    assert city_watch["selection_contract"]["references"].count(
-        f"rule-source-chunk:{chunk_key}"
-    ) == 1
+    assert (
+        city_watch["selection_contract"]["references"].count(
+            f"rule-source-chunk:{chunk_key}"
+        )
+        == 1
+    )
     assert city_watch["card"]["background_grants"]["feature"] == "Watcher's Eye"
     assert investigator["card"]["background_grants"]["feature"] == "Watcher's Eye"
-    assert investigator["card"]["description"].count(text) == 0
+    assert investigator["card"]["description"].count(text) == 1
 
 
 def test_city_watch_selection_projection_did_not_change() -> None:
     report = json.loads((ROOT / "migration-report.json").read_text(encoding="utf-8"))
-    current = next(item for item in report["packages"] if item["id"] == PACKAGE_ID)
-    retained = next(
+    source = next(
         item
         for item in report["superseded_archives"]
-        if item.get("retained_finalized") is True and item["identity"][2] == PACKAGE_ID
+        if item.get("retained_finalized") is True
+        and item["identity"][2] == PACKAGE_ID
+        and item["version"] == "1.0.1"
     )
-    old = _artifact(_descriptor(ROOT / retained["path"]), ".background.city-watch")
-    new = _artifact(_descriptor(ROOT / current["path"]), ".background.city-watch")
+    watcher_eye = next(
+        item
+        for item in report["superseded_archives"]
+        if item.get("retained_finalized") is True
+        and item["identity"][2] == PACKAGE_ID
+        and item["version"] == "1.0.2"
+    )
+    old = _artifact(_descriptor(ROOT / source["path"]), ".background.city-watch")
+    new = _artifact(_descriptor(ROOT / watcher_eye["path"]), ".background.city-watch")
     old_projection = copy.deepcopy(old["card"]["background_grants"])
     new_projection = copy.deepcopy(new["card"]["background_grants"])
     assert new_projection == old_projection

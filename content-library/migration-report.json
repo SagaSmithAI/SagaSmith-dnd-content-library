@@ -11,7 +11,7 @@
     "selected_identities": 46,
     "migrated": 41,
     "retained_current": 5,
-    "superseded_archives": 64,
+    "superseded_archives": 65,
     "unfinalized_module_inputs": 7,
     "unresolved_external_dependencies": 0
   },
@@ -296,14 +296,14 @@
       "kind": "addon",
       "id": "dnd5e.addon.rulebook.d-d-5e-sword-coast-adventurer-s-guide.16e6a243ef0a.addon",
       "action": "source_corrected_current",
-      "source_version": "1.0.1",
-      "source_checksum": "efbba0006ef837961a3d87203c60a49b1ed57428cdb10999aa8b6378964a5bb9",
-      "version": "1.0.2",
-      "checksum": "5e5504ec3d2ebb82e548a48c6b97f49938ed9d08bf94d6efaa08600a11ab3c22",
-      "archive_sha256": "63546d562fb921391202e10232733d45e818c71ed1d6cbdd164c11b1fb82359d",
-      "archive_size": 905484,
-      "source_path": "packages/efbba0006ef8-dnd5e.addon.rulebook.d-d-5e-sword-coast-adventurer-s-guide.16e6a243ef0a.addon-1.0.1.sagasmith-pack",
-      "path": "packages/5e5504ec3d2e-dnd5e.addon.rulebook.d-d-5e-sword-coast-adventurer-s-guide.16e6a243ef0a.addon-1.0.2.sagasmith-pack",
+      "source_version": "1.0.2",
+      "source_checksum": "5e5504ec3d2ebb82e548a48c6b97f49938ed9d08bf94d6efaa08600a11ab3c22",
+      "version": "1.0.3",
+      "checksum": "ff8bbff7268d3e9afab5fce2d2ae320422e9d64523c6d2c1c327689dae59a9d9",
+      "archive_sha256": "1bb977b1a54f9aeb6f31413d7e8918294f2f38a353c48597287ed6ef3d111d2a",
+      "archive_size": 905648,
+      "source_path": "packages/5e5504ec3d2e-dnd5e.addon.rulebook.d-d-5e-sword-coast-adventurer-s-guide.16e6a243ef0a.addon-1.0.2.sagasmith-pack",
+      "path": "packages/ff8bbff7268d-dnd5e.addon.rulebook.d-d-5e-sword-coast-adventurer-s-guide.16e6a243ef0a.addon-1.0.3.sagasmith-pack",
       "dependencies": [],
       "provided_rule_definitions": [
         {
@@ -1649,8 +1649,8 @@
       "archive_size": 905067,
       "retained_finalized": true,
       "superseded_by": {
-        "version": "1.0.2",
-        "checksum": "5e5504ec3d2ebb82e548a48c6b97f49938ed9d08bf94d6efaa08600a11ab3c22"
+        "version": "1.0.3",
+        "checksum": "ff8bbff7268d3e9afab5fce2d2ae320422e9d64523c6d2c1c327689dae59a9d9"
       }
     },
     {
@@ -1692,6 +1692,23 @@
       "version": "1.0.1",
       "checksum": "5ef0c7d18d2caae64097012f7697ef91bc4c05544bfcd4736479e2c90bf08858",
       "path": "packages/5ef0c7d18d2c-dnd5e.module.waterdeep-dragon-heist-1.0.1.sagasmith-pack"
+    },
+    {
+      "identity": [
+        "dnd5e",
+        "addon",
+        "dnd5e.addon.rulebook.d-d-5e-sword-coast-adventurer-s-guide.16e6a243ef0a.addon"
+      ],
+      "version": "1.0.2",
+      "checksum": "5e5504ec3d2ebb82e548a48c6b97f49938ed9d08bf94d6efaa08600a11ab3c22",
+      "path": "packages/5e5504ec3d2e-dnd5e.addon.rulebook.d-d-5e-sword-coast-adventurer-s-guide.16e6a243ef0a.addon-1.0.2.sagasmith-pack",
+      "archive_sha256": "63546d562fb921391202e10232733d45e818c71ed1d6cbdd164c11b1fb82359d",
+      "archive_size": 905484,
+      "retained_finalized": true,
+      "superseded_by": {
+        "version": "1.0.3",
+        "checksum": "ff8bbff7268d3e9afab5fce2d2ae320422e9d64523c6d2c1c327689dae59a9d9"
+      }
     }
   ],
   "excluded_unfinalized_modules": [

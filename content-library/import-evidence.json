@@ -68,10 +68,10 @@
     {
       "id": "dnd5e.addon.rulebook.d-d-5e-sword-coast-adventurer-s-guide.16e6a243ef0a.addon",
       "kind": "addon",
-      "checksum": "5e5504ec3d2ebb82e548a48c6b97f49938ed9d08bf94d6efaa08600a11ab3c22",
-      "campaign_id": "778d7c28-e702-43f1-bd42-4026581dcfab",
+      "checksum": "ff8bbff7268d3e9afab5fce2d2ae320422e9d64523c6d2c1c327689dae59a9d9",
+      "campaign_id": "ef2d80f8-fa9b-466a-839b-92f4481c416f",
       "idempotent_replay": true,
-      "listed_count": 5
+      "listed_count": 1
     },
     {
       "id": "dnd5e.addon.rulebook.d-d-5e-tasha-s-cauldron-of-everything.89a729b37a4b.addon",
