@@ -28,13 +28,47 @@ def _write_json(path: Path, value: dict) -> None:
     )
 
 
+def _historical_target_metadata() -> dict[str, dict]:
+    index = _read_json(LIBRARY_ROOT / "index.json")
+    report = _read_json(LIBRARY_ROOT / "migration-report.json")
+    summary = _read_json(LIBRARY_ROOT / "validation-summary.json")
+    index["packages"] = [
+        publication._target_entry()
+        if item.get("id") == publication.PACKAGE_ID
+        else item
+        for item in index["packages"]
+    ]
+    report["packages"] = copy.deepcopy(index["packages"])
+    retained = []
+    for item in report["superseded_archives"]:
+        if not publication._is_scag_retained(item):
+            retained.append(item)
+        elif item.get("version") == publication.PREVIOUS_VERSION:
+            retained.append(publication._previous_retained(target=True))
+        elif item.get("version") == publication.SOURCE_VERSION:
+            retained.append(publication._source_retained())
+    report["superseded_archives"] = retained
+    report["counts"]["superseded_archives"] = len(retained)
+    summary["archive_validation"].update(
+        {
+            "bytes": 1062814386,
+            "retained_superseded_archives": 2,
+            "retained_superseded_bytes": 1810551,
+            "stored_archives": 48,
+            "stored_bytes": 1064624937,
+        }
+    )
+    return {"index": index, "report": report, "summary": summary}
+
+
 def _make_library(tmp_path: Path, *, current_metadata: bool = False) -> Path:
     root = tmp_path / "content-library"
     packages = root / "packages"
     packages.mkdir(parents=True)
-    index = _read_json(LIBRARY_ROOT / "index.json")
-    report = _read_json(LIBRARY_ROOT / "migration-report.json")
-    summary = _read_json(LIBRARY_ROOT / "validation-summary.json")
+    target = _historical_target_metadata()
+    index = target["index"]
+    report = target["report"]
+    summary = target["summary"]
     if not current_metadata:
         index["packages"] = [
             publication._source_entry()
@@ -86,8 +120,10 @@ def _builder(source: bytes) -> bytes:
 
 
 def _assert_current(root: Path) -> None:
-    for name in ("index.json", "migration-report.json", "validation-summary.json"):
-        assert _read_json(root / name) == _read_json(LIBRARY_ROOT / name)
+    target = _historical_target_metadata()
+    assert _read_json(root / "index.json") == target["index"]
+    assert _read_json(root / "migration-report.json") == target["report"]
+    assert _read_json(root / "validation-summary.json") == target["summary"]
     assert (root / publication.TARGET_PATH).read_bytes() == _target_bytes()
     assert not list(root.rglob("*.tmp"))
 
@@ -155,8 +191,9 @@ def test_current_metadata_with_missing_archive_recovers(tmp_path: Path) -> None:
 
 def test_arbitrary_old_and_new_metadata_mix_recovers(tmp_path: Path) -> None:
     root = _make_library(tmp_path)
-    for name in ("migration-report.json", "validation-summary.json"):
-        (root / name).write_bytes((LIBRARY_ROOT / name).read_bytes())
+    target = _historical_target_metadata()
+    _write_json(root / "migration-report.json", target["report"])
+    _write_json(root / "validation-summary.json", target["summary"])
     (root / publication.TARGET_PATH).write_bytes(_target_bytes())
     result = publication.publish(root=root, archive_builder=_builder)
     assert result["writes"] == 1

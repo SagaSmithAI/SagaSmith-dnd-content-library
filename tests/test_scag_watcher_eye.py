@@ -36,16 +36,16 @@ def test_scag_republication_preserves_finalized_source_and_investigator() -> Non
         for item in report["superseded_archives"]
         if item.get("retained_finalized") is True and item["identity"][2] == PACKAGE_ID
     ]
-    assert [item["version"] for item in retained] == ["1.0.1", "1.0.2"]
-    source_item, watcher_eye_item = retained
-    assert current["version"] == "1.0.3"
-    assert (
-        source_item["superseded_by"]
-        == watcher_eye_item["superseded_by"]
+    assert [item["version"] for item in retained] == ["1.0.1", "1.0.2", "1.0.3"]
+    source_item, watcher_eye_item, checksum_item = retained
+    assert current["version"] == "1.0.4"
+    assert all(
+        item["superseded_by"]
         == {
             "version": current["version"],
             "checksum": current["checksum"],
         }
+        for item in (source_item, watcher_eye_item, checksum_item)
     )
     old_path = ROOT / source_item["path"]
     watcher_eye_path = ROOT / watcher_eye_item["path"]
