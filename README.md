@@ -36,7 +36,10 @@ Git LFS under `content-library/packages/`.
 
 Finalized source Packs are immutable. Updating this library means publishing a
 new Pack version and replacing the current collection; it does not rewrite the
-source archive or preserve a parallel legacy protocol.
+source archive or preserve a parallel legacy protocol. When a finalized archive
+is superseded by a source correction, its exact retained path and replacement
+identity are recorded in `migration-report.json`; it remains integrity-checked
+but is not part of the current discovery index.
 
 Validate a checkout after fetching LFS objects:
 
@@ -46,7 +49,8 @@ python scripts/validate_library.py
 
 The validator checks archive SHA-256 and sizes, descriptor identities, every
 embedded blob, required dependency closure, portable index paths, and the exact
-current system/kind counts.
+current system/kind counts. It also checks every retained finalized archive and
+its link to the current replacement.
 
 ## Full-chain campaign regression
 

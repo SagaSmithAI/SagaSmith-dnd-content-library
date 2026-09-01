@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import argparse
 import asyncio
 import json
 import tempfile
@@ -19,6 +20,7 @@ TARGET_IDS = frozenset(
         "dnd5e.addon.rulebook.d-d-5e-guildmasters-guide-to-ravnica.59317c5cf3da.addon",
         "dnd5e.addon.rulebook.d-d-5e-mordenkainen-s-tome-of-foes.2768304ef1af.addon",
         "dnd5e.addon.rulebook.d-d-5e-player-s-handbook.7ad6d3e9c93c.addon",
+        "dnd5e.addon.rulebook.d-d-5e-sword-coast-adventurer-s-guide.16e6a243ef0a.addon",
         "dnd5e.addon.rulebook.d-d-5e-volo-s-guide-to-monsters.962933255634.addon",
     }
 )
@@ -31,13 +33,15 @@ async def _call(server, name: str, arguments: dict[str, Any]) -> Any:
     return response
 
 
-async def _refresh(index: dict[str, Any]) -> dict[str, dict[str, Any]]:
+async def _refresh(
+    index: dict[str, Any], target_ids: frozenset[str]
+) -> dict[str, dict[str, Any]]:
     packages = {
         str(item.get("id") or ""): item
         for item in index.get("packages") or []
         if isinstance(item, dict)
     }
-    if not TARGET_IDS.issubset(packages):
+    if not target_ids.issubset(packages):
         raise ValueError("current index is missing a target D&D Pack")
     package_root = (ROOT / "packages").resolve()
     dnd_skills = Path(sagasmith_dnd.__file__).resolve().parents[4] / "skills"
@@ -59,7 +63,7 @@ async def _refresh(index: dict[str, Any]) -> dict[str, dict[str, Any]]:
                 rule_import_roots=(package_root,),
             )
         )
-        for ordinal, package_id in enumerate(sorted(TARGET_IDS), start=1):
+        for ordinal, package_id in enumerate(sorted(target_ids), start=1):
             item = packages[package_id]
             archive = (ROOT / str(item["path"])).resolve()
             if archive.parent != package_root or not archive.is_file():
@@ -151,15 +155,25 @@ async def _refresh(index: dict[str, Any]) -> dict[str, dict[str, Any]]:
 
 
 def main() -> None:
+    parser = argparse.ArgumentParser()
+    parser.add_argument(
+        "--package-id",
+        action="append",
+        choices=sorted(TARGET_IDS),
+        dest="package_ids",
+        help="refresh only this current Pack identity; may be repeated",
+    )
+    args = parser.parse_args()
+    target_ids = frozenset(args.package_ids or TARGET_IDS)
     index = json.loads((ROOT / "index.json").read_text(encoding="utf-8"))
     evidence_path = ROOT / "import-evidence.json"
     evidence = json.loads(evidence_path.read_text(encoding="utf-8"))
-    refreshed = asyncio.run(_refresh(index))
+    refreshed = asyncio.run(_refresh(index, target_ids))
     current = list(evidence.get("dnd") or [])
     evidence["dnd"] = [
         refreshed.get(str(item.get("id") or ""), item) for item in current
     ]
-    if set(refreshed) != TARGET_IDS:
+    if set(refreshed) != target_ids:
         raise ValueError("not every target D&D Pack produced import evidence")
     evidence_path.write_text(
         json.dumps(evidence, ensure_ascii=False, indent=2) + "\n",
