@@ -86,6 +86,20 @@ def test_source_digest_drift_fails_closed(package_id: str) -> None:
         _source_chunk(package, TARGETS[package_id])
 
 
+def test_waterdeep_supporting_source_digest_drift_fails_closed() -> None:
+    package_id = "dnd5e.module.waterdeep-dragon-heist"
+    package = _fixture_package(package_id)
+    supporting_key = TARGETS[package_id]["supporting_source"]["chunk_key"]
+    supporting_chunk = next(
+        chunk
+        for chunk in package["sources"][0]["sections"][0]["chunks"]
+        if chunk["key"] == supporting_key
+    )
+    supporting_chunk["content_hash"] = "0" * 64
+    with pytest.raises(ValueError, match="terminal source digest drift"):
+        _prepare_package(package, TARGETS[package_id])
+
+
 def test_current_archives_are_replaced_without_old_versions() -> None:
     root = Path(__file__).resolve().parents[1] / "content-library"
     index = json.loads((root / "index.json").read_text(encoding="utf-8"))
