@@ -122,6 +122,49 @@ def main() -> None:
                     raise ValueError(f"required dependency is absent: {package['id']}")
         counts[f"{item['system_id']}:{item['kind']}"] += 1
 
+    retained = [
+        item
+        for item in report.get("superseded_archives") or []
+        if item.get("retained_finalized") is True
+    ]
+    retained_bytes = 0
+    for item in retained:
+        path_text = str(item["path"])
+        if "\\" in path_text or Path(path_text).is_absolute():
+            raise ValueError(f"non-portable retained Pack path: {path_text}")
+        archive_path = (ROOT / path_text).resolve()
+        if archive_path.parent != (ROOT / "packages").resolve():
+            raise ValueError(f"retained Pack path escapes packages directory: {path_text}")
+        if archive_path in expected_files:
+            raise ValueError(f"retained Pack is also indexed as current: {path_text}")
+        expected_files.add(archive_path)
+        raw = archive_path.read_bytes()
+        retained_bytes += len(raw)
+        if len(raw) != int(item["archive_size"]):
+            raise ValueError(f"retained archive size mismatch: {path_text}")
+        if hashlib.sha256(raw).hexdigest() != item["archive_sha256"]:
+            raise ValueError(f"retained archive checksum mismatch: {path_text}")
+        with zipfile.ZipFile(archive_path) as archive:
+            package = json.loads(archive.read(DESCRIPTOR))
+        identity = item.get("identity") or []
+        if len(identity) != 3 or any(
+            package[field] != expected
+            for field, expected in zip(
+                ("system_id", "kind", "id"), identity, strict=True
+            )
+        ):
+            raise ValueError(f"retained archive identity differs from report: {path_text}")
+        if package["version"] != item["version"] or package["checksum"] != item["checksum"]:
+            raise ValueError(f"retained archive version differs from report: {path_text}")
+        replacement = item.get("superseded_by") or {}
+        if not any(
+            current["id"] == package["id"]
+            and current["version"] == replacement.get("version")
+            and current["checksum"] == replacement.get("checksum")
+            for current in indexed
+        ):
+            raise ValueError(f"retained archive replacement is not current: {path_text}")
+
     actual_files = {
         path.resolve() for path in (ROOT / "packages").iterdir() if path.is_file()
     }
@@ -131,12 +174,21 @@ def main() -> None:
         raise ValueError(f"unexpected current Pack counts: {dict(counts)}")
     archive_summary = summary.get("archive_validation") or {}
     if archive_summary.get("archives") != 46 or archive_summary.get("bytes") != total_bytes:
-        raise ValueError("validation summary does not match stored archives")
+        raise ValueError("validation summary does not match current archives")
+    if (
+        archive_summary.get("retained_superseded_archives") != len(retained)
+        or archive_summary.get("retained_superseded_bytes") != retained_bytes
+        or archive_summary.get("stored_archives") != len(expected_files)
+        or archive_summary.get("stored_bytes") != total_bytes + retained_bytes
+    ):
+        raise ValueError("validation summary does not match retained archives")
     print(
         json.dumps(
             {
                 "packages": len(indexed),
                 "bytes": total_bytes,
+                "retained_packages": len(retained),
+                "retained_bytes": retained_bytes,
                 "counts": dict(sorted(counts.items())),
                 "validated": True,
             },
