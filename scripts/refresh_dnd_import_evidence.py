@@ -10,6 +10,7 @@ from pathlib import Path
 from typing import Any
 
 import sagasmith_dnd
+from sagasmith_core.content_pack import loads_content_archive
 from sagasmith_dnd_mcp.config import McpConfig
 from sagasmith_dnd_mcp.server import create_server
 
@@ -22,6 +23,10 @@ TARGET_IDS = frozenset(
         "dnd5e.addon.rulebook.d-d-5e-player-s-handbook.7ad6d3e9c93c.addon",
         "dnd5e.addon.rulebook.d-d-5e-sword-coast-adventurer-s-guide.16e6a243ef0a.addon",
         "dnd5e.addon.rulebook.d-d-5e-volo-s-guide-to-monsters.962933255634.addon",
+        "906e1c57-005d-4bf1-8b03-221e0726e27d",
+        "d0871484-131a-418f-aba3-016e944411ab",
+        "dnd5e.module.lost-mine-of-phandelver.full-agent-corpus-v12",
+        "dnd5e.module.waterdeep-dragon-heist",
     }
 )
 
@@ -68,6 +73,7 @@ async def _refresh(
             archive = (ROOT / str(item["path"])).resolve()
             if archive.parent != package_root or not archive.is_file():
                 raise ValueError(f"indexed archive is outside packages/: {package_id}")
+            expected_package, _blobs = loads_content_archive(archive.read_bytes())
             campaign = await _call(
                 server,
                 "campaign_create",
@@ -97,21 +103,30 @@ async def _refresh(
                 or stored.get("checksum") != item["checksum"]
             ):
                 raise ValueError(f"public MCP imported a different identity: {package_id}")
+            identity_field = "module_id" if str(item["kind"]) == "module" else "addon_id"
+            detail_payload = {
+                "campaign_id": campaign["id"],
+                "kind": str(item["kind"]),
+                "version": str(item["version"]),
+                "include_package": True,
+            }
+            if str(item["kind"]) == "module":
+                # The module facade's runtime id is generated on import; the
+                # finalized Pack identity is therefore retrieved by archive.
+                detail_payload["source_path"] = str(archive)
+            else:
+                detail_payload[identity_field] = package_id
             detail = await _call(
                 server,
                 "content_pack",
                 {
                     "action": "get",
-                    "payload": {
-                        "campaign_id": campaign["id"],
-                        "kind": str(item["kind"]),
-                        "addon_id": package_id,
-                        "version": str(item["version"]),
-                        "include_package": True,
-                    },
+                    "payload": detail_payload,
                 },
             )
-            detailed_package = dict(detail.get("package") or {})
+            detailed_package = dict(
+                detail.get("package") or detail.get("module") or detail
+            )
             if (
                 detailed_package.get("id") != package_id
                 or detailed_package.get("version") != item["version"]
@@ -135,13 +150,25 @@ async def _refresh(
                 else listed
             )
             listed_items = list(listed_value)
-            if not any(
-                (entry.get("id") or entry.get("addon_id")) == package_id
-                and (entry.get("checksum") or entry.get("package_checksum"))
-                == item["checksum"]
-                for entry in listed_items
-                if isinstance(entry, dict)
-            ):
+            if str(item["kind"]) == "module":
+                listed_match = any(
+                    str(entry.get("logical_source_key") or "")
+                    == str(expected_package.get("sources", [{}])[0].get("source_key") or "")
+                    and str(entry.get("parser_profile") or "") == "content-package"
+                    and int(entry.get("scenes") or 0)
+                    == len(expected_package.get("content", {}).get("scene_atlas") or [])
+                    for entry in listed_items
+                    if isinstance(entry, dict)
+                )
+            else:
+                listed_match = any(
+                    (entry.get("id") or entry.get("addon_id")) == package_id
+                    and (entry.get("checksum") or entry.get("package_checksum"))
+                    == item["checksum"]
+                    for entry in listed_items
+                    if isinstance(entry, dict)
+                )
+            if not listed_match:
                 raise ValueError(f"public MCP list omitted the imported Pack: {package_id}")
             results[package_id] = {
                 "id": package_id,
