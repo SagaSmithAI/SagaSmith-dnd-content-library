@@ -6,8 +6,9 @@ import hashlib
 import json
 import zipfile
 from collections import Counter
+from collections.abc import Mapping, Sequence
 from pathlib import Path
-from typing import Any, Mapping, Sequence
+from typing import Any
 
 ROOT = Path(__file__).resolve().parents[1] / "content-library"
 DESCRIPTOR = "package.sagasmith.json"
@@ -75,7 +76,9 @@ def _validate_pinned_definitions(package: dict[str, Any], *, path_text: str) -> 
         return
     content = package.get("content") or {}
     definitions = content.get("rule_definitions") or []
-    if {str(item.get("id")) for item in definitions} != set(expected):
+    if len(definitions) != len(expected) or {
+        str(item.get("id")) for item in definitions
+    } != set(expected):
         raise ValueError(f"pinned rule-definition set differs: {path_text}")
     artifacts = content.get("artifacts") or []
     mechanics = content.get("mechanics") or []

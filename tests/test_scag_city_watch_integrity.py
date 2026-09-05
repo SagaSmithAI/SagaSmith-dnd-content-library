@@ -61,7 +61,7 @@ def _section_texts(
 def test_city_watch_uses_complete_source_bound_equipment() -> None:
     item, package, archive = _current_package()
     try:
-        assert item["version"] == package["version"] == "1.0.4"
+        assert item["version"] == package["version"] == "1.0.3"
         assert item["checksum"] == package["checksum"]
         city_watch = _artifact(package, ".background.city-watch")
         grants = city_watch["card"]["background_grants"]

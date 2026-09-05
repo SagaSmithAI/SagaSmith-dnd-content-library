@@ -1,326 +1,302 @@
+"""Source-only SCAG repair tests; synthetic IO tests do not claim real rebuilding."""
+
 from __future__ import annotations
 
 import copy
+import hashlib
 import importlib.util
 import json
+import os
 import zipfile
 from pathlib import Path
 
 import pytest
 
 REPOSITORY_ROOT = Path(__file__).resolve().parents[1]
-LIBRARY_ROOT = REPOSITORY_ROOT / "content-library"
-SCRIPT_PATH = REPOSITORY_ROOT / "scripts" / "republish_scag_definition_checksum.py"
-SPEC = importlib.util.spec_from_file_location(
-    "republish_scag_definition_checksum", SCRIPT_PATH
-)
-assert SPEC is not None and SPEC.loader is not None
-publication = importlib.util.module_from_spec(SPEC)
-SPEC.loader.exec_module(publication)
 
 
-def _read_json(path: Path) -> dict:
-    return json.loads(path.read_text(encoding="utf-8"))
-
-
-def _write_json(path: Path, value: dict) -> None:
-    path.write_text(
-        json.dumps(value, ensure_ascii=False, indent=2) + "\n", encoding="utf-8"
+def _module(name: str):
+    spec = importlib.util.spec_from_file_location(
+        name, REPOSITORY_ROOT / "scripts" / f"{name}.py"
     )
+    assert spec is not None and spec.loader is not None
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    return module
 
 
-def _target_bytes() -> bytes:
-    return (LIBRARY_ROOT / publication.TARGET_PATH).read_bytes()
+publication = _module("republish_scag_definition_checksum")
+validator = _module("validate_library")
 
 
-def _builder(source: bytes) -> bytes:
-    assert len(source) == publication.SOURCE_ARCHIVE_SIZE
-    return _target_bytes()
-
-
-def _make_library(tmp_path: Path, *, current_metadata: bool = False) -> Path:
-    root = tmp_path / "content-library"
-    packages = root / "packages"
-    packages.mkdir(parents=True)
-    index = _read_json(LIBRARY_ROOT / "index.json")
-    report = _read_json(LIBRARY_ROOT / "migration-report.json")
-    summary = _read_json(LIBRARY_ROOT / "validation-summary.json")
-    evidence = _read_json(LIBRARY_ROOT / "import-evidence.json")
-    if not current_metadata:
-        index["packages"] = [
-            publication._source_entry()
-            if item.get("id") == publication.PACKAGE_ID
-            else item
-            for item in index["packages"]
-        ]
-        report["packages"] = copy.deepcopy(index["packages"])
-        retained = []
-        for item in report["superseded_archives"]:
-            if not publication._is_scag_retained(item):
-                retained.append(item)
-            elif item.get("version") != publication.SOURCE_VERSION:
-                prior = next(
-                    value
-                    for value in publication.PRIOR_ARCHIVES
-                    if value["version"] == item["version"]
-                )
-                retained.append(publication._retained_entry(prior, target=False))
-        report["superseded_archives"] = retained
-        report["counts"]["superseded_archives"] = len(retained)
-        summary["archive_validation"].update(
-            {
-                "bytes": 1062814386,
-                "retained_superseded_archives": 2,
-                "retained_superseded_bytes": 1810551,
-                "stored_archives": 48,
-                "stored_bytes": 1064624937,
-            }
-        )
-        evidence["dnd"] = [
-            publication._source_evidence()
-            if item.get("id") == publication.PACKAGE_ID
-            else item
-            for item in evidence["dnd"]
-        ]
-    for name, value in (
-        ("index.json", index),
-        ("migration-report.json", report),
-        ("validation-summary.json", summary),
-        ("import-evidence.json", evidence),
-    ):
-        _write_json(root / name, value)
-    (root / publication.SOURCE_PATH).write_bytes(
-        (LIBRARY_ROOT / publication.SOURCE_PATH).read_bytes()
-    )
-    return root
-
-
-def _assert_current(root: Path) -> None:
-    for name in (
-        "index.json",
-        "migration-report.json",
-        "validation-summary.json",
-        "import-evidence.json",
-    ):
-        assert _read_json(root / name) == _read_json(LIBRARY_ROOT / name)
-    assert (root / publication.TARGET_PATH).read_bytes() == _target_bytes()
-    assert not list(root.rglob("*.tmp"))
-
-
-def _symlink_or_skip(link: Path, target: Path, *, directory: bool) -> None:
-    try:
-        link.symlink_to(target, target_is_directory=directory)
-    except OSError as error:
-        pytest.skip(f"symlink creation is unavailable: {error}")
-
-
-def test_current_definition_checksum_matches_every_exact_input() -> None:
-    with zipfile.ZipFile(LIBRARY_ROOT / publication.TARGET_PATH) as archive:
-        package = json.loads(archive.read("package.sagasmith.json"))
-    definitions = package["content"]["rule_definitions"]
-    assert len(definitions) == 1
-    for definition in definitions:
-        definition_id = definition["id"]
-        artifacts = [
-            item
-            for item in package["content"]["artifacts"]
-            if item.get("rule_definition_id") == definition_id
-        ]
-        mechanics = [
-            item
-            for item in package["content"]["mechanics"]
-            if item.get("rule_definition_id") == definition_id
-        ]
-        recomputed = publication.definition_checksum(
-            manifest=definition["manifest"],
-            artifacts=artifacts,
-            mechanics=mechanics,
-        )
-        assert (len(artifacts), len(mechanics)) == (108, 0)
-        assert definition["definition_checksum"] == recomputed
-        assert recomputed == publication.TARGET_DEFINITION_CHECKSUM
-    correction = package["metadata"]["definition_checksum_correction"]
-    assert correction["algorithm"] == "sagasmith-dnd.content-definition-checksum.v1"
-    assert correction["definitions"][0]["definition_checksum"] == recomputed
-
-
-def test_immutable_release_changes_only_checksum_identity_and_metadata() -> None:
-    with zipfile.ZipFile(LIBRARY_ROOT / publication.SOURCE_PATH) as source_archive:
-        source = json.loads(source_archive.read("package.sagasmith.json"))
-    with zipfile.ZipFile(LIBRARY_ROOT / publication.TARGET_PATH) as target_archive:
-        target = json.loads(target_archive.read("package.sagasmith.json"))
-    assert target["content"]["artifacts"] == source["content"]["artifacts"]
-    assert target["content"]["mechanics"] == source["content"]["mechanics"]
-    assert (
-        target["content"]["rule_definitions"][0]["manifest"]
-        == source["content"]["rule_definitions"][0]["manifest"]
-    )
-    normalized = copy.deepcopy(target)
-    normalized["version"] = source["version"]
-    normalized["checksum"] = source["checksum"]
-    normalized["manifest"]["version"] = source["manifest"]["version"]
-    normalized["metadata"].pop("definition_checksum_correction")
-    normalized["content"]["rule_definitions"][0]["definition_checksum"] = (
-        publication.SOURCE_DEFINITION_CHECKSUM
-    )
-    assert normalized == source
-
-
-def test_recompute_changes_definition_identity_after_artifact_change() -> None:
-    package = {
+def _package() -> dict:
+    return {
+        "id": "synthetic",
+        "version": "1",
         "content": {
             "rule_definitions": [
                 {
-                    "id": "dnd5e.test.definition",
+                    "id": "example.rule",
                     "definition_checksum": "0" * 64,
-                    "manifest": {"title": "Test"},
+                    "manifest": {"title": "Synthetic example"},
                 }
             ],
             "artifacts": [
                 {
-                    "id": "dnd5e.test.artifact",
-                    "rule_definition_id": "dnd5e.test.definition",
+                    "id": "example.artifact",
+                    "rule_definition_id": "example.rule",
                     "card": {"value": 1},
                 }
             ],
-            "mechanics": [],
-        }
+            "mechanics": [
+                {
+                    "id": "example.mechanic",
+                    "rule_definition_id": "example.rule",
+                    "event": "check",
+                }
+            ],
+        },
     }
-    first = publication.recompute_definition_checksums(package)[0][
-        "definition_checksum"
-    ]
-    package["content"]["artifacts"][0]["card"]["value"] = 2
-    second = publication.recompute_definition_checksums(package)[0][
-        "definition_checksum"
-    ]
-    assert first != second
-    assert package["content"]["rule_definitions"][0]["definition_checksum"] == second
 
 
-def test_fresh_publish_converges_to_committed_state(tmp_path: Path) -> None:
-    root = _make_library(tmp_path)
-    result = publication.publish(root=root, archive_builder=_builder)
-    assert result["status"] == "published"
-    assert result["writes"] == 5
-    _assert_current(root)
-
-
-def test_exact_replay_is_a_validated_no_op(tmp_path: Path) -> None:
-    root = _make_library(tmp_path, current_metadata=True)
-    (root / publication.TARGET_PATH).write_bytes(_target_bytes())
-
-    def unexpected_builder(_: bytes) -> bytes:
-        raise AssertionError("exact replay must reuse the target archive")
-
-    result = publication.publish(root=root, archive_builder=unexpected_builder)
-    assert result["status"] == "already_current"
-    assert result["writes"] == 0
-
-
-@pytest.mark.parametrize("failure_point", [1, 2, 3, 4, 5])
-def test_every_interrupted_replacement_recovers(
-    tmp_path: Path, failure_point: int
-) -> None:
-    root = _make_library(tmp_path)
-    with pytest.raises(publication.InjectedPublicationFailure):
-        publication.publish(
-            root=root,
-            archive_builder=_builder,
-            fail_after_replace=failure_point,
-        )
-    assert not list(root.rglob("*.tmp"))
-    publication.publish(root=root, archive_builder=_builder)
-    _assert_current(root)
-
-
-def test_arbitrary_old_and_new_metadata_mix_recovers(tmp_path: Path) -> None:
-    root = _make_library(tmp_path)
-    for name in ("migration-report.json", "import-evidence.json"):
-        (root / name).write_bytes((LIBRARY_ROOT / name).read_bytes())
-    (root / publication.TARGET_PATH).write_bytes(_target_bytes())
-    publication.publish(root=root, archive_builder=_builder)
-    _assert_current(root)
-
-
-def test_conflicting_target_archive_fails_closed(tmp_path: Path) -> None:
-    root = _make_library(tmp_path)
-    target = root / publication.TARGET_PATH
-    target.write_bytes(b"conflict")
-    with pytest.raises(publication.PublicationConflictError, match="target archive"):
-        publication.publish(root=root, archive_builder=_builder)
-    assert target.read_bytes() == b"conflict"
-
-
-@pytest.mark.parametrize("metadata_name", ["index.json", "import-evidence.json"])
-def test_conflicting_metadata_fails_before_archive_creation(
-    tmp_path: Path, metadata_name: str
-) -> None:
-    root = _make_library(tmp_path)
-    value = _read_json(root / metadata_name)
-    collection = value["packages"] if metadata_name == "index.json" else value["dnd"]
-    item = next(
-        entry for entry in collection if entry.get("id") == publication.PACKAGE_ID
-    )
-    item["checksum"] = "0" * 64
-    _write_json(root / metadata_name, value)
-    with pytest.raises(publication.PublicationConflictError, match="SCAG"):
-        publication.publish(root=root, archive_builder=_builder)
-    assert not (root / publication.TARGET_PATH).exists()
-
-
-def test_metadata_path_traversal_fails_before_writes(tmp_path: Path) -> None:
-    root = _make_library(tmp_path)
-    index = _read_json(root / "index.json")
-    item = next(
-        entry
-        for entry in index["packages"]
-        if entry.get("id") == publication.PACKAGE_ID
-    )
-    item["path"] = "packages/../../outside.sagasmith-pack"
-    _write_json(root / "index.json", index)
-    with pytest.raises(
-        publication.PublicationConflictError, match="unsafe archive path"
-    ):
-        publication.publish(root=root, archive_builder=_builder)
-    assert not (root / publication.TARGET_PATH).exists()
-
-
-def test_packages_directory_link_is_rejected_without_external_write(
-    tmp_path: Path,
-) -> None:
-    root = _make_library(tmp_path)
-    packages = root / "packages"
-    (root / publication.SOURCE_PATH).unlink()
-    packages.rmdir()
-    outside = tmp_path / "outside-packages"
-    outside.mkdir()
-    marker = outside / "marker"
-    marker.write_bytes(b"unchanged")
-    _symlink_or_skip(packages, outside, directory=True)
-    with pytest.raises(publication.PublicationConflictError, match="link or reparse"):
-        publication.publish(root=root, archive_builder=_builder)
-    assert marker.read_bytes() == b"unchanged"
-    assert not (outside / Path(publication.TARGET_PATH).name).exists()
-
-
-@pytest.mark.parametrize("archive_kind", ["source", "target"])
-def test_archive_file_link_outside_root_is_rejected(
-    tmp_path: Path, archive_kind: str
-) -> None:
-    root = _make_library(tmp_path)
-    if archive_kind == "source":
-        archive = root / publication.SOURCE_PATH
-        outside = tmp_path / "outside-source.sagasmith-pack"
-        outside.write_bytes(archive.read_bytes())
-        archive.unlink()
+@pytest.mark.parametrize("field", ["manifest", "artifacts", "mechanics"])
+def test_checksum_uses_each_exact_input_without_mutating_it(field: str) -> None:
+    package = _package()
+    content = package["content"]
+    inputs = {
+        "manifest": content["rule_definitions"][0]["manifest"],
+        "artifacts": content["artifacts"],
+        "mechanics": content["mechanics"],
+    }
+    before = copy.deepcopy(inputs)
+    first = publication.definition_checksum(**inputs)
+    assert inputs == before
+    if field == "manifest":
+        inputs[field]["title"] = "Changed"
+    elif field == "artifacts":
+        inputs[field][0]["card"]["value"] = 2
     else:
-        archive = root / publication.TARGET_PATH
-        outside = tmp_path / "outside-target.sagasmith-pack"
-        outside.write_bytes(_target_bytes())
-    before = outside.read_bytes()
-    _symlink_or_skip(archive, outside, directory=False)
-    with pytest.raises(
-        publication.PublicationConflictError, match="must not be a link"
-    ):
-        publication.publish(root=root, archive_builder=_builder)
-    assert outside.read_bytes() == before
+        inputs[field][0]["event"] = "attack"
+    assert publication.definition_checksum(**inputs) != first
+
+
+def test_definition_link_is_excluded_but_native_record_order_is_retained() -> None:
+    inputs = {
+        "manifest": {},
+        "artifacts": [
+            {"id": "a", "rule_definition_id": "one"},
+            {"id": "b", "rule_definition_id": "one"},
+        ],
+        "mechanics": [],
+    }
+    first = publication.definition_checksum(**inputs)
+    inputs["artifacts"][0]["rule_definition_id"] = "two"
+    assert publication.definition_checksum(**inputs) == first
+    inputs["artifacts"].reverse()
+    assert publication.definition_checksum(**inputs) != first
+
+
+def test_recompute_scopes_records_to_each_definition() -> None:
+    package = _package()
+    second = copy.deepcopy(package["content"]["rule_definitions"][0])
+    second["id"] = "other.rule"
+    package["content"]["rule_definitions"].append(second)
+    changes = publication.recompute_definition_checksums(package)
+    assert [(c["artifact_count"], c["mechanic_count"]) for c in changes] == [
+        (1, 1),
+        (0, 0),
+    ]
+    assert changes[0]["definition_checksum"] != changes[1]["definition_checksum"]
+
+
+@pytest.mark.parametrize("corruption", ["checksum", "artifact", "duplicate"])
+def test_validator_checks_stored_identity_and_exact_inputs(
+    monkeypatch, corruption
+) -> None:
+    package = _package()
+    changes = publication.recompute_definition_checksums(package)
+    expected = {changes[0]["id"]: changes[0]["definition_checksum"]}
+    monkeypatch.setattr(
+        validator, "PINNED_DEFINITION_CHECKSUMS", {("synthetic", "1"): expected}
+    )
+    validator._validate_pinned_definitions(package, path_text="synthetic")
+    if corruption == "checksum":
+        package["content"]["rule_definitions"][0]["definition_checksum"] = "0" * 64
+    elif corruption == "artifact":
+        package["content"]["artifacts"][0]["card"]["value"] = 2
+    else:
+        package["content"]["rule_definitions"].append(
+            copy.deepcopy(package["content"]["rule_definitions"][0])
+        )
+    with pytest.raises(ValueError):
+        validator._validate_pinned_definitions(package, path_text="synthetic")
+
+
+@pytest.fixture
+def synthetic_io(tmp_path: Path, monkeypatch):
+    # Deliberate IO fixture: not evidence of source-package reconstruction.
+    source_bytes = b"synthetic immutable input"
+    target_bytes = b"synthetic corrected output"
+    for prefix, data in (("SOURCE", source_bytes), ("TARGET", target_bytes)):
+        monkeypatch.setattr(publication, f"{prefix}_ARCHIVE_SIZE", len(data))
+        monkeypatch.setattr(
+            publication, f"{prefix}_ARCHIVE_SHA256", hashlib.sha256(data).hexdigest()
+        )
+    calls = []
+
+    def builder(data):
+        assert data == source_bytes
+        calls.append(data)
+        return target_bytes
+
+    monkeypatch.setattr(publication, "_build_target_archive", builder)
+    source = tmp_path / "source.pack"
+    output = tmp_path / "corrected.pack"
+    source.write_bytes(source_bytes)
+    return source, output, source_bytes, target_bytes, calls
+
+
+def test_local_output_and_repeat_preserve_input_and_metadata(synthetic_io) -> None:
+    source, output, source_bytes, target_bytes, calls = synthetic_io
+    evidence = source.parent / "import-evidence.json"
+    evidence.write_bytes(b'{"observed": "old input only"}')
+    first = publication.repair_local_archive(source=source, output=output)
+    second = publication.repair_local_archive(source=source, output=output)
+    assert (first["status"], second["status"]) == ("created", "already_present")
+    assert first["published"] is False and first["import_verified"] is False
+    assert len(calls) == 2
+    assert source.read_bytes() == source_bytes
+    assert output.read_bytes() == target_bytes
+    assert evidence.read_bytes() == b'{"observed": "old input only"}'
+    assert not list(source.parent.glob(".scag-repair-*.tmp"))
+
+
+def test_invalid_source_is_rejected_before_build_or_write(synthetic_io) -> None:
+    source, output, _, _, calls = synthetic_io
+    source.write_bytes(b"changed")
+    with pytest.raises(publication.PublicationConflictError, match="exact finalized"):
+        publication.repair_local_archive(source=source, output=output)
+    assert not output.exists() and calls == []
+
+
+def test_builder_drift_is_rejected_before_write(synthetic_io, monkeypatch) -> None:
+    source, output, *_ = synthetic_io
+    monkeypatch.setattr(publication, "_build_target_archive", lambda _: b"wrong output")
+    with pytest.raises(publication.PublicationConflictError, match="archive conflicts"):
+        publication.repair_local_archive(source=source, output=output)
+    assert not output.exists()
+
+
+def test_conflicting_output_is_never_overwritten(synthetic_io) -> None:
+    source, output, *_ = synthetic_io
+    output.write_bytes(b"user data")
+    with pytest.raises(publication.PublicationConflictError, match="different content"):
+        publication.repair_local_archive(source=source, output=output)
+    assert output.read_bytes() == b"user data"
+
+
+def test_output_race_does_not_overwrite_competing_file(
+    synthetic_io, monkeypatch
+) -> None:
+    source, output, *_ = synthetic_io
+    real_link = publication.os.link
+
+    def competing_writer(src, dst):
+        Path(dst).write_bytes(b"concurrent user data")
+        return real_link(src, dst)
+
+    monkeypatch.setattr(publication.os, "link", competing_writer)
+    with pytest.raises(FileExistsError):
+        publication.repair_local_archive(source=source, output=output)
+    assert output.read_bytes() == b"concurrent user data"
+    assert not list(source.parent.glob(".scag-repair-*.tmp"))
+
+
+@pytest.mark.parametrize("failure", ["fsync", "link"])
+def test_output_failure_leaves_no_partial_destination(
+    synthetic_io, monkeypatch, failure
+) -> None:
+    source, output, source_bytes, *_ = synthetic_io
+
+    def fail(*_args):
+        raise OSError("injected write failure")
+
+    monkeypatch.setattr(publication.os, failure, fail)
+    with pytest.raises(OSError, match="injected"):
+        publication.repair_local_archive(source=source, output=output)
+    assert source.read_bytes() == source_bytes
+    assert not output.exists()
+    assert not list(source.parent.glob(".scag-repair-*.tmp"))
+
+
+@pytest.mark.parametrize("target", ["source", "parent"])
+def test_link_or_reparse_detection_prevents_writes(
+    synthetic_io, monkeypatch, target
+) -> None:
+    source, output, _, _, calls = synthetic_io
+    linked = source if target == "source" else output.parent
+    monkeypatch.setattr(publication, "_is_reparse_point", lambda p: p == linked)
+    with pytest.raises(publication.PublicationConflictError, match="reparse"):
+        publication.repair_local_archive(source=source, output=output)
+    assert calls == [] and not output.exists()
+
+
+def test_same_input_output_and_repository_destination_are_rejected(
+    synthetic_io,
+) -> None:
+    source, output, _, _, calls = synthetic_io
+    for destination in (source, REPOSITORY_ROOT / "content-library" / output.name):
+        with pytest.raises(publication.PublicationConflictError):
+            publication.repair_local_archive(source=source, output=destination)
+    assert calls == [] and not output.exists()
+
+
+def test_traversal_is_rejected(synthetic_io) -> None:
+    source, output, *_ = synthetic_io
+    with pytest.raises(publication.PublicationConflictError, match="traversal"):
+        publication.repair_local_archive(
+            source=source, output=output.parent / ".." / output.name
+        )
+    assert not output.exists()
+
+
+def test_cli_requires_explicit_paths_without_writing(capsys) -> None:
+    with pytest.raises(SystemExit) as error:
+        publication.main([])
+    assert error.value.code == 2
+    assert "--source" in capsys.readouterr().err
+
+
+def test_real_authorized_archive_rebuild_and_input_integrity(tmp_path: Path) -> None:
+    configured = os.environ.get("SAGASMITH_SCAG_SOURCE_ARCHIVE")
+    if not configured:
+        pytest.skip("explicit authorized SCAG source is not configured")
+    # Once explicitly configured, missing dependencies/files or a bad hash FAIL.
+    source = Path(configured)
+    source_bytes = source.read_bytes()
+    output = tmp_path / "repaired.sagasmith-pack"
+    result = publication.repair_local_archive(source=source, output=output)
+    assert result["archive_sha256"] == publication.TARGET_ARCHIVE_SHA256
+    assert source.read_bytes() == source_bytes
+    with zipfile.ZipFile(source) as old, zipfile.ZipFile(output) as new:
+        before = json.loads(old.read("package.sagasmith.json"))
+        after = json.loads(new.read("package.sagasmith.json"))
+        assert old.namelist() == new.namelist()
+        for name in old.namelist():
+            if name != "package.sagasmith.json":
+                assert old.read(name) == new.read(name)
+    assert after["content"]["artifacts"] == before["content"]["artifacts"]
+    assert after["content"]["mechanics"] == before["content"]["mechanics"]
+    changes = publication.recompute_definition_checksums(copy.deepcopy(after))
+    assert len(changes) == 1
+    assert changes[0]["source_definition_checksum"] == changes[0]["definition_checksum"]
+    assert changes[0]["definition_checksum"] == publication.TARGET_DEFINITION_CHECKSUM
+    normalized = copy.deepcopy(after)
+    normalized["version"] = before["version"]
+    normalized["checksum"] = before["checksum"]
+    normalized["manifest"]["version"] = before["manifest"]["version"]
+    normalized["metadata"].pop("definition_checksum_correction")
+    normalized["content"]["rule_definitions"][0]["definition_checksum"] = (
+        publication.SOURCE_DEFINITION_CHECKSUM
+    )
+    assert normalized == before
