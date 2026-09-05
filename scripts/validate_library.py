@@ -6,6 +6,7 @@ import hashlib
 import json
 import zipfile
 from collections import Counter
+from collections.abc import Mapping, Sequence
 from pathlib import Path
 from typing import Any
 
@@ -19,6 +20,16 @@ EXPECTED_COUNTS = {
     "dnd5e:module": 18,
     "dnd5e:preset": 2,
 }
+PINNED_DEFINITION_CHECKSUMS = {
+    (
+        "dnd5e.addon.rulebook.d-d-5e-sword-coast-adventurer-s-guide.16e6a243ef0a.addon",
+        "1.0.4",
+    ): {
+        "dnd5e.addon.rulebook.d-d-5e-sword-coast-adventurer-s-guide.16e6a243ef0a": (
+            "8b5066a280f5800e24061fbad0b1b11ccf9f2eda4b08de89d8913bb7bc745f44"
+        )
+    }
+}
 
 
 def _read_json(path: Path) -> dict[str, Any]:
@@ -26,6 +37,70 @@ def _read_json(path: Path) -> dict[str, Any]:
     if not isinstance(value, dict):
         raise TypeError(f"{path} must contain an object")
     return value
+
+
+def _definition_checksum(
+    *,
+    manifest: Mapping[str, Any],
+    artifacts: Sequence[Mapping[str, Any]],
+    mechanics: Sequence[Mapping[str, Any]],
+) -> str:
+    def native_records(items: Sequence[Mapping[str, Any]]) -> list[dict[str, Any]]:
+        return [
+            {
+                key: value
+                for key, value in dict(item).items()
+                if key != "rule_definition_id"
+            }
+            for item in items
+        ]
+
+    encoded = json.dumps(
+        {
+            "manifest": dict(manifest),
+            "artifacts": native_records(artifacts),
+            "mechanics": native_records(mechanics),
+        },
+        ensure_ascii=False,
+        sort_keys=True,
+        separators=(",", ":"),
+    ).encode("utf-8")
+    return hashlib.sha256(encoded).hexdigest()
+
+
+def _validate_pinned_definitions(package: dict[str, Any], *, path_text: str) -> None:
+    expected = PINNED_DEFINITION_CHECKSUMS.get(
+        (str(package.get("id")), str(package.get("version")))
+    )
+    if expected is None:
+        return
+    content = package.get("content") or {}
+    definitions = content.get("rule_definitions") or []
+    if len(definitions) != len(expected) or {
+        str(item.get("id")) for item in definitions
+    } != set(expected):
+        raise ValueError(f"pinned rule-definition set differs: {path_text}")
+    artifacts = content.get("artifacts") or []
+    mechanics = content.get("mechanics") or []
+    for definition in definitions:
+        definition_id = str(definition["id"])
+        recomputed = _definition_checksum(
+            manifest=definition["manifest"],
+            artifacts=[
+                item
+                for item in artifacts
+                if str(item.get("rule_definition_id") or "") == definition_id
+            ],
+            mechanics=[
+                item
+                for item in mechanics
+                if str(item.get("rule_definition_id") or "") == definition_id
+            ],
+        )
+        if recomputed != expected[definition_id]:
+            raise ValueError(f"pinned rule-definition input drift: {path_text}")
+        if definition.get("definition_checksum") != recomputed:
+            raise ValueError(f"stale rule-definition checksum: {path_text}")
 
 
 def main() -> None:
@@ -73,7 +148,9 @@ def main() -> None:
         },
     }
     if evidence_identities != indexed_identities:
-        raise ValueError("public MCP import evidence does not match current Pack identities")
+        raise ValueError(
+            "public MCP import evidence does not match current Pack identities"
+        )
 
     checksum_set = {str(item["checksum"]) for item in indexed}
     counts: Counter[str] = Counter()
@@ -103,6 +180,7 @@ def main() -> None:
                 for field in ("id", "version", "checksum", "system_id", "kind")
             ):
                 raise ValueError(f"archive identity differs from index: {path_text}")
+            _validate_pinned_definitions(package, path_text=path_text)
             assets = {str(asset["checksum"]): asset for asset in package["assets"]}
             blob_names = {
                 name.removeprefix("blobs/sha256/")
@@ -118,7 +196,10 @@ def main() -> None:
                 if hashlib.sha256(blob).hexdigest() != checksum:
                     raise ValueError(f"blob checksum mismatch: {path_text}:{checksum}")
             for dependency in package["dependencies"]:
-                if not dependency["optional"] and dependency["checksum"] not in checksum_set:
+                if (
+                    not dependency["optional"]
+                    and dependency["checksum"] not in checksum_set
+                ):
                     raise ValueError(f"required dependency is absent: {package['id']}")
         counts[f"{item['system_id']}:{item['kind']}"] += 1
 
@@ -134,7 +215,9 @@ def main() -> None:
             raise ValueError(f"non-portable retained Pack path: {path_text}")
         archive_path = (ROOT / path_text).resolve()
         if archive_path.parent != (ROOT / "packages").resolve():
-            raise ValueError(f"retained Pack path escapes packages directory: {path_text}")
+            raise ValueError(
+                f"retained Pack path escapes packages directory: {path_text}"
+            )
         if archive_path in expected_files:
             raise ValueError(f"retained Pack is also indexed as current: {path_text}")
         expected_files.add(archive_path)
@@ -153,9 +236,16 @@ def main() -> None:
                 ("system_id", "kind", "id"), identity, strict=True
             )
         ):
-            raise ValueError(f"retained archive identity differs from report: {path_text}")
-        if package["version"] != item["version"] or package["checksum"] != item["checksum"]:
-            raise ValueError(f"retained archive version differs from report: {path_text}")
+            raise ValueError(
+                f"retained archive identity differs from report: {path_text}"
+            )
+        if (
+            package["version"] != item["version"]
+            or package["checksum"] != item["checksum"]
+        ):
+            raise ValueError(
+                f"retained archive version differs from report: {path_text}"
+            )
         replacement = item.get("superseded_by") or {}
         if not any(
             current["id"] == package["id"]
@@ -163,7 +253,9 @@ def main() -> None:
             and current["checksum"] == replacement.get("checksum")
             for current in indexed
         ):
-            raise ValueError(f"retained archive replacement is not current: {path_text}")
+            raise ValueError(
+                f"retained archive replacement is not current: {path_text}"
+            )
 
     actual_files = {
         path.resolve() for path in (ROOT / "packages").iterdir() if path.is_file()
@@ -173,7 +265,10 @@ def main() -> None:
     if dict(sorted(counts.items())) != EXPECTED_COUNTS:
         raise ValueError(f"unexpected current Pack counts: {dict(counts)}")
     archive_summary = summary.get("archive_validation") or {}
-    if archive_summary.get("archives") != 46 or archive_summary.get("bytes") != total_bytes:
+    if (
+        archive_summary.get("archives") != 46
+        or archive_summary.get("bytes") != total_bytes
+    ):
         raise ValueError("validation summary does not match current archives")
     if (
         archive_summary.get("retained_superseded_archives") != len(retained)
