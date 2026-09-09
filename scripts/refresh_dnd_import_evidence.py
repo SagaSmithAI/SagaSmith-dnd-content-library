@@ -22,6 +22,8 @@ TARGET_IDS = frozenset(
         "dnd5e.addon.rulebook.d-d-5e-mordenkainen-s-tome-of-foes.2768304ef1af.addon",
         "dnd5e.addon.rulebook.d-d-5e-player-s-handbook.7ad6d3e9c93c.addon",
         "dnd5e.addon.rulebook.d-d-5e-sword-coast-adventurer-s-guide.16e6a243ef0a.addon",
+        "dnd5e.addon.rulebook.d-d-5e-tasha-s-cauldron-of-everything.89a729b37a4b.addon",
+        "dnd5e.addon.rulebook.d-d-5e-wayfinders-guide-to-eberron.38e71ffb60c7.addon",
         "dnd5e.addon.rulebook.d-d-5e-volo-s-guide-to-monsters.962933255634.addon",
         "906e1c57-005d-4bf1-8b03-221e0726e27d",
         "d0871484-131a-418f-aba3-016e944411ab",

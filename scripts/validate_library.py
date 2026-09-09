@@ -23,10 +23,10 @@ EXPECTED_COUNTS = {
 PINNED_DEFINITION_CHECKSUMS = {
     (
         "dnd5e.addon.rulebook.d-d-5e-sword-coast-adventurer-s-guide.16e6a243ef0a.addon",
-        "1.0.4",
+        "1.0.5-local.subclass-grants.1",
     ): {
         "dnd5e.addon.rulebook.d-d-5e-sword-coast-adventurer-s-guide.16e6a243ef0a": (
-            "8b5066a280f5800e24061fbad0b1b11ccf9f2eda4b08de89d8913bb7bc745f44"
+            "c091c39cf03443e40f7b76a0de561298a0527fddff5c83d51fc0660fcbbd70eb"
         )
     }
 }
