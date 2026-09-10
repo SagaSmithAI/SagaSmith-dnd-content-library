@@ -2,7 +2,7 @@
   "schema": "sagasmith.pack-migration-validation.v1",
   "archive_validation": {
     "archives": 46,
-    "bytes": 1062814956,
+    "bytes": 1062815455,
     "dependencies_closed": true,
     "hashes_match_report": true,
     "full_archive_validation": true,
@@ -10,10 +10,10 @@
       "restricted": 1537,
       "group": 270
     },
-    "retained_superseded_archives": 7,
-    "retained_superseded_bytes": 7764872,
-    "stored_archives": 53,
-    "stored_bytes": 1070579828
+    "retained_superseded_archives": 8,
+    "retained_superseded_bytes": 7943653,
+    "stored_archives": 54,
+    "stored_bytes": 1070759108
   },
   "public_mcp_import": {
     "dnd": 43,
