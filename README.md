@@ -52,6 +52,22 @@ embedded blob, required dependency closure, portable index paths, and the exact
 current system/kind counts. It also checks every retained finalized archive and
 its link to the current replacement.
 
+### Public catalog freshness
+
+The public site exposes a metadata-only catalog marker at
+`https://sagasmithai.github.io/library-catalog-status.json`. It records the
+generation date and the exact commit that produced the published index. Check
+that marker against the catalog currently on this branch with:
+
+```powershell
+python scripts/check_catalog_freshness.py
+```
+
+The check fails closed when the marker is unavailable, has no source commit, or
+does not match the latest commit that changed `content-library/index.json`.
+Repository visibility and a successful site deployment are not treated as
+freshness evidence.
+
 ## Full-chain campaign regression
 
 The long campaign regression rebuilds and recreates the hosted stack from the
