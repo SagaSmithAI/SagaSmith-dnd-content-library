@@ -1,2 +1,4 @@
 httpx==0.28.1
 pytest==9.1.1
+sagasmith-core @ git+https://github.com/SagaSmithAI/Sagasmith-core.git@37058d3bc772058a969517de2fc5d6a7f17a52c6
+sagasmith-dnd @ git+https://github.com/SagaSmithAI/Sagasmith-dnd.git@70e1283dab742fbb50d7be479990c5609e0d08c8#subdirectory=packages/domain
