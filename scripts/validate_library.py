@@ -8,7 +8,7 @@ import zipfile
 from collections import Counter
 from collections.abc import Mapping, Sequence
 from pathlib import Path
-from typing import Any
+from typing import Any, BinaryIO
 
 ROOT = Path(__file__).resolve().parents[1] / "content-library"
 DESCRIPTOR = "package.sagasmith.json"
@@ -37,6 +37,16 @@ def _read_json(path: Path) -> dict[str, Any]:
     if not isinstance(value, dict):
         raise TypeError(f"{path} must contain an object")
     return value
+
+
+def _stream_digest(stream: BinaryIO) -> tuple[int, str]:
+    """Validate large archives and blobs without retaining their entire bytes."""
+    digest = hashlib.sha256()
+    size = 0
+    while chunk := stream.read(1024 * 1024):
+        size += len(chunk)
+        digest.update(chunk)
+    return size, digest.hexdigest()
 
 
 def _definition_checksum(
@@ -164,11 +174,12 @@ def main() -> None:
         if archive_path.parent != (ROOT / "packages").resolve():
             raise ValueError(f"Pack path escapes packages directory: {path_text}")
         expected_files.add(archive_path)
-        raw = archive_path.read_bytes()
-        total_bytes += len(raw)
-        if len(raw) != int(item["archive_size"]):
+        with archive_path.open("rb") as stream:
+            archive_size, archive_digest = _stream_digest(stream)
+        total_bytes += archive_size
+        if archive_size != int(item["archive_size"]):
             raise ValueError(f"archive size mismatch: {path_text}")
-        if hashlib.sha256(raw).hexdigest() != item["archive_sha256"]:
+        if archive_digest != item["archive_sha256"]:
             raise ValueError(f"archive checksum mismatch: {path_text}")
         with zipfile.ZipFile(archive_path) as archive:
             names = set(archive.namelist())
@@ -190,10 +201,11 @@ def main() -> None:
             if blob_names != set(assets):
                 raise ValueError(f"archive blob set is incomplete: {path_text}")
             for checksum, asset in assets.items():
-                blob = archive.read(f"blobs/sha256/{checksum}")
-                if len(blob) != int(asset["size"]):
+                with archive.open(f"blobs/sha256/{checksum}") as stream:
+                    blob_size, blob_digest = _stream_digest(stream)
+                if blob_size != int(asset["size"]):
                     raise ValueError(f"blob size mismatch: {path_text}:{checksum}")
-                if hashlib.sha256(blob).hexdigest() != checksum:
+                if blob_digest != checksum:
                     raise ValueError(f"blob checksum mismatch: {path_text}:{checksum}")
             for dependency in package["dependencies"]:
                 if (
@@ -221,11 +233,12 @@ def main() -> None:
         if archive_path in expected_files:
             raise ValueError(f"retained Pack is also indexed as current: {path_text}")
         expected_files.add(archive_path)
-        raw = archive_path.read_bytes()
-        retained_bytes += len(raw)
-        if len(raw) != int(item["archive_size"]):
+        with archive_path.open("rb") as stream:
+            archive_size, archive_digest = _stream_digest(stream)
+        retained_bytes += archive_size
+        if archive_size != int(item["archive_size"]):
             raise ValueError(f"retained archive size mismatch: {path_text}")
-        if hashlib.sha256(raw).hexdigest() != item["archive_sha256"]:
+        if archive_digest != item["archive_sha256"]:
             raise ValueError(f"retained archive checksum mismatch: {path_text}")
         with zipfile.ZipFile(archive_path) as archive:
             package = json.loads(archive.read(DESCRIPTOR))
