@@ -1,16 +1,25 @@
 from __future__ import annotations
 
+import json
+from pathlib import Path
+
 import pytest
 
 from scripts import check_catalog_freshness as freshness
 
 
 def test_check_accepts_marker_matching_catalog(monkeypatch: pytest.MonkeyPatch) -> None:
+    catalog = json.loads(
+        (Path(freshness.__file__).resolve().parents[1] / "content-library" / "index.json").read_text(
+            encoding="utf-8"
+        )
+    )
+    generated_on = str(catalog["generated_on"])
     monkeypatch.setattr(
         freshness,
         "_read_json",
         lambda url, timeout: {
-            "generated_on": "2026-09-09",
+            "generated_on": generated_on,
             "source_commit": "a" * 40,
         },
     )
@@ -19,7 +28,7 @@ def test_check_accepts_marker_matching_catalog(monkeypatch: pytest.MonkeyPatch) 
     result = freshness.check(status_url="https://example.test/status.json", timeout=1)
 
     assert result["fresh"] == "true"
-    assert result["generated_on"] == "2026-09-09"
+    assert result["generated_on"] == generated_on
 
 
 @pytest.mark.parametrize(
