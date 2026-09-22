@@ -15,11 +15,13 @@ def catalog_index(monkeypatch: pytest.MonkeyPatch) -> None:
 
 
 def test_check_accepts_marker_matching_catalog(monkeypatch: pytest.MonkeyPatch) -> None:
+    catalog = freshness._read_local_index()
+    generated_on = str(catalog["generated_on"])
     monkeypatch.setattr(
         freshness,
         "_read_json",
         lambda url, timeout: {
-            "generated_on": "2026-09-09",
+            "generated_on": generated_on,
             "source_commit": "a" * 40,
         },
     )
@@ -28,7 +30,7 @@ def test_check_accepts_marker_matching_catalog(monkeypatch: pytest.MonkeyPatch) 
     result = freshness.check(status_url="https://example.test/status.json", timeout=1)
 
     assert result["fresh"] == "true"
-    assert result["generated_on"] == "2026-09-09"
+    assert result["generated_on"] == generated_on
 
 
 @pytest.mark.parametrize(
