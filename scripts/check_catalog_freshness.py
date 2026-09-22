@@ -43,6 +43,7 @@ def _latest_catalog_commit() -> str:
         check=True,
         capture_output=True,
         text=True,
+        cwd=Path(__file__).resolve().parents[1],
     )
     commit = result.stdout.strip()
     if len(commit) != 40:
@@ -50,8 +51,7 @@ def _latest_catalog_commit() -> str:
     return commit
 
 
-def check(*, status_url: str, timeout: float) -> dict[str, str]:
-    status = _read_json(status_url, timeout=timeout)
+def _read_local_index() -> dict[str, object]:
     index = json.loads(
         (Path(__file__).resolve().parents[1] / "content-library" / "index.json").read_text(
             encoding="utf-8"
@@ -59,6 +59,12 @@ def check(*, status_url: str, timeout: float) -> dict[str, str]:
     )
     if not isinstance(index, dict):
         raise ValueError("content-library/index.json must contain an object")
+    return index
+
+
+def check(*, status_url: str, timeout: float) -> dict[str, str]:
+    status = _read_json(status_url, timeout=timeout)
+    index = _read_local_index()
     generated_on = str(index.get("generated_on") or "")
     source_commit = _latest_catalog_commit()
     published_date = str(status.get("generated_on") or "")

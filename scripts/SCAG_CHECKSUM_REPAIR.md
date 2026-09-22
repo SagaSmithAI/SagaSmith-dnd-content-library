@@ -4,8 +4,10 @@
 does **not** publish a library. It repairs an explicitly supplied, authorized
 local SCAG 1.0.3 archive into a new local 1.0.4 archive. It does not change the
 repository's current index, migration report, validation summary, or import
-evidence. The existing public collection remains at 1.0.3; this tool alone does
-not resolve the publication requirement in issue #18.
+evidence. This tool is the historical 1.0.3-to-1.0.4 repair step. The current
+private collection separately contains `1.0.5-local.subclass-grants.1`, whose
+definition checksum is recomputed by the library validator; immutable 1.0.3 is
+retained. Running this historical tool does not publish or update the catalog.
 
 Use a Python environment containing the current SagaSmith Core and DND domain
 packages, and create a private output directory outside this repository first:

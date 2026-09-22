@@ -5,6 +5,15 @@ import pytest
 from scripts import check_catalog_freshness as freshness
 
 
+@pytest.fixture(autouse=True)
+def catalog_index(monkeypatch: pytest.MonkeyPatch) -> None:
+    # Freshness cases must exercise dates and commits independently of future
+    # catalog publications, including the equal-date/wrong-commit rejection.
+    monkeypatch.setattr(
+        freshness, "_read_local_index", lambda: {"generated_on": "2026-09-09"},
+    )
+
+
 def test_check_accepts_marker_matching_catalog(monkeypatch: pytest.MonkeyPatch) -> None:
     monkeypatch.setattr(
         freshness,
