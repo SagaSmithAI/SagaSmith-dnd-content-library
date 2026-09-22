@@ -1,8 +1,5 @@
 from __future__ import annotations
 
-import json
-from pathlib import Path
-
 import pytest
 
 from scripts import check_catalog_freshness as freshness
@@ -18,11 +15,7 @@ def catalog_index(monkeypatch: pytest.MonkeyPatch) -> None:
 
 
 def test_check_accepts_marker_matching_catalog(monkeypatch: pytest.MonkeyPatch) -> None:
-    catalog = json.loads(
-        (Path(freshness.__file__).resolve().parents[1] / "content-library" / "index.json").read_text(
-            encoding="utf-8"
-        )
-    )
+    catalog = freshness._read_local_index()
     generated_on = str(catalog["generated_on"])
     monkeypatch.setattr(
         freshness,
